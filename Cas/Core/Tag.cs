@@ -9,7 +9,7 @@ namespace Cas.Core
     /// Tags are the discrete functional sections of <see cref="ICell"/> objects that define
     /// the nature of each behaviour.
     /// 
-    /// Examples: offense tag, defense tag, identity tag, etc.
+    /// Examples: offense tag, defence tag, identity tag, etc.
     /// </summary>
     public class Tag
     {
