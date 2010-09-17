@@ -1,0 +1,1047 @@
+﻿namespace WebCritters
+{
+    partial class WebCrittersForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.label1 = new System.Windows.Forms.Label();
+            this.gridHeight = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.gridWidth = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.maxStartingPopulation = new System.Windows.Forms.TextBox();
+            this.minStartingPopulation = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.label34 = new System.Windows.Forms.Label();
+            this.normalToWildcardRatio = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.reproductionInheritancePercent = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.reproductionThresholdPercent = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.interactionsPerGeneration = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.upkeepPercent = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.maximumUpkeep = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.agentResourcePercent = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.numberOfResources = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.createSimulation = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.agentCellCount = new System.Windows.Forms.Label();
+            this.agentAgentsCount = new System.Windows.Forms.Label();
+            this.cellName = new System.Windows.Forms.Label();
+            this.agentCellList = new System.Windows.Forms.ListBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.agentAgentList = new System.Windows.Forms.ListBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.agentResourceCount = new System.Windows.Forms.Label();
+            this.agentHistoryList = new System.Windows.Forms.ListBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.agentResourceList = new System.Windows.Forms.ListBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.cellReservoir = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.exchangeTag = new System.Windows.Forms.Label();
+            this.defenseTag = new System.Windows.Forms.Label();
+            this.offenseTag = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.agentName = new System.Windows.Forms.Label();
+            this.locationConnectionCount = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.connectionList = new System.Windows.Forms.ListBox();
+            this.locationAgentCount = new System.Windows.Forms.Label();
+            this.locationResourceCount = new System.Windows.Forms.Label();
+            this.agentList = new System.Windows.Forms.ListBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.locationResourceList = new System.Windows.Forms.ListBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.upkeepCost = new System.Windows.Forms.Label();
+            this.shortSimulationDescription = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.locationName = new System.Windows.Forms.Label();
+            this.locationList = new System.Windows.Forms.ListBox();
+            this.runProgressBar = new System.Windows.Forms.ProgressBar();
+            this.runGenerations = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.generationsToRun = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.currentGeneration = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
+            this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
+            this.splitContainer.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 179);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Grid Size";
+            // 
+            // gridHeight
+            // 
+            this.gridHeight.Location = new System.Drawing.Point(79, 177);
+            this.gridHeight.Name = "gridHeight";
+            this.gridHeight.Size = new System.Drawing.Size(40, 20);
+            this.gridHeight.TabIndex = 1;
+            this.gridHeight.Text = "10";
+            this.gridHeight.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.gridHeight.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(126, 183);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(12, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "x";
+            // 
+            // gridWidth
+            // 
+            this.gridWidth.Location = new System.Drawing.Point(145, 176);
+            this.gridWidth.Name = "gridWidth";
+            this.gridWidth.Size = new System.Drawing.Size(45, 20);
+            this.gridWidth.TabIndex = 3;
+            this.gridWidth.Text = "10";
+            this.gridWidth.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.gridWidth.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 234);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Max Pop.";
+            // 
+            // maxStartingPopulation
+            // 
+            this.maxStartingPopulation.Location = new System.Drawing.Point(79, 232);
+            this.maxStartingPopulation.Name = "maxStartingPopulation";
+            this.maxStartingPopulation.Size = new System.Drawing.Size(59, 20);
+            this.maxStartingPopulation.TabIndex = 5;
+            this.maxStartingPopulation.Text = "100";
+            this.maxStartingPopulation.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.maxStartingPopulation.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // minStartingPopulation
+            // 
+            this.minStartingPopulation.Location = new System.Drawing.Point(79, 205);
+            this.minStartingPopulation.Name = "minStartingPopulation";
+            this.minStartingPopulation.Size = new System.Drawing.Size(59, 20);
+            this.minStartingPopulation.TabIndex = 7;
+            this.minStartingPopulation.Text = "50";
+            this.minStartingPopulation.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.minStartingPopulation.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 207);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Min Pop.";
+            // 
+            // splitContainer
+            // 
+            this.splitContainer.IsSplitterFixed = true;
+            this.splitContainer.Location = new System.Drawing.Point(13, 11);
+            this.splitContainer.Name = "splitContainer";
+            // 
+            // splitContainer.Panel1
+            // 
+            this.splitContainer.Panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer.Panel1.Controls.Add(this.label34);
+            this.splitContainer.Panel1.Controls.Add(this.normalToWildcardRatio);
+            this.splitContainer.Panel1.Controls.Add(this.label33);
+            this.splitContainer.Panel1.Controls.Add(this.reproductionInheritancePercent);
+            this.splitContainer.Panel1.Controls.Add(this.label32);
+            this.splitContainer.Panel1.Controls.Add(this.reproductionThresholdPercent);
+            this.splitContainer.Panel1.Controls.Add(this.label31);
+            this.splitContainer.Panel1.Controls.Add(this.interactionsPerGeneration);
+            this.splitContainer.Panel1.Controls.Add(this.label28);
+            this.splitContainer.Panel1.Controls.Add(this.upkeepPercent);
+            this.splitContainer.Panel1.Controls.Add(this.label30);
+            this.splitContainer.Panel1.Controls.Add(this.maximumUpkeep);
+            this.splitContainer.Panel1.Controls.Add(this.label29);
+            this.splitContainer.Panel1.Controls.Add(this.agentResourcePercent);
+            this.splitContainer.Panel1.Controls.Add(this.label27);
+            this.splitContainer.Panel1.Controls.Add(this.label26);
+            this.splitContainer.Panel1.Controls.Add(this.label25);
+            this.splitContainer.Panel1.Controls.Add(this.label24);
+            this.splitContainer.Panel1.Controls.Add(this.numberOfResources);
+            this.splitContainer.Panel1.Controls.Add(this.label8);
+            this.splitContainer.Panel1.Controls.Add(this.createSimulation);
+            this.splitContainer.Panel1.Controls.Add(this.label1);
+            this.splitContainer.Panel1.Controls.Add(this.minStartingPopulation);
+            this.splitContainer.Panel1.Controls.Add(this.gridHeight);
+            this.splitContainer.Panel1.Controls.Add(this.label4);
+            this.splitContainer.Panel1.Controls.Add(this.label2);
+            this.splitContainer.Panel1.Controls.Add(this.maxStartingPopulation);
+            this.splitContainer.Panel1.Controls.Add(this.gridWidth);
+            this.splitContainer.Panel1.Controls.Add(this.label3);
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer.Panel2.Controls.Add(this.stopButton);
+            this.splitContainer.Panel2.Controls.Add(this.label23);
+            this.splitContainer.Panel2.Controls.Add(this.label22);
+            this.splitContainer.Panel2.Controls.Add(this.label21);
+            this.splitContainer.Panel2.Controls.Add(this.agentCellCount);
+            this.splitContainer.Panel2.Controls.Add(this.agentAgentsCount);
+            this.splitContainer.Panel2.Controls.Add(this.cellName);
+            this.splitContainer.Panel2.Controls.Add(this.agentCellList);
+            this.splitContainer.Panel2.Controls.Add(this.label20);
+            this.splitContainer.Panel2.Controls.Add(this.agentAgentList);
+            this.splitContainer.Panel2.Controls.Add(this.label18);
+            this.splitContainer.Panel2.Controls.Add(this.agentResourceCount);
+            this.splitContainer.Panel2.Controls.Add(this.agentHistoryList);
+            this.splitContainer.Panel2.Controls.Add(this.label17);
+            this.splitContainer.Panel2.Controls.Add(this.agentResourceList);
+            this.splitContainer.Panel2.Controls.Add(this.label16);
+            this.splitContainer.Panel2.Controls.Add(this.panel2);
+            this.splitContainer.Panel2.Controls.Add(this.agentName);
+            this.splitContainer.Panel2.Controls.Add(this.locationConnectionCount);
+            this.splitContainer.Panel2.Controls.Add(this.label11);
+            this.splitContainer.Panel2.Controls.Add(this.connectionList);
+            this.splitContainer.Panel2.Controls.Add(this.locationAgentCount);
+            this.splitContainer.Panel2.Controls.Add(this.locationResourceCount);
+            this.splitContainer.Panel2.Controls.Add(this.agentList);
+            this.splitContainer.Panel2.Controls.Add(this.label12);
+            this.splitContainer.Panel2.Controls.Add(this.locationResourceList);
+            this.splitContainer.Panel2.Controls.Add(this.panel1);
+            this.splitContainer.Panel2.Controls.Add(this.shortSimulationDescription);
+            this.splitContainer.Panel2.Controls.Add(this.label9);
+            this.splitContainer.Panel2.Controls.Add(this.locationName);
+            this.splitContainer.Panel2.Controls.Add(this.locationList);
+            this.splitContainer.Panel2.Controls.Add(this.runProgressBar);
+            this.splitContainer.Panel2.Controls.Add(this.runGenerations);
+            this.splitContainer.Panel2.Controls.Add(this.label7);
+            this.splitContainer.Panel2.Controls.Add(this.generationsToRun);
+            this.splitContainer.Panel2.Controls.Add(this.label6);
+            this.splitContainer.Panel2.Controls.Add(this.label5);
+            this.splitContainer.Panel2.Controls.Add(this.currentGeneration);
+            this.splitContainer.Size = new System.Drawing.Size(1304, 670);
+            this.splitContainer.SplitterDistance = 250;
+            this.splitContainer.TabIndex = 8;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(170, 132);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(19, 13);
+            this.label34.TabIndex = 30;
+            this.label34.Text = ": 1";
+            // 
+            // normalToWildcardRatio
+            // 
+            this.normalToWildcardRatio.Location = new System.Drawing.Point(109, 129);
+            this.normalToWildcardRatio.Name = "normalToWildcardRatio";
+            this.normalToWildcardRatio.Size = new System.Drawing.Size(59, 20);
+            this.normalToWildcardRatio.TabIndex = 29;
+            this.normalToWildcardRatio.Text = "2";
+            this.normalToWildcardRatio.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.normalToWildcardRatio.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(9, 131);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(91, 13);
+            this.label33.TabIndex = 28;
+            this.label33.Text = "Normal : Wildcard";
+            // 
+            // reproductionInheritancePercent
+            // 
+            this.reproductionInheritancePercent.Location = new System.Drawing.Point(108, 348);
+            this.reproductionInheritancePercent.Name = "reproductionInheritancePercent";
+            this.reproductionInheritancePercent.Size = new System.Drawing.Size(59, 20);
+            this.reproductionInheritancePercent.TabIndex = 27;
+            this.reproductionInheritancePercent.Text = "30";
+            this.reproductionInheritancePercent.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.reproductionInheritancePercent.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(9, 350);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(71, 13);
+            this.label32.TabIndex = 26;
+            this.label32.Text = "Inheritance %";
+            // 
+            // reproductionThresholdPercent
+            // 
+            this.reproductionThresholdPercent.Location = new System.Drawing.Point(108, 320);
+            this.reproductionThresholdPercent.Name = "reproductionThresholdPercent";
+            this.reproductionThresholdPercent.Size = new System.Drawing.Size(59, 20);
+            this.reproductionThresholdPercent.TabIndex = 25;
+            this.reproductionThresholdPercent.Text = "200";
+            this.reproductionThresholdPercent.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.reproductionThresholdPercent.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(9, 322);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(59, 13);
+            this.label31.TabIndex = 24;
+            this.label31.Text = "Repro at %";
+            // 
+            // interactionsPerGeneration
+            // 
+            this.interactionsPerGeneration.Location = new System.Drawing.Point(109, 105);
+            this.interactionsPerGeneration.Name = "interactionsPerGeneration";
+            this.interactionsPerGeneration.Size = new System.Drawing.Size(59, 20);
+            this.interactionsPerGeneration.TabIndex = 23;
+            this.interactionsPerGeneration.Text = "1.5";
+            this.interactionsPerGeneration.Validating += new System.ComponentModel.CancelEventHandler(this.doubleTextBox_Validating);
+            this.interactionsPerGeneration.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(9, 107);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(85, 13);
+            this.label28.TabIndex = 22;
+            this.label28.Text = "Interactions/gen";
+            // 
+            // upkeepPercent
+            // 
+            this.upkeepPercent.Location = new System.Drawing.Point(109, 79);
+            this.upkeepPercent.Name = "upkeepPercent";
+            this.upkeepPercent.Size = new System.Drawing.Size(59, 20);
+            this.upkeepPercent.TabIndex = 21;
+            this.upkeepPercent.Text = "25";
+            this.upkeepPercent.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.upkeepPercent.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(9, 81);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(56, 13);
+            this.label30.TabIndex = 20;
+            this.label30.Text = "Upkeep %";
+            // 
+            // maximumUpkeep
+            // 
+            this.maximumUpkeep.Location = new System.Drawing.Point(109, 53);
+            this.maximumUpkeep.Name = "maximumUpkeep";
+            this.maximumUpkeep.Size = new System.Drawing.Size(59, 20);
+            this.maximumUpkeep.TabIndex = 19;
+            this.maximumUpkeep.Text = "2";
+            this.maximumUpkeep.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.maximumUpkeep.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(9, 55);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(68, 13);
+            this.label29.TabIndex = 18;
+            this.label29.Text = "Max Upkeep";
+            // 
+            // agentResourcePercent
+            // 
+            this.agentResourcePercent.Location = new System.Drawing.Point(108, 291);
+            this.agentResourcePercent.Name = "agentResourcePercent";
+            this.agentResourcePercent.Size = new System.Drawing.Size(59, 20);
+            this.agentResourcePercent.TabIndex = 15;
+            this.agentResourcePercent.Text = "75";
+            this.agentResourcePercent.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.agentResourcePercent.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(9, 293);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(89, 13);
+            this.label27.TabIndex = 14;
+            this.label27.Text = "Start Resource %";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(9, 265);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(67, 13);
+            this.label26.TabIndex = 13;
+            this.label26.Text = "Agent Profile";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(9, 161);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(83, 13);
+            this.label25.TabIndex = 12;
+            this.label25.Text = "Location Details";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(9, 10);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(111, 13);
+            this.label24.TabIndex = 11;
+            this.label24.Text = "Simulation Parameters";
+            // 
+            // numberOfResources
+            // 
+            this.numberOfResources.Location = new System.Drawing.Point(109, 28);
+            this.numberOfResources.Name = "numberOfResources";
+            this.numberOfResources.Size = new System.Drawing.Size(59, 20);
+            this.numberOfResources.TabIndex = 10;
+            this.numberOfResources.Text = "4";
+            this.numberOfResources.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.numberOfResources.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 31);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(58, 13);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Resources";
+            // 
+            // createSimulation
+            // 
+            this.createSimulation.BackColor = System.Drawing.SystemColors.Control;
+            this.createSimulation.Location = new System.Drawing.Point(4, 637);
+            this.createSimulation.Name = "createSimulation";
+            this.createSimulation.Size = new System.Drawing.Size(243, 23);
+            this.createSimulation.TabIndex = 8;
+            this.createSimulation.Text = "Create Simulation";
+            this.createSimulation.UseVisualStyleBackColor = false;
+            this.createSimulation.Click += new System.EventHandler(this.createSimulation_Click);
+            // 
+            // stopButton
+            // 
+            this.stopButton.Location = new System.Drawing.Point(232, 5);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(75, 23);
+            this.stopButton.TabIndex = 34;
+            this.stopButton.Text = "Stop";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(599, 37);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(90, 20);
+            this.label23.TabIndex = 33;
+            this.label23.Text = "Agent / Cell";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(218, 37);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(70, 20);
+            this.label22.TabIndex = 32;
+            this.label22.Text = "Location";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(8, 37);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(98, 20);
+            this.label21.TabIndex = 31;
+            this.label21.Text = "Environment";
+            // 
+            // agentCellCount
+            // 
+            this.agentCellCount.AutoSize = true;
+            this.agentCellCount.Location = new System.Drawing.Point(1026, 221);
+            this.agentCellCount.Name = "agentCellCount";
+            this.agentCellCount.Size = new System.Drawing.Size(13, 13);
+            this.agentCellCount.TabIndex = 30;
+            this.agentCellCount.Text = "0";
+            // 
+            // agentAgentsCount
+            // 
+            this.agentAgentsCount.AutoSize = true;
+            this.agentAgentsCount.Location = new System.Drawing.Point(1026, 147);
+            this.agentAgentsCount.Name = "agentAgentsCount";
+            this.agentAgentsCount.Size = new System.Drawing.Size(13, 13);
+            this.agentAgentsCount.TabIndex = 29;
+            this.agentAgentsCount.Text = "0";
+            // 
+            // cellName
+            // 
+            this.cellName.AutoSize = true;
+            this.cellName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cellName.Location = new System.Drawing.Point(603, 359);
+            this.cellName.Name = "cellName";
+            this.cellName.Size = new System.Drawing.Size(30, 13);
+            this.cellName.TabIndex = 28;
+            this.cellName.Text = "N/A";
+            // 
+            // agentCellList
+            // 
+            this.agentCellList.FormattingEnabled = true;
+            this.agentCellList.Location = new System.Drawing.Point(603, 239);
+            this.agentCellList.Name = "agentCellList";
+            this.agentCellList.Size = new System.Drawing.Size(440, 108);
+            this.agentCellList.TabIndex = 27;
+            this.agentCellList.SelectedIndexChanged += new System.EventHandler(this.agentCellList_SelectedIndexChanged);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(604, 223);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(32, 13);
+            this.label20.TabIndex = 26;
+            this.label20.Text = "Cells:";
+            // 
+            // agentAgentList
+            // 
+            this.agentAgentList.FormattingEnabled = true;
+            this.agentAgentList.Location = new System.Drawing.Point(603, 162);
+            this.agentAgentList.Name = "agentAgentList";
+            this.agentAgentList.Size = new System.Drawing.Size(440, 56);
+            this.agentAgentList.TabIndex = 25;
+            this.agentAgentList.DoubleClick += new System.EventHandler(this.agentAgentList_DoubleClick);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(604, 146);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(43, 13);
+            this.label18.TabIndex = 24;
+            this.label18.Text = "Agents:";
+            // 
+            // agentResourceCount
+            // 
+            this.agentResourceCount.AutoSize = true;
+            this.agentResourceCount.Location = new System.Drawing.Point(1026, 84);
+            this.agentResourceCount.Name = "agentResourceCount";
+            this.agentResourceCount.Size = new System.Drawing.Size(13, 13);
+            this.agentResourceCount.TabIndex = 23;
+            this.agentResourceCount.Text = "0";
+            // 
+            // agentHistoryList
+            // 
+            this.agentHistoryList.FormattingEnabled = true;
+            this.agentHistoryList.Location = new System.Drawing.Point(604, 498);
+            this.agentHistoryList.Name = "agentHistoryList";
+            this.agentHistoryList.Size = new System.Drawing.Size(439, 160);
+            this.agentHistoryList.TabIndex = 22;
+            this.agentHistoryList.MouseMove += new System.Windows.Forms.MouseEventHandler(this.agentHistoryList_MouseMove);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(606, 482);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(42, 13);
+            this.label17.TabIndex = 21;
+            this.label17.Text = "History:";
+            // 
+            // agentResourceList
+            // 
+            this.agentResourceList.FormattingEnabled = true;
+            this.agentResourceList.Location = new System.Drawing.Point(604, 101);
+            this.agentResourceList.MultiColumn = true;
+            this.agentResourceList.Name = "agentResourceList";
+            this.agentResourceList.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.agentResourceList.Size = new System.Drawing.Size(439, 43);
+            this.agentResourceList.TabIndex = 20;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(604, 84);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(61, 13);
+            this.label16.TabIndex = 19;
+            this.label16.Text = "Resources:";
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.cellReservoir);
+            this.panel2.Controls.Add(this.label19);
+            this.panel2.Controls.Add(this.exchangeTag);
+            this.panel2.Controls.Add(this.defenseTag);
+            this.panel2.Controls.Add(this.offenseTag);
+            this.panel2.Controls.Add(this.label15);
+            this.panel2.Controls.Add(this.label14);
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Location = new System.Drawing.Point(604, 378);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(440, 101);
+            this.panel2.TabIndex = 18;
+            // 
+            // cellReservoir
+            // 
+            this.cellReservoir.AutoSize = true;
+            this.cellReservoir.Location = new System.Drawing.Point(73, 83);
+            this.cellReservoir.Name = "cellReservoir";
+            this.cellReservoir.Size = new System.Drawing.Size(10, 13);
+            this.cellReservoir.TabIndex = 9;
+            this.cellReservoir.Text = "-";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(3, 82);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(58, 13);
+            this.label19.TabIndex = 8;
+            this.label19.Text = "Reservoir: ";
+            // 
+            // exchangeTag
+            // 
+            this.exchangeTag.AutoSize = true;
+            this.exchangeTag.Location = new System.Drawing.Point(82, 40);
+            this.exchangeTag.Name = "exchangeTag";
+            this.exchangeTag.Size = new System.Drawing.Size(10, 13);
+            this.exchangeTag.TabIndex = 7;
+            this.exchangeTag.Text = "-";
+            // 
+            // defenseTag
+            // 
+            this.defenseTag.AutoSize = true;
+            this.defenseTag.Location = new System.Drawing.Point(82, 18);
+            this.defenseTag.Name = "defenseTag";
+            this.defenseTag.Size = new System.Drawing.Size(10, 13);
+            this.defenseTag.TabIndex = 6;
+            this.defenseTag.Text = "-";
+            // 
+            // offenseTag
+            // 
+            this.offenseTag.AutoSize = true;
+            this.offenseTag.Location = new System.Drawing.Point(82, 1);
+            this.offenseTag.Name = "offenseTag";
+            this.offenseTag.Size = new System.Drawing.Size(10, 13);
+            this.offenseTag.TabIndex = 5;
+            this.offenseTag.Text = "-";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(5, 36);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(58, 13);
+            this.label15.TabIndex = 4;
+            this.label15.Text = "Exchange:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(5, 18);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(50, 13);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "Defense:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(5, 1);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(47, 13);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Offense:";
+            // 
+            // agentName
+            // 
+            this.agentName.AutoSize = true;
+            this.agentName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.agentName.Location = new System.Drawing.Point(606, 68);
+            this.agentName.Name = "agentName";
+            this.agentName.Size = new System.Drawing.Size(30, 13);
+            this.agentName.TabIndex = 17;
+            this.agentName.Text = "N/A";
+            // 
+            // locationConnectionCount
+            // 
+            this.locationConnectionCount.AutoSize = true;
+            this.locationConnectionCount.Location = new System.Drawing.Point(584, 211);
+            this.locationConnectionCount.Name = "locationConnectionCount";
+            this.locationConnectionCount.Size = new System.Drawing.Size(13, 13);
+            this.locationConnectionCount.TabIndex = 16;
+            this.locationConnectionCount.Text = "0";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(222, 211);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(69, 13);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "Connections:";
+            // 
+            // connectionList
+            // 
+            this.connectionList.FormattingEnabled = true;
+            this.connectionList.Location = new System.Drawing.Point(222, 226);
+            this.connectionList.Name = "connectionList";
+            this.connectionList.Size = new System.Drawing.Size(375, 82);
+            this.connectionList.TabIndex = 14;
+            this.connectionList.DoubleClick += new System.EventHandler(this.connectionList_DoubleClick);
+            // 
+            // locationAgentCount
+            // 
+            this.locationAgentCount.AutoSize = true;
+            this.locationAgentCount.Location = new System.Drawing.Point(584, 313);
+            this.locationAgentCount.Name = "locationAgentCount";
+            this.locationAgentCount.Size = new System.Drawing.Size(13, 13);
+            this.locationAgentCount.TabIndex = 13;
+            this.locationAgentCount.Text = "0";
+            // 
+            // locationResourceCount
+            // 
+            this.locationResourceCount.AutoSize = true;
+            this.locationResourceCount.Location = new System.Drawing.Point(584, 120);
+            this.locationResourceCount.Name = "locationResourceCount";
+            this.locationResourceCount.Size = new System.Drawing.Size(13, 13);
+            this.locationResourceCount.TabIndex = 5;
+            this.locationResourceCount.Text = "0";
+            // 
+            // agentList
+            // 
+            this.agentList.FormattingEnabled = true;
+            this.agentList.Location = new System.Drawing.Point(222, 329);
+            this.agentList.Name = "agentList";
+            this.agentList.Size = new System.Drawing.Size(375, 329);
+            this.agentList.TabIndex = 12;
+            this.agentList.SelectedIndexChanged += new System.EventHandler(this.agentList_SelectedIndexChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(219, 313);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(43, 13);
+            this.label12.TabIndex = 11;
+            this.label12.Text = "Agents:";
+            // 
+            // locationResourceList
+            // 
+            this.locationResourceList.FormattingEnabled = true;
+            this.locationResourceList.Location = new System.Drawing.Point(222, 136);
+            this.locationResourceList.Name = "locationResourceList";
+            this.locationResourceList.Size = new System.Drawing.Size(375, 69);
+            this.locationResourceList.TabIndex = 10;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.upkeepCost);
+            this.panel1.Location = new System.Drawing.Point(222, 83);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(375, 34);
+            this.panel1.TabIndex = 9;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(5, 1);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(51, 13);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Upkeep: ";
+            // 
+            // upkeepCost
+            // 
+            this.upkeepCost.AutoSize = true;
+            this.upkeepCost.Location = new System.Drawing.Point(101, 1);
+            this.upkeepCost.Name = "upkeepCost";
+            this.upkeepCost.Size = new System.Drawing.Size(13, 13);
+            this.upkeepCost.TabIndex = 3;
+            this.upkeepCost.Text = "0";
+            // 
+            // shortSimulationDescription
+            // 
+            this.shortSimulationDescription.AutoSize = true;
+            this.shortSimulationDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shortSimulationDescription.Location = new System.Drawing.Point(9, 65);
+            this.shortSimulationDescription.Name = "shortSimulationDescription";
+            this.shortSimulationDescription.Size = new System.Drawing.Size(73, 13);
+            this.shortSimulationDescription.TabIndex = 8;
+            this.shortSimulationDescription.Text = "Not Loaded";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(219, 120);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(61, 13);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Resources:";
+            // 
+            // locationName
+            // 
+            this.locationName.AutoSize = true;
+            this.locationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.locationName.Location = new System.Drawing.Point(221, 67);
+            this.locationName.Name = "locationName";
+            this.locationName.Size = new System.Drawing.Size(30, 13);
+            this.locationName.TabIndex = 0;
+            this.locationName.Text = "N/A";
+            // 
+            // locationList
+            // 
+            this.locationList.FormattingEnabled = true;
+            this.locationList.Location = new System.Drawing.Point(10, 82);
+            this.locationList.Name = "locationList";
+            this.locationList.Size = new System.Drawing.Size(205, 576);
+            this.locationList.TabIndex = 7;
+            this.locationList.SelectedIndexChanged += new System.EventHandler(this.locationList_SelectedIndexChanged);
+            // 
+            // runProgressBar
+            // 
+            this.runProgressBar.Location = new System.Drawing.Point(319, 5);
+            this.runProgressBar.Name = "runProgressBar";
+            this.runProgressBar.Size = new System.Drawing.Size(100, 23);
+            this.runProgressBar.Step = 1;
+            this.runProgressBar.TabIndex = 6;
+            // 
+            // runGenerations
+            // 
+            this.runGenerations.Location = new System.Drawing.Point(152, 5);
+            this.runGenerations.Name = "runGenerations";
+            this.runGenerations.Size = new System.Drawing.Size(75, 23);
+            this.runGenerations.TabIndex = 5;
+            this.runGenerations.Text = "Go!";
+            this.runGenerations.UseVisualStyleBackColor = true;
+            this.runGenerations.Click += new System.EventHandler(this.runGenerations_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(89, 10);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(57, 13);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "generation";
+            // 
+            // generationsToRun
+            // 
+            this.generationsToRun.Location = new System.Drawing.Point(40, 7);
+            this.generationsToRun.Name = "generationsToRun";
+            this.generationsToRun.Size = new System.Drawing.Size(43, 20);
+            this.generationsToRun.TabIndex = 3;
+            this.generationsToRun.Text = "500";
+            this.generationsToRun.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.generationsToRun.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.generationsToRun_KeyPress);
+            this.generationsToRun.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.generationsToRun.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 10);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(27, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Run";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(882, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(99, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Current Generation:";
+            // 
+            // currentGeneration
+            // 
+            this.currentGeneration.Location = new System.Drawing.Point(985, 4);
+            this.currentGeneration.Name = "currentGeneration";
+            this.currentGeneration.ReadOnly = true;
+            this.currentGeneration.Size = new System.Drawing.Size(58, 20);
+            this.currentGeneration.TabIndex = 0;
+            this.currentGeneration.Text = "0";
+            this.currentGeneration.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // WebCrittersForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1322, 683);
+            this.Controls.Add(this.splitContainer);
+            this.Name = "WebCrittersForm";
+            this.Text = "Web Critters tester";
+            this.Load += new System.EventHandler(this.WebCrittersForm_Load);
+            this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel1.PerformLayout();
+            this.splitContainer.Panel2.ResumeLayout(false);
+            this.splitContainer.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
+            this.splitContainer.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox gridHeight;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox gridWidth;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox maxStartingPopulation;
+        private System.Windows.Forms.TextBox minStartingPopulation;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.SplitContainer splitContainer;
+        private System.Windows.Forms.Button createSimulation;
+        private System.Windows.Forms.TextBox currentGeneration;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button runGenerations;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox generationsToRun;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.TextBox numberOfResources;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ProgressBar runProgressBar;
+        private System.Windows.Forms.Label shortSimulationDescription;
+        private System.Windows.Forms.ListBox locationList;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label locationName;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label upkeepCost;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ListBox locationResourceList;
+        private System.Windows.Forms.Label locationResourceCount;
+        private System.Windows.Forms.ListBox agentList;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label locationAgentCount;
+        private System.Windows.Forms.Label locationConnectionCount;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ListBox connectionList;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label agentName;
+        private System.Windows.Forms.ListBox agentResourceList;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label exchangeTag;
+        private System.Windows.Forms.Label defenseTag;
+        private System.Windows.Forms.Label offenseTag;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ListBox agentHistoryList;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label agentResourceCount;
+        private System.Windows.Forms.ListBox agentCellList;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ListBox agentAgentList;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label cellReservoir;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label cellName;
+        private System.Windows.Forms.Label agentCellCount;
+        private System.Windows.Forms.Label agentAgentsCount;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox agentResourcePercent;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox upkeepPercent;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox maximumUpkeep;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TextBox interactionsPerGeneration;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox reproductionInheritancePercent;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox reproductionThresholdPercent;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Button stopButton;
+        private System.Windows.Forms.TextBox normalToWildcardRatio;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+    }
+}
+
