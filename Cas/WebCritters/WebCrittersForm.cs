@@ -104,6 +104,7 @@ namespace WebCritters
             {
                 this.shortSimulationDescription.Text = "Not Loaded";
                 this.currentGeneration.Text = "0";
+                this.totalPopulation.Text = "0";
 
                 this.locationList.DataSource = null;
             }
@@ -111,6 +112,9 @@ namespace WebCritters
             {
                 this.shortSimulationDescription.Text = string.Format("{0} : size {1}", this.CasSimulation.Environment, this.CasSimulation.Environment.Locations.Count);
                 this.currentGeneration.Text = this.CasSimulation.CurrentGeneration.ToString();
+
+                long population = this.CasSimulation.Environment.Locations.Sum(loc => loc.Agents.Count);
+                this.totalPopulation.Text = population.ToString();
 
                 if (generationCompleted)
                 {

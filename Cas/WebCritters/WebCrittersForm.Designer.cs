@@ -38,6 +38,8 @@
             this.minStartingPopulation = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.migrationBaseChance = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.normalToWildcardRatio = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
@@ -59,6 +61,9 @@
             this.numberOfResources = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.createSimulation = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label36 = new System.Windows.Forms.Label();
+            this.totalPopulation = new System.Windows.Forms.Label();
             this.stopButton = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -109,12 +114,11 @@
             this.currentGeneration = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.migrationBaseChance = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -240,6 +244,7 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer.Panel2.Controls.Add(this.panel3);
             this.splitContainer.Panel2.Controls.Add(this.stopButton);
             this.splitContainer.Panel2.Controls.Add(this.label23);
             this.splitContainer.Panel2.Controls.Add(this.label22);
@@ -281,6 +286,25 @@
             this.splitContainer.Size = new System.Drawing.Size(1304, 670);
             this.splitContainer.SplitterDistance = 250;
             this.splitContainer.TabIndex = 8;
+            // 
+            // migrationBaseChance
+            // 
+            this.migrationBaseChance.Location = new System.Drawing.Point(108, 373);
+            this.migrationBaseChance.Name = "migrationBaseChance";
+            this.migrationBaseChance.Size = new System.Drawing.Size(59, 20);
+            this.migrationBaseChance.TabIndex = 32;
+            this.migrationBaseChance.Text = "0.5";
+            this.migrationBaseChance.Validating += new System.ComponentModel.CancelEventHandler(this.doubleTextBox_Validating);
+            this.migrationBaseChance.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(9, 375);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(61, 13);
+            this.label35.TabIndex = 31;
+            this.label35.Text = "Migration %";
             // 
             // label34
             // 
@@ -483,6 +507,34 @@
             this.createSimulation.Text = "Create Simulation";
             this.createSimulation.UseVisualStyleBackColor = false;
             this.createSimulation.Click += new System.EventHandler(this.createSimulation_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.label36);
+            this.panel3.Controls.Add(this.totalPopulation);
+            this.panel3.Location = new System.Drawing.Point(12, 84);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(203, 34);
+            this.panel3.TabIndex = 35;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(5, 1);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(60, 13);
+            this.label36.TabIndex = 2;
+            this.label36.Text = "Population:";
+            // 
+            // totalPopulation
+            // 
+            this.totalPopulation.AutoSize = true;
+            this.totalPopulation.Location = new System.Drawing.Point(101, 1);
+            this.totalPopulation.Name = "totalPopulation";
+            this.totalPopulation.Size = new System.Drawing.Size(13, 13);
+            this.totalPopulation.TabIndex = 3;
+            this.totalPopulation.Text = "0";
             // 
             // stopButton
             // 
@@ -863,15 +915,15 @@
             // locationList
             // 
             this.locationList.FormattingEnabled = true;
-            this.locationList.Location = new System.Drawing.Point(10, 82);
+            this.locationList.Location = new System.Drawing.Point(10, 134);
             this.locationList.Name = "locationList";
-            this.locationList.Size = new System.Drawing.Size(205, 576);
+            this.locationList.Size = new System.Drawing.Size(205, 524);
             this.locationList.TabIndex = 7;
             this.locationList.SelectedIndexChanged += new System.EventHandler(this.locationList_SelectedIndexChanged);
             // 
             // runProgressBar
             // 
-            this.runProgressBar.Location = new System.Drawing.Point(319, 5);
+            this.runProgressBar.Location = new System.Drawing.Point(311, 5);
             this.runProgressBar.Name = "runProgressBar";
             this.runProgressBar.Size = new System.Drawing.Size(100, 23);
             this.runProgressBar.Step = 1;
@@ -940,25 +992,6 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // migrationBaseChance
-            // 
-            this.migrationBaseChance.Location = new System.Drawing.Point(108, 373);
-            this.migrationBaseChance.Name = "migrationBaseChance";
-            this.migrationBaseChance.Size = new System.Drawing.Size(59, 20);
-            this.migrationBaseChance.TabIndex = 32;
-            this.migrationBaseChance.Text = "0.5";
-            this.migrationBaseChance.Validating += new System.ComponentModel.CancelEventHandler(this.doubleTextBox_Validating);
-            this.migrationBaseChance.Validated += new System.EventHandler(this.control_Validated);
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(9, 375);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(61, 13);
-            this.label35.TabIndex = 31;
-            this.label35.Text = "Migration %";
-            // 
             // WebCrittersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -974,6 +1007,8 @@
             this.splitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -1067,6 +1102,9 @@
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.TextBox migrationBaseChance;
         private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label totalPopulation;
     }
 }
 
