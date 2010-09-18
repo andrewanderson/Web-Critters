@@ -78,6 +78,10 @@ namespace WebCritters
                     {
                         UpdateSimulationDetails(true);
                     }
+                    else
+                    {
+                        this.currentGeneration.Text = this.CasSimulation.CurrentGeneration.ToString();
+                    }
                 }
             }));
         }
