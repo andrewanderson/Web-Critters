@@ -70,7 +70,15 @@ namespace WebCritters
             this.Invoke(new MethodInvoker(delegate
             {
                 this.runProgressBar.PerformStep();
-                UpdateSimulationDetails(true);
+
+                if (updateGuiWhileProcessing.Checked)
+                {
+                    int generationUpdateFrequency = int.Parse(this.generationsBetweenUpdate.Text);
+                    if (CasSimulation.CurrentGeneration % generationUpdateFrequency == 0)
+                    {
+                        UpdateSimulationDetails(true);
+                    }
+                }
             }));
         }
 

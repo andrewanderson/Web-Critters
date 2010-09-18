@@ -61,6 +61,9 @@
             this.numberOfResources = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.createSimulation = new System.Windows.Forms.Button();
+            this.label37 = new System.Windows.Forms.Label();
+            this.generationsBetweenUpdate = new System.Windows.Forms.TextBox();
+            this.updateGuiWhileProcessing = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label36 = new System.Windows.Forms.Label();
             this.totalPopulation = new System.Windows.Forms.Label();
@@ -244,6 +247,9 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer.Panel2.Controls.Add(this.label37);
+            this.splitContainer.Panel2.Controls.Add(this.generationsBetweenUpdate);
+            this.splitContainer.Panel2.Controls.Add(this.updateGuiWhileProcessing);
             this.splitContainer.Panel2.Controls.Add(this.panel3);
             this.splitContainer.Panel2.Controls.Add(this.stopButton);
             this.splitContainer.Panel2.Controls.Add(this.label23);
@@ -321,7 +327,7 @@
             this.normalToWildcardRatio.Name = "normalToWildcardRatio";
             this.normalToWildcardRatio.Size = new System.Drawing.Size(59, 20);
             this.normalToWildcardRatio.TabIndex = 29;
-            this.normalToWildcardRatio.Text = "2";
+            this.normalToWildcardRatio.Text = "3";
             this.normalToWildcardRatio.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.normalToWildcardRatio.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -508,6 +514,37 @@
             this.createSimulation.UseVisualStyleBackColor = false;
             this.createSimulation.Click += new System.EventHandler(this.createSimulation_Click);
             // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(694, 12);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(62, 13);
+            this.label37.TabIndex = 38;
+            this.label37.Text = "generations";
+            // 
+            // generationsBetweenUpdate
+            // 
+            this.generationsBetweenUpdate.Location = new System.Drawing.Point(664, 9);
+            this.generationsBetweenUpdate.Name = "generationsBetweenUpdate";
+            this.generationsBetweenUpdate.Size = new System.Drawing.Size(27, 20);
+            this.generationsBetweenUpdate.TabIndex = 37;
+            this.generationsBetweenUpdate.Text = "5";
+            this.generationsBetweenUpdate.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.generationsBetweenUpdate.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // updateGuiWhileProcessing
+            // 
+            this.updateGuiWhileProcessing.AutoSize = true;
+            this.updateGuiWhileProcessing.Checked = true;
+            this.updateGuiWhileProcessing.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.updateGuiWhileProcessing.Location = new System.Drawing.Point(579, 11);
+            this.updateGuiWhileProcessing.Name = "updateGuiWhileProcessing";
+            this.updateGuiWhileProcessing.Size = new System.Drawing.Size(90, 17);
+            this.updateGuiWhileProcessing.TabIndex = 36;
+            this.updateGuiWhileProcessing.Text = "Update every";
+            this.updateGuiWhileProcessing.UseVisualStyleBackColor = true;
+            // 
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -550,7 +587,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(599, 37);
+            this.label23.Location = new System.Drawing.Point(599, 43);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(90, 20);
             this.label23.TabIndex = 33;
@@ -560,7 +597,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(218, 37);
+            this.label22.Location = new System.Drawing.Point(218, 43);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(70, 20);
             this.label22.TabIndex = 32;
@@ -570,7 +607,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(8, 37);
+            this.label21.Location = new System.Drawing.Point(8, 43);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(98, 20);
             this.label21.TabIndex = 31;
@@ -944,9 +981,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(89, 10);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(57, 13);
+            this.label7.Size = new System.Drawing.Size(63, 13);
             this.label7.TabIndex = 4;
-            this.label7.Text = "generation";
+            this.label7.Text = "generation2";
             // 
             // generationsToRun
             // 
@@ -1105,6 +1142,9 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label totalPopulation;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.TextBox generationsBetweenUpdate;
+        private System.Windows.Forms.CheckBox updateGuiWhileProcessing;
     }
 }
 
