@@ -16,7 +16,7 @@ namespace Cas.Core.Interactions
             Match = 0,
             Mismatch = 1,
             Wildcard = 2,
-            Extra = 3
+            Extra = 3,
         }
 
         /// <summary>
@@ -42,13 +42,21 @@ namespace Cas.Core.Interactions
 
             for (int actorIndex = 0; actorIndex < actorTag.Data.Count; actorIndex++)
             {
+                Resource actorData = actorTag.Data[actorIndex];
+
                 if (actorIndex >= targetTag.Data.Count)
                 {
-                    result += InteractionLocus[(int)InteractionLocusIndecies.Extra];
+                    if (actorData.Equals(Resource.WildcardResource))
+                    {
+                        result += InteractionLocus[(int)InteractionLocusIndecies.Wildcard];
+                    }
+                    else
+                    {
+                        result += InteractionLocus[(int)InteractionLocusIndecies.Extra];
+                    }
                     continue;
                 }
 
-                Resource actorData = actorTag.Data[actorIndex];
                 Resource targetData = targetTag.Data[actorIndex];
 
                 if (actorData.Equals(Resource.WildcardResource) && targetData.Equals(Resource.WildcardResource))

@@ -98,6 +98,14 @@ namespace TestCore.Interactions
         }
 
         [TestMethod]
+        public void Interact_LongerAttackerWithWildcards()
+        {
+            int result = Interaction.Interact(Tag.New("aa##"), Tag.New("a"));
+
+            Assert.AreEqual(MatchValue * 1 + ExtraValue * 1 + WildcardValue * 2, result);
+        }
+
+        [TestMethod]
         public void Interact_LongerTarget()
         {
             int result = Interaction.Interact(Tag.New("a"), Tag.New("aaa"));
