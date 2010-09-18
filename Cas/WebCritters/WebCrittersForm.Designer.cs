@@ -109,6 +109,8 @@
             this.currentGeneration = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.migrationBaseChance = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -203,6 +205,8 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer.Panel1.Controls.Add(this.migrationBaseChance);
+            this.splitContainer.Panel1.Controls.Add(this.label35);
             this.splitContainer.Panel1.Controls.Add(this.label34);
             this.splitContainer.Panel1.Controls.Add(this.normalToWildcardRatio);
             this.splitContainer.Panel1.Controls.Add(this.label33);
@@ -936,6 +940,25 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // migrationBaseChance
+            // 
+            this.migrationBaseChance.Location = new System.Drawing.Point(108, 373);
+            this.migrationBaseChance.Name = "migrationBaseChance";
+            this.migrationBaseChance.Size = new System.Drawing.Size(59, 20);
+            this.migrationBaseChance.TabIndex = 32;
+            this.migrationBaseChance.Text = "0.5";
+            this.migrationBaseChance.Validating += new System.ComponentModel.CancelEventHandler(this.doubleTextBox_Validating);
+            this.migrationBaseChance.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(9, 375);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(61, 13);
+            this.label35.TabIndex = 31;
+            this.label35.Text = "Migration %";
+            // 
             // WebCrittersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1042,6 +1065,8 @@
         private System.Windows.Forms.TextBox normalToWildcardRatio;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox migrationBaseChance;
+        private System.Windows.Forms.Label label35;
     }
 }
 

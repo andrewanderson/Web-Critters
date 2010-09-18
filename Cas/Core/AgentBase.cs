@@ -49,6 +49,17 @@ namespace Cas.Core
         }
 
         /// <summary>
+        /// Retrieves the total size of the agent's genome, including all sub-agents/cells.
+        /// </summary>
+        public int Size
+        {
+            get
+            {
+                return this.Cells.Sum(cell => cell.Size) + this.Agents.Sum(agent => agent.Size);
+            }
+        }
+
+        /// <summary>
         /// The number of generations that an agent has existed for.
         /// </summary>
         public long Age

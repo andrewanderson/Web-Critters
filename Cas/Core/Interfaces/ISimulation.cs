@@ -75,6 +75,11 @@ namespace Cas.Core.Interfaces
         /// </summary>
         double ReproductionInheritance { get; }
 
+        /// <summary>
+        /// The base percent chance (0-1) that an agent decides to migrate to a new location, per generation.
+        /// </summary>
+        double MigrationBaseChance { get; }
+
         #endregion
 
     }

@@ -37,6 +37,11 @@ namespace Cas.Core.Interfaces
         void SetInteractionContactPoint();
 
         /// <summary>
+        /// Retrieves the total size of the agent's genome, including all sub-agents/cells.
+        /// </summary>
+        int Size { get; }
+
+        /// <summary>
         /// The number of generations that an agent has existed for.
         /// </summary>
         long Age { get; }

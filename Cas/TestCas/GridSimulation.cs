@@ -20,10 +20,11 @@ namespace Cas.TestImplementation
         private readonly IInteraction<ICell, ICell, IList<ICell>> multipointCrossoverInteraction;
         private readonly IInteraction<ICell, ICell, ICell> asexualReproductionInteraction;
 
-        public GridSimulation(int length, int width) : this(length, width, 4, 0.25, 1.5, 1.75, 0.2) { }
+        public GridSimulation(int length, int width) : this(length, width, 4, 0.25, 1.5, 1.75, 0.2, 0.05) { }
 
-        public GridSimulation(int length, int width, int maximumUpkeepCostPerLocation, double upkeepChance, double interactionsPerGeneration, double reproductionThreshold, double reproductionInheritance)
-            : base(interactionsPerGeneration, maximumUpkeepCostPerLocation, upkeepChance, reproductionThreshold, reproductionInheritance)
+        public GridSimulation(int length, int width, int maximumUpkeepCostPerLocation, double upkeepChance, double interactionsPerGeneration, 
+            double reproductionThreshold, double reproductionInheritance, double migrationBaseChance)
+            : base(interactionsPerGeneration, maximumUpkeepCostPerLocation, upkeepChance, reproductionThreshold, reproductionInheritance, migrationBaseChance)
         {
             if (length <= 0) throw new ArgumentException("length");
             if (width <= 0) throw new ArgumentException("width");

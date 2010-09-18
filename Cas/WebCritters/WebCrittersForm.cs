@@ -52,7 +52,8 @@ namespace WebCritters
                 int.Parse(upkeepPercent.Text) / 100.0,
                 double.Parse(interactionsPerGeneration.Text),
                 int.Parse(reproductionThresholdPercent.Text) / 100.0,
-                int.Parse(reproductionInheritancePercent.Text) / 100.0);
+                int.Parse(reproductionInheritancePercent.Text) / 100.0,
+                double.Parse(migrationBaseChance.Text) / 100.0);
 
             CasSimulation.GenerationFinished += new EventHandler(CasSimulation_GenerationFinished);
 

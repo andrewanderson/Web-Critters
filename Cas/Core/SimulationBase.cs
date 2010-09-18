@@ -21,9 +21,10 @@ namespace Cas.Core
         #endregion
 
         protected SimulationBase() 
-            : this(1.5, 4, 0.25, 1.75, 0.2) { }
+            : this(1.5, 4, 0.25, 1.75, 0.2, 0.005) { }
 
-        protected SimulationBase(double interactionsPerGenerationFactor, int maximumUpkeepCostPerLocation, double upkeepChance, double reproductionThreshold, double reproductionInheritance)
+        protected SimulationBase(double interactionsPerGenerationFactor, int maximumUpkeepCostPerLocation, double upkeepChance, 
+            double reproductionThreshold, double reproductionInheritance, double migrationBaseChance)
         {
             // Set some defaults
             InteractionsPerGenerationFactor = interactionsPerGenerationFactor;
@@ -32,6 +33,8 @@ namespace Cas.Core
 
             ReproductionThreshold = reproductionThreshold;
             ReproductionInheritance = reproductionInheritance;
+
+            MigrationBaseChance = migrationBaseChance;
         }
 
         #region ISimulation Members
@@ -140,6 +143,8 @@ namespace Cas.Core
 
         public double ReproductionInheritance { get; set; }
 
+        public double MigrationBaseChance { get; set; }
+
         #endregion
 
         #region RunGeneration
@@ -160,9 +165,10 @@ namespace Cas.Core
                 ProcessLocation(location, pendingMigrations);
             }
 
-            // Relocate the migrants
+            // Relocate the migrants and charge them upkeep at their new location
             foreach (var migration in pendingMigrations)
             {
+                migration.Key.RemoveResources(migration.Value.UpkeepCost);
                 migration.Value.Agents.Add(migration.Key);
             }
 
@@ -186,6 +192,9 @@ namespace Cas.Core
             // Iterate all agents and have them interact with something (agent/resource node) or migrate (if healthy enough)
             int interactionsToPerform = (int)(location.Agents.Count*InteractionsPerGenerationFactor);
             DoInteractions(location, interactionsToPerform);
+
+            // Prior to upkeep, select agents for migration
+            QueueForMigration(location, pendingMigrations);
 
             // Change upkeep for the location
             if (location.UpkeepCost > 0 && RandomProvider.NextDouble() < this.UpkeepChance)
@@ -275,12 +284,58 @@ namespace Cas.Core
         protected abstract void DoOneReproduction(ILocation location, List<IAgent> breeders);
 
         /// <summary>
+        /// Selects agents from the location at random, and queues them to
+        /// move into a new location at the end of this generation.
+        /// 
+        /// As suggested in Hidden Order pg 151, agents with relatively less fitness
+        /// have a better chance at migrating.
+        /// </summary>
+        /// <param name="location">
+        /// The location to perform migration actions on
+        /// </param>
+        /// <param name="pendingMigrations">
+        /// A list to add all migrants to.
+        /// </param>
+        private void QueueForMigration(ILocation location, List<KeyValuePair<IAgent, ILocation>> pendingMigrations)
+        {
+            if (location == null) throw new ArgumentNullException("location");
+            if (pendingMigrations == null) throw new ArgumentNullException("pendingMigrations");
+
+            if (location.Connections.Count == 0) return;
+
+            var migrants = location.Agents
+                    .Where(agent => (RandomProvider.NextDouble() < CalculateMigrationChance(agent)))
+                    .Select(agent => new KeyValuePair<IAgent, ILocation>(agent, location.Connections.GetRandom()))
+                    .ToList();
+
+            migrants.ForEach(kvp =>
+            {
+                var agent = kvp.Key;
+                var destination = kvp.Value;
+
+                location.Agents.Remove(agent);
+                agent.History.Add(new MigrationEvent(agent.Id, location.Id, destination.Id, destination.UpkeepCost, this.CurrentGeneration));
+                pendingMigrations.Add(kvp);
+            });
+        }
+
+        /// <summary>
+        /// Determines the chance that an agent has to migrate, based on
+        /// it's relative fitness.
+        /// </summary>
+        protected virtual double CalculateMigrationChance(IAgent agent)
+        {
+            const double maxBonus = 0.02; 
+
+            double percentFull = Math.Max(1, agent.CurrentResourceCount / agent.Size);
+            
+            return MigrationBaseChance + ((1 - percentFull) * maxBonus);
+        }
+
+        /// <summary>
         /// Retrieves a random target from the supplied list, ensuring that it
         /// does not match the supplied actor.
         /// </summary>
-        /// <param name="allTargets"></param>
-        /// <param name="actor"></param>
-        /// <returns></returns>
         protected static TBase SelectRandomTarget<TBase, TSpecific>(List<TBase> allTargets, TSpecific actor) where TBase : class
         {
             if (allTargets == null) throw new ArgumentNullException("allTargets");
