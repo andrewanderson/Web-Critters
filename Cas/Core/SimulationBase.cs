@@ -21,10 +21,10 @@ namespace Cas.Core
         #endregion
 
         protected SimulationBase() 
-            : this(1.5, 4, 0.25, 1.75, 0.2, 0.005) { }
+            : this(1.5, 4, 0.25, 1.75, 0.2, 0.005, 0.005) { }
 
         protected SimulationBase(double interactionsPerGenerationFactor, int maximumUpkeepCostPerLocation, double upkeepChance, 
-            double reproductionThreshold, double reproductionInheritance, double migrationBaseChance)
+            double reproductionThreshold, double reproductionInheritance, double migrationBaseChance, double randomDeathChance)
         {
             // Set some defaults
             InteractionsPerGenerationFactor = interactionsPerGenerationFactor;
@@ -35,6 +35,8 @@ namespace Cas.Core
             ReproductionInheritance = reproductionInheritance;
 
             MigrationBaseChance = migrationBaseChance;
+
+            RandomDeathChance = randomDeathChance;
         }
 
         #region ISimulation Members
@@ -145,6 +147,8 @@ namespace Cas.Core
 
         public double MigrationBaseChance { get; set; }
 
+        public double RandomDeathChance { get; set; }
+
         #endregion
 
         #region RunGeneration
@@ -209,7 +213,7 @@ namespace Cas.Core
             {
                 var agent = location.Agents[i];
 
-                if (agent.IsEligableForDeath)
+                if (agent.IsEligableForDeath || RandomProvider.NextDouble() < this.RandomDeathChance)
                 {
                     deathIndecies.Add(i);
                     continue;

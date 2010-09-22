@@ -80,6 +80,11 @@ namespace Cas.Core.Interfaces
         /// </summary>
         double MigrationBaseChance { get; }
 
+        /// <summary>
+        /// The percent chance (0-1) that an agent will randomly die at the end of a generation.
+        /// </summary>
+        double RandomDeathChance { get; }
+
         #endregion
 
     }

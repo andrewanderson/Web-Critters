@@ -117,6 +117,8 @@
             this.currentGeneration = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.randomDeathPercent = new System.Windows.Forms.TextBox();
+            this.label38 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -212,6 +214,8 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer.Panel1.Controls.Add(this.randomDeathPercent);
+            this.splitContainer.Panel1.Controls.Add(this.label38);
             this.splitContainer.Panel1.Controls.Add(this.migrationBaseChance);
             this.splitContainer.Panel1.Controls.Add(this.label35);
             this.splitContainer.Panel1.Controls.Add(this.label34);
@@ -1029,6 +1033,25 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // randomDeathPercent
+            // 
+            this.randomDeathPercent.Location = new System.Drawing.Point(108, 399);
+            this.randomDeathPercent.Name = "randomDeathPercent";
+            this.randomDeathPercent.Size = new System.Drawing.Size(59, 20);
+            this.randomDeathPercent.TabIndex = 34;
+            this.randomDeathPercent.Text = "0.5";
+            this.randomDeathPercent.Validating += new System.ComponentModel.CancelEventHandler(this.doubleTextBox_Validating);
+            this.randomDeathPercent.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(9, 401);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(47, 13);
+            this.label38.TabIndex = 33;
+            this.label38.Text = "Death %";
+            // 
             // WebCrittersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1145,6 +1168,8 @@
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.TextBox generationsBetweenUpdate;
         private System.Windows.Forms.CheckBox updateGuiWhileProcessing;
+        private System.Windows.Forms.TextBox randomDeathPercent;
+        private System.Windows.Forms.Label label38;
     }
 }
 
