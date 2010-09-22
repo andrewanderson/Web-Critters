@@ -21,10 +21,10 @@ namespace Cas.Core
         #endregion
 
         protected SimulationBase() 
-            : this(1.5, 4, 0.25, 1.75, 0.2, 0.005, 0.005) { }
+            : this(1.5, 4, 0.25, 1.75, 0.2, 0.005, 0.02, 0.005) { }
 
         protected SimulationBase(double interactionsPerGenerationFactor, int maximumUpkeepCostPerLocation, double upkeepChance, 
-            double reproductionThreshold, double reproductionInheritance, double migrationBaseChance, double randomDeathChance)
+            double reproductionThreshold, double reproductionInheritance, double migrationBaseChance, double maxMigrationBonus, double randomDeathChance)
         {
             // Set some defaults
             InteractionsPerGenerationFactor = interactionsPerGenerationFactor;
@@ -35,6 +35,7 @@ namespace Cas.Core
             ReproductionInheritance = reproductionInheritance;
 
             MigrationBaseChance = migrationBaseChance;
+            MaximumMigrationBonus = maxMigrationBonus;
 
             RandomDeathChance = randomDeathChance;
         }
@@ -146,6 +147,8 @@ namespace Cas.Core
         public double ReproductionInheritance { get; set; }
 
         public double MigrationBaseChance { get; set; }
+
+        public double MaximumMigrationBonus { get; set; }
 
         public double RandomDeathChance { get; set; }
 
@@ -329,11 +332,9 @@ namespace Cas.Core
         /// </summary>
         protected virtual double CalculateMigrationChance(IAgent agent)
         {
-            const double maxBonus = 0.02; 
-
             double percentFull = Math.Max(1, agent.CurrentResourceCount / agent.Size);
             
-            return MigrationBaseChance + ((1 - percentFull) * maxBonus);
+            return MigrationBaseChance + ((1 - percentFull) * MaximumMigrationBonus);
         }
 
         /// <summary>

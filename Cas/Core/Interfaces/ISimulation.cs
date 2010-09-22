@@ -81,6 +81,11 @@ namespace Cas.Core.Interfaces
         double MigrationBaseChance { get; }
 
         /// <summary>
+        /// The maximum bonus to MigrationBaseChance (0-1) that an agent can be awarded for being unfit.
+        /// </summary>
+        double MaximumMigrationBonus { get; }
+
+        /// <summary>
         /// The percent chance (0-1) that an agent will randomly die at the end of a generation.
         /// </summary>
         double RandomDeathChance { get; }
