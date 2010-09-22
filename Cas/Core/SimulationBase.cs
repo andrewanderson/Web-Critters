@@ -216,7 +216,7 @@ namespace Cas.Core
             {
                 var agent = location.Agents[i];
 
-                if (agent.IsEligableForDeath || RandomProvider.NextDouble() < this.RandomDeathChance)
+                if (RandomProvider.NextDouble() < this.RandomDeathChance || agent.IsEligableForDeath)
                 {
                     deathIndecies.Add(i);
                     continue;
