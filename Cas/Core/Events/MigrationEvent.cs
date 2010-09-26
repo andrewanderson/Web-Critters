@@ -10,7 +10,7 @@ namespace Cas.Core.Events
         public Guid OriginLocationId { get; set; }
 
         public MigrationEvent(Guid agentId, Guid originLocationId, Guid destinationLocationId, int cost, int generation)
-            : base(agentId, destinationLocationId, cost, generation, "Migration")
+            : base(agentId, destinationLocationId, cost, generation)
         {
             this.OriginLocationId = originLocationId;
         }

@@ -10,8 +10,8 @@ namespace Cas.Core.Events
 
         public string Result { get; private set; }
 
-        public TargetedEvent(Guid agentId, Guid locationId, string eventType, int generation, Guid targetId, Type targetType, string result) 
-            : base(agentId, locationId, eventType, generation)
+        public TargetedEvent(Guid agentId, Guid locationId, int generation, Guid targetId, Type targetType, string result) 
+            : base(agentId, locationId, generation)
         {
             if (targetType == null) throw new ArgumentNullException("targetType");
 
@@ -22,7 +22,7 @@ namespace Cas.Core.Events
 
         public override string ToString()
         {
-            return string.Format("{0}: {1} ({4}) on ({3}) {2}", this.Generation, EventType, TargetId, TargetType.Name, Result);
+            return string.Format("{0}: Won encounter ({3}) against ({2}) {1}", this.Generation, TargetId, TargetType.Name, Result);
         }
     }
 }

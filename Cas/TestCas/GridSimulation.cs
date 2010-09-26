@@ -82,11 +82,11 @@ namespace Cas.TestImplementation
             // TODO: For now we only log successful attacks due to history bloat
             if (result > 0)
             {
-                actor.History.Add(new TargetedEvent(actor.Id, location.Id, "Successful attack", CurrentGeneration, target.Id, target.GetType(), result.ToString()));
+                actor.History.Add(new TargetedEvent(actor.Id, location.Id, CurrentGeneration, target.Id, target.GetType(), result.ToString()));
                 if (target is IAgent)
                 {
                     var targetAgent = target as IAgent;
-                    targetAgent.History.Add(new TargetOfEvent(targetAgent.Id, location.Id, "Successful attack", CurrentGeneration, actor.Id, actor.GetType(), result.ToString()));
+                    targetAgent.History.Add(new TargetOfEvent(targetAgent.Id, location.Id, CurrentGeneration, actor.Id, actor.GetType(), result.ToString()));
                 }
             }
         }

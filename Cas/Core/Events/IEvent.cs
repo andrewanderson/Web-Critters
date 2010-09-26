@@ -15,11 +15,6 @@ namespace Cas.Core.Events
         Guid AgentId { get; }
 
         /// <summary>
-        /// A simple description of the event that occurred
-        /// </summary>
-        string EventType { get; }
-
-        /// <summary>
         /// The generation in which the event occurred
         /// </summary>
         int Generation { get; }

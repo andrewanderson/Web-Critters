@@ -13,8 +13,8 @@ namespace Cas.Core.Events
 
         public string Result { get; private set; }
 
-        public TargetOfEvent(Guid agentId, Guid locationId, string eventType, int generation, Guid actorId, Type actorType, string result)
-            : base(agentId, locationId, eventType, generation)
+        public TargetOfEvent(Guid agentId, Guid locationId, int generation, Guid actorId, Type actorType, string result)
+            : base(agentId, locationId, generation)
         {
             if (actorType == null) throw new ArgumentNullException("actorType");
 
@@ -25,7 +25,7 @@ namespace Cas.Core.Events
 
         public override string ToString()
         {
-            return string.Format("{0}: {1} {4} by ({3}) {2}", this.Generation, EventType, ActorId, ActorType.Name, Result);
+            return string.Format("{0}: Lost encounter ({3}) with ({2}) {1}", this.Generation, ActorId, ActorType.Name, Result);
         }
     }
 }
