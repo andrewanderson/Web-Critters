@@ -12,27 +12,38 @@ namespace Cas.TestImplementation
 {
     public class GridSimulation : SimulationBase
     {
-        public int Length { get; set; }
-        public int Width { get; set; }
+        public int Length { get; private set; }
+        public int Width { get; private set; }
+        private int MinResourceNodesPerLocation { get; set; }
+        private int MaxResourceNodesPerLocation { get; set; }
+        private int MinResourcesPerNodePerLocation { get; set; }
+        private int MaxResourcesPerNodePerLocation { get; set; }
+        private int StartingTagComplexity { get; set; }
+        private int UniqueResourceCount { get; set; }
 
         private readonly IInteraction<IInteractable, IInteractable, int> attackInteraction;
         private readonly IInteraction<ICell, ICell, IList<ICell>> crossoverInteraction;
         private readonly IInteraction<ICell, ICell, IList<ICell>> multipointCrossoverInteraction;
         private readonly IInteraction<ICell, ICell, ICell> asexualReproductionInteraction;
 
-        public GridSimulation(int length, int width) : this(length, width, 4, 0.25, 1.5, 1.75, 0.2, 0.005, 0.02, 0.005) { }
+        public GridSimulation(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, int tagComplexity) 
+            : this(length, width, minResourceNodes, maxResourceNodes, minResourcesPerNode, maxResourcesPerNode, tagComplexity, 100, 4, 0.25, 1.5, 1.75, 0.2, 0.005, 0.02, 0.005) { }
 
-        public GridSimulation(int length, int width, int maximumUpkeepCostPerLocation, double upkeepChance, double interactionsPerGeneration, 
-            double reproductionThreshold, double reproductionInheritance, double migrationBaseChance, double maxMigrationBonus, double randomDeathChance)
-            : base(interactionsPerGeneration, maximumUpkeepCostPerLocation, upkeepChance, 
-                   reproductionThreshold, reproductionInheritance, migrationBaseChance, maxMigrationBonus, randomDeathChance)
+        public GridSimulation(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, int tagComplexity,
+                              int uniqueResourceCount, int maximumUpkeepCostPerLocation, double upkeepChance, double interactionsPerGeneration, 
+                              double reproductionThreshold, double reproductionInheritance, double migrationBaseChance, double maxMigrationBonus, double randomDeathChance)
+            : base(interactionsPerGeneration, maximumUpkeepCostPerLocation, upkeepChance, reproductionThreshold, reproductionInheritance, 
+                   migrationBaseChance, maxMigrationBonus, randomDeathChance)
         {
-            if (length <= 0) throw new ArgumentException("length");
-            if (width <= 0) throw new ArgumentException("width");
-
             Length = length;
             Width = width;
-            
+            MinResourceNodesPerLocation = minResourceNodes;
+            MaxResourceNodesPerLocation = maxResourceNodes;
+            MinResourcesPerNodePerLocation = minResourcesPerNode;
+            MaxResourcesPerNodePerLocation = maxResourcesPerNode;
+            StartingTagComplexity = tagComplexity;
+            UniqueResourceCount = uniqueResourceCount;
+
             attackInteraction = new AttackInteraction();
             crossoverInteraction = new CrossoverInteraction(true, ReproductionInheritance);
             multipointCrossoverInteraction = new MultipointCrossoverInteraction(true, ReproductionInheritance);
@@ -41,7 +52,16 @@ namespace Cas.TestImplementation
 
         protected override void InnerInitialize()
         {
-            environment = new GridEnvironment(Length, Width, this);
+            environment = new GridEnvironment(
+                Length, 
+                Width, 
+                MinResourceNodesPerLocation, 
+                MaxResourceNodesPerLocation, 
+                MinResourcesPerNodePerLocation, 
+                MaxResourcesPerNodePerLocation,
+                StartingTagComplexity,
+                UniqueResourceCount,
+                this);
         }
 
         protected override void InnerReset()

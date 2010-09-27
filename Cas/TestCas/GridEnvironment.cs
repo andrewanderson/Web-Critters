@@ -10,13 +10,6 @@ namespace Cas.TestImplementation
 {
     public class GridEnvironment : IEnvironment
     {
-        internal const int MinimumResourcesGenerated = 2;
-        internal const int MaximumResourcesGenerated = 25;
-
-        internal const int GlobalResourcePoolSize = 100;
-        internal const int MinimumResourcePoolNodeSize = 10;
-        internal const int MaximumResourcePoolNodeSize = 50;
-
         /// <summary>
         /// The length of the grid
         /// </summary>
@@ -26,6 +19,39 @@ namespace Cas.TestImplementation
         /// The width of the grid
         /// </summary>
         public int Width { get; private set; }
+
+        /// <summary>
+        /// The minimum number of resource nodes that will be created in each location
+        /// </summary>
+        public int MinResourceNodesPerLocation { get; private set; }
+
+        /// <summary>
+        /// The maximum number of resource nodes that will be created in each location
+        /// </summary>
+        public int MaxResourceNodesPerLocation { get; private set; }
+
+        /// <summary>
+        /// The minimum number of resources that each resource node will contain
+        /// </summary>
+        public int MinResourcesPerNodePerLocation { get; private set; }
+
+        /// <summary>
+        /// The maximum number of resources that each resource node will contain
+        /// </summary>
+        public int MaxResourcesPerNodePerLocation { get; private set; }
+
+        /// <summary>
+        /// The maximum length of new tags (cells/resources) within the simulation
+        /// </summary>
+        public int StartingTagComplexity { get; private set; }
+        
+        /// <summary>
+        /// The number of unique resource nodes in the simulation.  
+        /// </summary>
+        /// <remarks>
+        /// This sort of implies fauna diversity.
+        /// </remarks>
+        public int GlobalResourcePoolSize { get; private set; }
 
         #region IEnvironment Members
 
@@ -59,15 +85,30 @@ namespace Cas.TestImplementation
         /// <summary>
         /// Create a new length x width sized grid.
         /// </summary>
-        public GridEnvironment(int length, int width, GridSimulation simulation)
+        public GridEnvironment(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, 
+            int tagComplexity, int uniqueResourceCount, GridSimulation simulation)
         {
             if (length <= 0) throw  new ArgumentOutOfRangeException("length", length, "Length must be greater than zero.");
             if (width <= 0) throw new ArgumentOutOfRangeException("width", width, "Width must be greater than zero.");
+            if (minResourceNodes <= 0) throw new ArgumentOutOfRangeException("minResourceNodes", minResourceNodes, "minResourceNodes must be greater than zero.");
+            if (maxResourceNodes <= 0) throw new ArgumentOutOfRangeException("maxResourceNodes", maxResourceNodes, "maxResourceNodes must be greater than zero.");
+            if (minResourceNodes > maxResourceNodes) throw new ArgumentException("minResourceNodes cannot exceed maxResourceNodes");
+            if (minResourcesPerNode <= 0) throw new ArgumentOutOfRangeException("minResourcesPerNode", minResourcesPerNode, "minResourcesPerNode must be greater than zero.");
+            if (maxResourcesPerNode <= 0) throw new ArgumentOutOfRangeException("maxResourcesPerNode", maxResourcesPerNode, "maxResourcesPerNode must be greater than zero.");
+            if (minResourcesPerNode > maxResourcesPerNode) throw new ArgumentException("minResourcesPerNode cannot exceed maxResourcesPerNode");
+            if (tagComplexity <= 0) throw new ArgumentOutOfRangeException("tagComplexity", tagComplexity, "tagComplexity must be greater than zero.");
+            if (uniqueResourceCount <= 0) throw new ArgumentOutOfRangeException("uniqueResourceCount", uniqueResourceCount, "uniqueResourceCount must be greater than zero.");
             if (simulation == null) throw new ArgumentNullException("simulation");
 
             Length = length;
             Width = width;
             Simulation = simulation;
+            MinResourceNodesPerLocation = minResourceNodes;
+            MaxResourceNodesPerLocation = maxResourceNodes;
+            MinResourcesPerNodePerLocation = minResourcesPerNode;
+            MaxResourcesPerNodePerLocation = maxResourcesPerNode;
+            StartingTagComplexity = tagComplexity;
+            GlobalResourcePoolSize = uniqueResourceCount;
         }
 
         /// <summary>
@@ -100,7 +141,7 @@ namespace Cas.TestImplementation
             // TODO: It would be nice if the resources were normally distributed
             
             List<IResourceNode> nodes = new List<IResourceNode>();
-            int num = RandomProvider.Next(MinimumResourcesGenerated, MaximumResourcesGenerated);
+            int num = RandomProvider.Next(MinResourceNodesPerLocation, MaxResourceNodesPerLocation);
             for (int i = 0; i < num; i++)
             {
                 var node = GlobalResources.GetRandom().Clone() as IResourceNode;
@@ -110,8 +151,8 @@ namespace Cas.TestImplementation
             return nodes;
         }
 
-        private static List<IResourceNode> globalResources = null;
-        internal static List<IResourceNode> GlobalResources
+        private List<IResourceNode> globalResources = null;
+        internal List<IResourceNode> GlobalResources
         {
             get
             {
@@ -120,14 +161,14 @@ namespace Cas.TestImplementation
                     globalResources = new List<IResourceNode>();
                     for (int i = 0; i < GlobalResourcePoolSize; i++)
                     {
-                        int nodeSize = RandomProvider.Next(MinimumResourcePoolNodeSize, MaximumResourcePoolNodeSize);
+                        int nodeSize = RandomProvider.Next(MinResourcesPerNodePerLocation, MaxResourcesPerNodePerLocation);
                         var resources = new List<Resource>();
                         for (int j = 0; j < nodeSize; j++)
                         {
                             resources.Add(Resource.Random(false));
                         }
 
-                        globalResources.Add(new GridResourceNode(resources));
+                        globalResources.Add(GridResourceNode.New(resources, StartingTagComplexity));
                     }
 
                 }

@@ -16,7 +16,7 @@ namespace Cas.TestImplementation
     {
         internal List<Resource> Reservoir { get; private set; }
 
-        public GridResourceNode(List<Resource> resources)
+        private GridResourceNode(List<Resource> resources, int tagSize) : base()
         {
             RenewableResources = new List<Resource>();
             RenewableResources.AddRange(resources);
@@ -25,12 +25,12 @@ namespace Cas.TestImplementation
             RefreshReservoir();
 
             Id = Guid.NewGuid();
-            Offense = Tag.New(GridCell.MaxOffenseSize, false);
-            Defense = Tag.New(GridCell.MaxDefenseSize, false);
-            Exchange = Tag.New(GridCell.MaxExchangeSize, false);
+            Offense = Tag.New(tagSize, false);
+            Defense = Tag.New(tagSize, false);
+            Exchange = Tag.New(tagSize, false);
         }
 
-        public GridResourceNode(IResourceNode node)
+        private GridResourceNode(IResourceNode node)
         {
             if (node == null) throw new ArgumentNullException("node");
 
@@ -44,6 +44,11 @@ namespace Cas.TestImplementation
 
             this.Reservoir = new List<Resource>();
             this.RefreshReservoir();
+        }
+
+        public static GridResourceNode New(List<Resource> resources, int tagSize)
+        {
+            return new GridResourceNode(resources, tagSize);
         }
 
         public override string ToString()

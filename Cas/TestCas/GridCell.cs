@@ -25,27 +25,23 @@ namespace Cas.TestImplementation
         
         #region Static members
 
-        public const int DefaultTagSize = 4;
-
-        public const int MaxOffenseSize = DefaultTagSize;
-        public const int MaxDefenseSize = DefaultTagSize;
-        public const int MaxExchangeSize = DefaultTagSize;
-
         /// <summary>
         /// Generates a random cell
         /// </summary>
-        public static ICell New(bool seedRandom)
+        public static ICell New(int tagSize)
         {
             var cell = new GridCell();
 
-            if (seedRandom)
-            {
-                cell.Offense = Tag.New(MaxOffenseSize, true);
-                cell.Defense = Tag.New(MaxDefenseSize, true);
-                cell.Exchange = Tag.New(MaxExchangeSize, true);
-            }
+            cell.Offense = Tag.New(tagSize, true);
+            cell.Defense = Tag.New(tagSize, true);
+            cell.Exchange = Tag.New(tagSize, true);
 
             return cell;
+        }
+
+        public static ICell New()
+        {
+            return new GridCell();
         }
 
         #endregion

@@ -52,11 +52,11 @@ namespace TestCore.Interactions
         [TestMethod]
         public void Interact_AttackEqualsDefense()
         {
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("abc");
             AddRandomResources(actor, 10);
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Defense = Tag.New("abc");
             AddRandomResources(target, 10);
 
@@ -73,11 +73,11 @@ namespace TestCore.Interactions
         [TestMethod]
         public void Interact_CompleteMismatch()
         {
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("abc");
             AddRandomResources(actor, 10);
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Defense = Tag.New("cca");
             AddRandomResources(target, 10);
 
@@ -94,11 +94,11 @@ namespace TestCore.Interactions
         [TestMethod]
         public void Interact_WildcardAttacker()
         {
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("###");
             AddRandomResources(actor, 10);
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Defense = Tag.New("cca");
             AddRandomResources(target, 10);
 
@@ -115,11 +115,11 @@ namespace TestCore.Interactions
         [TestMethod]
         public void Interact_WildcardsCancelOut()
         {
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("ab#c");
             AddRandomResources(actor, 10);
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Defense = Tag.New("ab#c");
             AddRandomResources(target, 10);
 
@@ -136,11 +136,11 @@ namespace TestCore.Interactions
         [TestMethod]
         public void Interact_LongerAttacker()
         {
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("aa");
             AddRandomResources(actor, 10);
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Defense = Tag.New("a");
             AddRandomResources(target, 10);
 
@@ -157,11 +157,11 @@ namespace TestCore.Interactions
         [TestMethod]
         public void Interact_LongerTarget()
         {
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("a");
             AddRandomResources(actor, 10);
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Defense = Tag.New("aaa");
             AddRandomResources(target, 10);
             
@@ -178,11 +178,11 @@ namespace TestCore.Interactions
         [TestMethod]
         public void Interact_WildcardToExtend()
         {
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("abc#c");
             AddRandomResources(actor, 10);
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Defense = Tag.New("abcac");
             AddRandomResources(target, 10);
 
@@ -199,11 +199,11 @@ namespace TestCore.Interactions
         [TestMethod]
         public void Interact_Kill()
         {
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("abc");
             AddRandomResources(actor, 4);
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Defense = Tag.New("abc");
             AddRandomResources(target, 4);
 
@@ -219,11 +219,11 @@ namespace TestCore.Interactions
         [TestMethod]
         public void Interact_ResourceNode()
         {
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("abc");
             AddRandomResources(actor, 4);
 
-            IResourceNode target = new GridResourceNode(new List<Resource> {Resource.Random(false)});
+            IResourceNode target = GridResourceNode.New(new List<Resource> {Resource.Random(false)}, 4);
             target.Defense = Tag.New("abc");
             AddRandomResources(target, 3);  // top the node up to 4 resources
 

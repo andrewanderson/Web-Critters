@@ -33,7 +33,10 @@ namespace Cas.Core.Interfaces
         /// <param name="normalToWildcardResourceRatio">
         /// The prominence of wildcard resources
         /// </param>
-        void Initialize(int distinctResources, int normalToWildcardResourceRatio);
+        /// <param name="maximumTagSize">
+        /// The largest size that a tag can reach in the simulation.
+        /// </param>
+        void Initialize(int distinctResources, int normalToWildcardResourceRatio, int maximumTagSize);
 
         /// <summary>
         /// Discard the current simulation configuration.

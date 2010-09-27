@@ -12,6 +12,8 @@ namespace TestCore.Interactions
     [TestClass]
     public class AsexualInteractionTest
     {
+        private const int TagSize = 4;
+
         [TestInitialize()]
         public void MyTestInitialize()
         {
@@ -24,7 +26,7 @@ namespace TestCore.Interactions
         {
             var interaction = new AsexualInteraction(false, 0);
 
-            var actor = GridCell.New(true);
+            var actor = GridCell.New(TagSize);
             actor.AddRandomResources(actor.Size * 2);
 
             interaction.Interact(actor, actor);
@@ -37,7 +39,7 @@ namespace TestCore.Interactions
         {
             var interaction = new AsexualInteraction(false, 0);
 
-            var actor = GridCell.New(true);
+            var actor = GridCell.New(TagSize);
             actor.AddRandomResources(actor.Size * 2);
 
             var child = interaction.Interact(actor, null);
@@ -51,7 +53,7 @@ namespace TestCore.Interactions
         {
             var interaction = new AsexualInteraction(false, 0);
 
-            var actor = GridCell.New(true);
+            var actor = GridCell.New(TagSize);
             actor.AddRandomResources(actor.Size * 2);
 
             // Reverse engineer the interaction percentage so that each child gets 2 resources
@@ -72,7 +74,7 @@ namespace TestCore.Interactions
 
             for (int i = 0; i < 100; i++)
             {
-                var parent = GridCell.New(true);
+                var parent = GridCell.New(TagSize);
                 parent.AddRandomResources(parent.Size * 2);
 
                 var child = interaction.Interact(parent, null);

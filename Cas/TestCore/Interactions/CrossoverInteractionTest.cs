@@ -28,12 +28,12 @@ namespace TestCore.Interactions
             string defenseData = "dcb";
             string exchangeData = "aba";
 
-            var actor = GridCell.New(false);
+            var actor = GridCell.New();
             actor.Offense = Tag.New(offenseData);
             actor.Defense = Tag.New(defenseData);
             actor.Exchange = Tag.New(exchangeData);
 
-            var target = GridCell.New(false);
+            var target = GridCell.New();
             target.Offense = Tag.New(offenseData);
             target.Defense = Tag.New(defenseData);
             target.Exchange = Tag.New(exchangeData);
@@ -63,7 +63,7 @@ namespace TestCore.Interactions
             Console.Out.WriteLine("Cells in this test run:");
             for (int i = 0; i < cellCount; i++)
             {
-                var cell = GridCell.New(true);
+                var cell = GridCell.New(4);
                 candidates.Add(cell);
 
                 Console.Out.WriteLine("Cell {0}: {1}", i, cell);

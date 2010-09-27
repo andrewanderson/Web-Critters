@@ -29,7 +29,7 @@ namespace TestCore.Interactions
             // Make random cells
             for (int i = 0; i < cellCount; i++)
             {
-                var cell = GridCell.New(true);
+                var cell = GridCell.New(4);
                 candidates.Add(cell);
             }
 

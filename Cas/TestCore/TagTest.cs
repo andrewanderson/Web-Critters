@@ -81,8 +81,9 @@ namespace TestCore
             // Verify that we can generate new Tags of varying size without error.
             for (int i = 0; i < 100; i++)
             {
-                Tag t = Tag.New();
+                Tag t = Tag.New(10, true);
                 Console.WriteLine("Tag: " + t);
+                if (t.Data.Count == 0 || t.Data.Count > 10) Assert.Fail();
             }
         }
 

@@ -77,30 +77,37 @@ namespace Cas.Core
 
         #region Static members
 
+        private const int DefaultMaxSize = 10;
+
         /// <summary>
         /// The maximum size of a Tag in the system.  No tag can exceed this.
         /// </summary>
-        public const int MaxSize = 10;
-
-        /// <summary>
-        /// Returns a new random tag with a size between 1 and 10.
-        /// </summary>
-        public static Tag New() 
+        public static int MaxSize { get; private set; }
+        
+        static Tag()
         {
-            return Tag.New(RandomProvider.Next(9) + 1, false);
+            MaxSize = DefaultMaxSize;
+        }
+
+        public static void Initialize(int maxSize)
+        {
+            if (maxSize <= 0) throw new ArgumentOutOfRangeException("maxSize", "maxSize must be greater than zero.");
+
+            MaxSize = maxSize;
         }
 
         /// <summary>
         /// Generates a new random tag of the desired length.
         /// </summary>
-        public static Tag New(int length, bool allowWildCard)
+        public static Tag New(int maxLength, bool allowWildCard)
         {
-            if (length < 1 || length > MaxSize) throw new ArgumentOutOfRangeException("length");
+            if (maxLength < 1 || maxLength > MaxSize) throw new ArgumentOutOfRangeException("length");
 
             Tag newTag = new Tag();
             newTag.Data = new List<Resource>();
 
-            for (int i = 0; i< length; i++)
+            int length = RandomProvider.Next(maxLength) + 1;
+            for (int i = 0; i < length; i++)
             {
                 newTag.Data.Add(Resource.Random(allowWildCard));
             }

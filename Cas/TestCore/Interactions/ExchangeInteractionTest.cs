@@ -24,11 +24,11 @@ namespace TestCore.Interactions
         {
             var interaction = new ExchangeInteraction(0);
 
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("cba");
             actor.Exchange = Tag.New("abc");
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Offense = Tag.New("abc");
             target.Exchange = Tag.New("cba");
 
@@ -42,11 +42,11 @@ namespace TestCore.Interactions
         {
             var interaction = new ExchangeInteraction(0);
 
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("cbadd");
             actor.Exchange = Tag.New("abcdd");
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Offense = Tag.New("abc");
             target.Exchange = Tag.New("cba");
 
@@ -60,11 +60,11 @@ namespace TestCore.Interactions
         {
             var interaction = new ExchangeInteraction(0);
 
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("c##dd");
             actor.Exchange = Tag.New("abc");
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Offense = Tag.New("ab#");
             target.Exchange = Tag.New("cba");
 
@@ -78,11 +78,11 @@ namespace TestCore.Interactions
         {
             var interaction = new ExchangeInteraction(0);
 
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("c#a#");
             actor.Exchange = Tag.New("abc");
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Offense = Tag.New("db#");
             target.Exchange = Tag.New("cba");
 
@@ -96,11 +96,11 @@ namespace TestCore.Interactions
         {
             var interaction = new ExchangeInteraction(0);
 
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("cba");
             actor.Exchange = Tag.New("abc");
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Offense = Tag.New("dbc");
             target.Exchange = Tag.New("cba");
 
@@ -114,11 +114,11 @@ namespace TestCore.Interactions
         {
             var interaction = new ExchangeInteraction(100);
 
-            ICell actor = GridCell.New(false);
+            ICell actor = GridCell.New();
             actor.Offense = Tag.New("cba");
             actor.Exchange = Tag.New("abc");
 
-            ICell target = GridCell.New(false);
+            ICell target = GridCell.New();
             target.Offense = Tag.New("dbc");
             target.Exchange = Tag.New("cba");
 

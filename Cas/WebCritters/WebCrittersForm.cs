@@ -46,6 +46,12 @@ namespace WebCritters
             CasSimulation = new GridSimulation(
                 int.Parse(gridHeight.Text),
                 int.Parse(gridWidth.Text),
+                int.Parse(minResourceNodes.Text),
+                int.Parse(maxResourceNodes.Text),
+                int.Parse(minResourcesPerNode.Text),
+                int.Parse(maxResourcesPerNode.Text),
+                int.Parse(startingComplexity.Text),
+                int.Parse(uniqueResourceCount.Text),
                 int.Parse(maximumUpkeep.Text),
                 int.Parse(upkeepPercent.Text) / 100.0,
                 double.Parse(interactionsPerGeneration.Text),
@@ -57,10 +63,16 @@ namespace WebCritters
 
             CasSimulation.GenerationFinished += new EventHandler(CasSimulation_GenerationFinished);
 
-            CasSimulation.Initialize(int.Parse(numberOfResources.Text), int.Parse(normalToWildcardRatio.Text));
+            CasSimulation.Initialize(
+                int.Parse(numberOfResources.Text), 
+                int.Parse(normalToWildcardRatio.Text), 
+                int.Parse(maxComplexity.Text));
 
             // TODO: Load up some default agents
-            LoadStartingAgents(int.Parse(minStartingPopulation.Text), int.Parse(maxStartingPopulation.Text));
+            LoadStartingAgents(
+                int.Parse(minStartingPopulation.Text),
+                int.Parse(maxStartingPopulation.Text),
+                int.Parse(startingComplexity.Text));
 
             UpdateSimulationDetails(false);
         }
@@ -86,7 +98,7 @@ namespace WebCritters
             }));
         }
 
-        private void LoadStartingAgents(int min, int max)
+        private void LoadStartingAgents(int min, int max, int tagComplexity)
         {
             if (max < min) throw new ArgumentOutOfRangeException("max", "max must exceed min");
 
@@ -99,7 +111,7 @@ namespace WebCritters
                 {
                     var agent = new GridAgent();
                     agent.History.Add(new CreationEvent(agent.Id, location.Id, 0));
-                    var cell = GridCell.New(true);
+                    var cell = GridCell.New(tagComplexity);
 
                     int startingResourceCount = (int)(cell.Size / 100.0 * startingResourcePercent);
                     cell.AddRandomResources(startingResourceCount);

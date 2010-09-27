@@ -87,6 +87,9 @@ namespace Cas.Core
         /// <param name="normalToWildcardResourceRatio">
         /// The prominence of wildcard resources
         /// </param>
+        /// <param name="maximumTagSize">
+        /// The largest size that a tag can reach in the simulation.
+        /// </param>
         /// <exception cref="InvalidOperationException">
         /// Thrown if this method is called when the class is already initialized.
         /// </exception>
@@ -94,13 +97,14 @@ namespace Cas.Core
         /// This method must be called before any other class methods.  Once it is called,
         /// it may not be called again without first calling <see cref="Reset"/>.
         /// </remarks>
-        public void Initialize(int distinctResources, int normalToWildcardResourceRatio)
+        public void Initialize(int distinctResources, int normalToWildcardResourceRatio, int maximumTagSize)
         {
             if (Initialized) throw new InvalidOperationException("The Simulation is already initialized.");
 
             Initializing = true;
 
             Resource.Initialize(distinctResources, normalToWildcardResourceRatio);
+            Tag.Initialize(maximumTagSize);
 
             InnerInitialize();
 
