@@ -74,7 +74,7 @@ namespace Cas.Core
         {
             foreach (var agent in Agents)
             {
-                agent.History.Add(new PayUpkeepEvent(agent.Id, this.Id, this.UpkeepCost, generation));
+                agent.History.Add(new PayUpkeepEvent(this.Id, this.UpkeepCost, generation));
                 if (agent.IsMultiAgent() || agent.Cells.Count == 0)
                 {
                     // TODO: How do we extract payment if the base agent has no resources?  

@@ -13,8 +13,8 @@ namespace Cas.Core.Events
 
         public string Result { get; private set; }
 
-        public TargetOfEvent(Guid agentId, Guid locationId, int generation, Guid actorId, Type actorType, string result)
-            : base(agentId, locationId, generation)
+        public TargetOfEvent(Guid locationId, int generation, Guid actorId, Type actorType, string result)
+            : base(locationId, generation)
         {
             if (actorType == null) throw new ArgumentNullException("actorType");
 

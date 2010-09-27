@@ -6,15 +6,12 @@ namespace Cas.Core.Events
     {
         public Guid LocationId { get; private set; }
 
-        public Guid AgentId { get; private set; }
-
         public int Generation { get; private set; }
 
-        protected EventBase(Guid agentId, Guid locationId,int generation) 
+        protected EventBase(Guid locationId,int generation) 
         {
             if (generation < 0) throw new ArgumentOutOfRangeException("generation");
 
-            this.AgentId = agentId;
             this.LocationId = locationId;
             this.Generation = generation;
         }

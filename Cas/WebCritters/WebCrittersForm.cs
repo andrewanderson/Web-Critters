@@ -110,7 +110,7 @@ namespace WebCritters
                 for (int i = 0; i < agentsToAdd; i++)
                 {
                     var agent = new GridAgent();
-                    agent.History.Add(new CreationEvent(agent.Id, location.Id, 0));
+                    agent.History.Add(new CreationEvent(location.Id, 0));
                     var cell = GridCell.New(tagComplexity);
 
                     int startingResourceCount = (int)(cell.Size / 100.0 * startingResourcePercent);

@@ -10,11 +10,6 @@ namespace Cas.Core.Events
         Guid LocationId { get; }
 
         /// <summary>
-        /// The identifier of the agent that this event was initiated by
-        /// </summary>
-        Guid AgentId { get; }
-
-        /// <summary>
         /// The generation in which the event occurred
         /// </summary>
         int Generation { get; }

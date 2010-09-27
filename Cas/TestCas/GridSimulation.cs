@@ -102,11 +102,11 @@ namespace Cas.TestImplementation
             // TODO: For now we only log successful attacks due to history bloat
             if (result > 0)
             {
-                actor.History.Add(new TargetedEvent(actor.Id, location.Id, CurrentGeneration, target.Id, target.GetType(), result.ToString()));
+                actor.History.Add(new TargetedEvent(location.Id, CurrentGeneration, target.Id, target.GetType(), result.ToString()));
                 if (target is IAgent)
                 {
                     var targetAgent = target as IAgent;
-                    targetAgent.History.Add(new TargetOfEvent(targetAgent.Id, location.Id, CurrentGeneration, actor.Id, actor.GetType(), result.ToString()));
+                    targetAgent.History.Add(new TargetOfEvent(location.Id, CurrentGeneration, actor.Id, actor.GetType(), result.ToString()));
                 }
             }
         }
@@ -159,8 +159,8 @@ namespace Cas.TestImplementation
             var childAgent = new GridAgent();
             childAgent.Cells.Add(childCell);
 
-            parent.History.Add(new ReproductionEvent(parent.Id, location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), Guid.Empty, childAgent.Id));
-            childAgent.History.Add(new BirthEvent(childAgent.Id, location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), parent.Id));
+            parent.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), Guid.Empty, childAgent.Id));
+            childAgent.History.Add(new BirthEvent(location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), parent.Id));
 
             return childAgent;
         }
@@ -194,10 +194,10 @@ namespace Cas.TestImplementation
             child2.Cells.Add(childCells[1]);
 
             // Events
-            parent1.History.Add(new ReproductionEvent(parent1.Id, location.Id, CurrentGeneration, interaction.GetType(), Guid.Empty, child1.Id, child2.Id));
-            parent2.History.Add(new ReproductionEvent(parent2.Id, location.Id, CurrentGeneration, interaction.GetType(), Guid.Empty, child1.Id, child2.Id));
-            child1.History.Add(new BirthEvent(child1.Id, location.Id, CurrentGeneration, interaction.GetType(), parent1.Id, parent2.Id));
-            child2.History.Add(new BirthEvent(child2.Id, location.Id, CurrentGeneration, interaction.GetType(), parent1.Id, parent2.Id));
+            parent1.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, interaction.GetType(), Guid.Empty, child1.Id, child2.Id));
+            parent2.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, interaction.GetType(), Guid.Empty, child1.Id, child2.Id));
+            child1.History.Add(new BirthEvent(location.Id, CurrentGeneration, interaction.GetType(), parent1.Id, parent2.Id));
+            child2.History.Add(new BirthEvent(location.Id, CurrentGeneration, interaction.GetType(), parent1.Id, parent2.Id));
 
             return new[] {child1, child2};
         }

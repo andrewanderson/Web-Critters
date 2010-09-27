@@ -7,8 +7,8 @@ namespace Cas.Core.Events
 {
     public class DeathEvent : EventBase
     {
-        public DeathEvent(Guid agentId, Guid locationId, int generation)
-            : base(agentId, locationId, generation) { }
+        public DeathEvent(Guid locationId, int generation)
+            : base(locationId, generation) { }
 
         public override string ToString()
         {

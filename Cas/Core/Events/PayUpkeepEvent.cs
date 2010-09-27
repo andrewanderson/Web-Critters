@@ -6,8 +6,8 @@ namespace Cas.Core.Events
     {
         public int Cost { get; private set; }
 
-        public PayUpkeepEvent(Guid agentId, Guid locationId, int cost, int generation)
-            : base(agentId, locationId, generation)
+        public PayUpkeepEvent(Guid locationId, int cost, int generation)
+            : base(locationId, generation)
         {
             this.Cost = cost;
         }

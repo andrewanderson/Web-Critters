@@ -12,8 +12,8 @@ namespace Cas.Core.Events
 
         public Type ReproductionType { get; private set; }
 
-        public ReproductionEvent(Guid agentId, Guid locationId, int generation, Type reproductionType, Guid mateId, params Guid[] childIds)
-            : base(agentId, locationId, generation)
+        public ReproductionEvent(Guid locationId, int generation, Type reproductionType, Guid mateId, params Guid[] childIds)
+            : base(locationId, generation)
         {
             this.MateId = mateId;
             this.OffspringIds = new List<Guid>(childIds);

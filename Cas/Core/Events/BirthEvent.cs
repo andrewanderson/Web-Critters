@@ -11,8 +11,8 @@ namespace Cas.Core.Events
 
         public List<Guid> ParentIds { get; private set; }
 
-        public BirthEvent(Guid agentId, Guid locationId, int generation, Type reproductionType, params Guid[] parentIds)
-            : base(agentId, locationId, generation)
+        public BirthEvent(Guid locationId, int generation, Type reproductionType, params Guid[] parentIds)
+            : base(locationId, generation)
         {
             if (reproductionType == null) throw new ArgumentNullException("reproductionType");
 

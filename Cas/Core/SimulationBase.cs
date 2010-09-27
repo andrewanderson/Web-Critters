@@ -237,7 +237,7 @@ namespace Cas.Core
             {
                 // TODO: Should we record where this thing died?
                 var condemned = location.Agents[deathIndecies[i]];
-                condemned.History.Add(new DeathEvent(condemned.Id, Guid.Empty, CurrentGeneration));
+                condemned.History.Add(new DeathEvent(Guid.Empty, CurrentGeneration));
 
                 location.Agents.RemoveAt(deathIndecies[i]);
             }
@@ -325,7 +325,7 @@ namespace Cas.Core
                 var destination = kvp.Value;
 
                 location.Agents.Remove(agent);
-                agent.History.Add(new MigrationEvent(agent.Id, location.Id, destination.Id, destination.UpkeepCost, this.CurrentGeneration));
+                agent.History.Add(new MigrationEvent(location.Id, destination.Id, destination.UpkeepCost, this.CurrentGeneration));
                 pendingMigrations.Add(kvp);
             });
         }
