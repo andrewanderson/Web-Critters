@@ -16,18 +16,15 @@ namespace Cas.TestImplementation
     {
         internal List<Resource> Reservoir { get; private set; }
 
-        private GridResourceNode(List<Resource> resources, int tagSize) : base()
+        private GridResourceNode(int maximumTagSize) : base()
         {
             RenewableResources = new List<Resource>();
-            RenewableResources.AddRange(resources);
-
             Reservoir = new List<Resource>();
-            RefreshReservoir();
-
+            
             Id = Guid.NewGuid();
-            Offense = Tag.New(tagSize, false);
-            Defense = Tag.New(tagSize, false);
-            Exchange = Tag.New(tagSize, false);
+            Offense = Tag.New(maximumTagSize, false);
+            Defense = Tag.New(maximumTagSize, false);
+            Exchange = Tag.New(maximumTagSize, false);
         }
 
         private GridResourceNode(IResourceNode node)
@@ -46,15 +43,48 @@ namespace Cas.TestImplementation
             this.RefreshReservoir();
         }
 
-        public static GridResourceNode New(List<Resource> resources, int tagSize)
+        public static GridResourceNode New(List<Resource> resources, int maximumTagSize)
         {
-            return new GridResourceNode(resources, tagSize);
+            var grn = new GridResourceNode(maximumTagSize);
+
+            grn.RenewableResources.AddRange(resources);
+            grn.RefreshReservoir();
+
+            return grn;
+        }
+
+        /// <summary>
+        /// Creates a new GridResourceNode with resources that are scaled to the complexity of the
+        /// node's defense tag.
+        /// </summary>
+        public static GridResourceNode New(int maximumTagSize, int minResources, int maxResources)
+        {
+            if (maximumTagSize <= 0) throw new ArgumentOutOfRangeException("maximumTagSize");
+            if (minResources < 0) throw new ArgumentOutOfRangeException("minResources");
+            if (maxResources <= 0) throw new ArgumentOutOfRangeException("maxResources");
+            if (minResources > maxResources) throw new ArgumentException("minResources cannot exceed maxResources");
+
+            var grn = new GridResourceNode(maximumTagSize);
+
+            double range = maxResources - minResources;
+            int nodeSize = (int)(((double)grn.Defense.Data.Count / (double)maximumTagSize) * range) + minResources;
+            
+            var resources = new List<Resource>();
+            for (int j = 0; j < nodeSize; j++)
+            {
+                resources.Add(Resource.Random(false));
+            }
+
+            grn.RenewableResources.AddRange(resources);
+            grn.RefreshReservoir();
+
+            return grn;
         }
 
         public override string ToString()
         {
             string renewableResources = string.Concat(this.RenewableResources.Select(x => x.ToString()));
-            return string.Format("{1} {2} {3} => {0}", renewableResources, this.Offense, this.Defense, this.Exchange);
+            return string.Format("{0} defense => {1}", renewableResources, this.Defense);
         }
 
         #region IResourceNode Members

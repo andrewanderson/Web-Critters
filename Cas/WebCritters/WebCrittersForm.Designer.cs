@@ -38,6 +38,8 @@
             this.minStartingPopulation = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.uniqueResourceCount = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
             this.maxComplexity = new System.Windows.Forms.TextBox();
             this.label45 = new System.Windows.Forms.Label();
             this.startingComplexity = new System.Windows.Forms.TextBox();
@@ -133,8 +135,6 @@
             this.currentGeneration = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.uniqueResourceCount = new System.Windows.Forms.TextBox();
-            this.label46 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -329,6 +329,25 @@
             this.splitContainer.SplitterDistance = 250;
             this.splitContainer.TabIndex = 8;
             // 
+            // uniqueResourceCount
+            // 
+            this.uniqueResourceCount.Location = new System.Drawing.Point(109, 53);
+            this.uniqueResourceCount.Name = "uniqueResourceCount";
+            this.uniqueResourceCount.Size = new System.Drawing.Size(59, 20);
+            this.uniqueResourceCount.TabIndex = 50;
+            this.uniqueResourceCount.Text = "100";
+            this.uniqueResourceCount.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.uniqueResourceCount.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(9, 56);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(95, 13);
+            this.label46.TabIndex = 49;
+            this.label46.Text = "Unique Resources";
+            // 
             // maxComplexity
             // 
             this.maxComplexity.Location = new System.Drawing.Point(109, 201);
@@ -373,7 +392,7 @@
             this.minResourcesPerNode.Name = "minResourcesPerNode";
             this.minResourcesPerNode.Size = new System.Drawing.Size(34, 20);
             this.minResourcesPerNode.TabIndex = 44;
-            this.minResourcesPerNode.Text = "10";
+            this.minResourcesPerNode.Text = "5";
             this.minResourcesPerNode.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.minResourcesPerNode.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -392,7 +411,7 @@
             this.maxResourcesPerNode.Name = "maxResourcesPerNode";
             this.maxResourcesPerNode.Size = new System.Drawing.Size(44, 20);
             this.maxResourcesPerNode.TabIndex = 42;
-            this.maxResourcesPerNode.Text = "50";
+            this.maxResourcesPerNode.Text = "40";
             this.maxResourcesPerNode.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.maxResourcesPerNode.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -1216,25 +1235,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // uniqueResourceCount
-            // 
-            this.uniqueResourceCount.Location = new System.Drawing.Point(109, 53);
-            this.uniqueResourceCount.Name = "uniqueResourceCount";
-            this.uniqueResourceCount.Size = new System.Drawing.Size(59, 20);
-            this.uniqueResourceCount.TabIndex = 50;
-            this.uniqueResourceCount.Text = "100";
-            this.uniqueResourceCount.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
-            this.uniqueResourceCount.Validated += new System.EventHandler(this.control_Validated);
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(9, 56);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(95, 13);
-            this.label46.TabIndex = 49;
-            this.label46.Text = "Unique Resources";
             // 
             // WebCrittersForm
             // 

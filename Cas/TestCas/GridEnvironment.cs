@@ -161,14 +161,7 @@ namespace Cas.TestImplementation
                     globalResources = new List<IResourceNode>();
                     for (int i = 0; i < GlobalResourcePoolSize; i++)
                     {
-                        int nodeSize = RandomProvider.Next(MinResourcesPerNodePerLocation, MaxResourcesPerNodePerLocation);
-                        var resources = new List<Resource>();
-                        for (int j = 0; j < nodeSize; j++)
-                        {
-                            resources.Add(Resource.Random(false));
-                        }
-
-                        globalResources.Add(GridResourceNode.New(resources, StartingTagComplexity));
+                        globalResources.Add(GridResourceNode.New(StartingTagComplexity, MinResourcesPerNodePerLocation, MaxResourcesPerNodePerLocation));
                     }
 
                 }
