@@ -101,6 +101,7 @@
     <Compile Include="Interfaces\IIsAlive.cs" />
     <Compile Include="Interfaces\ILocation.cs" />
     <Compile Include="Interfaces\IResourceNode.cs" />
+    <Compile Include="Interfaces\IIsUnique.cs" />
     <Compile Include="LocationBase.cs" />
     <Compile Include="RandomProvider.cs" />
     <Compile Include="Resource.cs" />

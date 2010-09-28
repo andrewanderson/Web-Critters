@@ -105,6 +105,8 @@ namespace Cas.Core
             }
         }
 
+        public abstract ICell DeepCopy();
+
         #endregion
 
         #region IInteractable Members

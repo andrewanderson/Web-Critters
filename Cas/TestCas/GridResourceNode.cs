@@ -37,7 +37,7 @@ namespace Cas.TestImplementation
             this.Exchange = node.Exchange;
 
             this.RenewableResources = new List<Resource>();
-            this.RenewableResources.AddRange(node.RenewableResources.Select(x=>x.Clone() as Resource));
+            this.RenewableResources.AddRange(node.RenewableResources.Select(x=>x.DeepCopy()));
 
             this.Reservoir = new List<Resource>();
             this.RefreshReservoir();
@@ -103,8 +103,13 @@ namespace Cas.TestImplementation
         {
             Reservoir.Clear();
             Reservoir = new List<Resource>(
-                RenewableResources.Select(resource => (Resource)resource.Clone()).ToList()
+                RenewableResources.Select(resource => resource.DeepCopy()).ToList()
             );
+        }
+
+        public IResourceNode DeepCopy()
+        {
+            return new GridResourceNode(this);
         }
 
         #endregion
@@ -154,15 +159,6 @@ namespace Cas.TestImplementation
         public string ShowResourcePool(string delimiter)
         {
             return string.Join(delimiter, this.Reservoir.Select(x => x.Label.ToString()));
-        }
-
-        #endregion
-
-        #region ICloneable Members
-
-        public object Clone()
-        {
-            return new GridResourceNode(this);
         }
 
         #endregion

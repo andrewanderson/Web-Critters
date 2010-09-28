@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Cas.Core;
+using Cas.Core.Interfaces;
 
 namespace Cas.TestImplementation
 {
@@ -34,6 +35,26 @@ namespace Cas.TestImplementation
             {
                 return string.Format("Multiagent: {0} cells, {1} agents - {2} generations", this.Cells.Count, this.Agents.Count, this.Age);
             }
+        }
+
+        /// <summary>
+        /// Copies the structure, but not the state, of an agent.
+        /// </summary>
+        public override IAgent DeepCopy()
+        {
+            var clone = new GridAgent();
+
+            foreach (var agent in this.Agents)
+            {
+                clone.Agents.Add(agent.DeepCopy());
+            }
+
+            foreach (var cell in this.Cells)
+            {
+                clone.Cells.Add(cell.DeepCopy());
+            }
+
+            return clone;
         }
     }
 }

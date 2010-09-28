@@ -14,7 +14,7 @@ namespace Cas.Core.Interfaces
     /// a of multi-character bundle (Twitter CAS), or anything in between.  ResourceNodes
     /// are usually located in ILocation objects.
     /// </remarks>
-    public interface IResourceNode : ICloneable, IInteractable
+    public interface IResourceNode : IInteractable, IIsUnique
     {
         /// <summary>
         /// The Resources that can be derived from this Resource Node.
@@ -26,5 +26,7 @@ namespace Cas.Core.Interfaces
         /// copies of all renewable resources.
         /// </summary>
         void RefreshReservoir();
+
+        IResourceNode DeepCopy();
     }
 }

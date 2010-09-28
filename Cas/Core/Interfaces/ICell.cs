@@ -67,5 +67,9 @@ namespace Cas.Core.Interfaces
         /// </summary>
         void AddRandomResources(int count);
 
+        /// <summary>
+        /// Copies the structure, but not the state, of a cell.
+        /// </summary>
+        ICell DeepCopy();
     }
 }

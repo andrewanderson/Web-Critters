@@ -144,7 +144,7 @@ namespace Cas.TestImplementation
             int num = RandomProvider.Next(MinResourceNodesPerLocation, MaxResourceNodesPerLocation);
             for (int i = 0; i < num; i++)
             {
-                var node = GlobalResources.GetRandom().Clone() as IResourceNode;
+                var node = GlobalResources.GetRandom().DeepCopy();
                 nodes.Add(node);
             }
 

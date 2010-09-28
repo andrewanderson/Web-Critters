@@ -55,5 +55,10 @@ namespace Cas.Core.Interfaces
         /// A list of events that have occurred to this agent.
         /// </summary>
         List<IEvent> History { get; }
+
+        /// <summary>
+        /// Copies the structure, but not the state, of an agent.
+        /// </summary>
+        IAgent DeepCopy();
     }
 }

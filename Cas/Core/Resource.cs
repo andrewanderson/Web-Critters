@@ -14,7 +14,7 @@ namespace Cas.Core
     /// a location.  For example, in ECHO it would be a single character, while in a web implementation it
     /// might be a word (or waste product), and in a twitter implementation it might be the entire message.
     /// </remarks>
-    public class Resource : ICloneable
+    public class Resource
     {
         #region Instance Methods
 
@@ -28,7 +28,7 @@ namespace Cas.Core
         /// </summary>
         public char Label { get; set; }
 
-        public object Clone()
+        public Resource DeepCopy()
         {
             return new Resource(this.Label);
         }

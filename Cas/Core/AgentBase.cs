@@ -86,6 +86,8 @@ namespace Cas.Core
             }
         }
 
+        public abstract IAgent DeepCopy();
+
         #region IBoundary implementation
 
         /// <summary>
@@ -93,7 +95,7 @@ namespace Cas.Core
         /// </summary>
         public List<IAgent> Agents
         {
-            get 
+            get
             {
                 return agents;
             }
