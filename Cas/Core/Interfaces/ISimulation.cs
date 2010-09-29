@@ -19,6 +19,20 @@ namespace Cas.Core.Interfaces
         IEnvironment Environment { get; }
 
         /// <summary>
+        /// A catalog of all unique species in the simulation.
+        /// </summary>
+        List<ISpecies> Species { get; }
+
+        /// <summary>
+        /// Performs work required to add a new agent to the simulation.
+        /// </summary>
+        /// <remarks>
+        /// The key piece of work is to ensure that a species exists for
+        /// this agent.
+        /// </remarks>
+        void Register(IAgent agent);
+
+        /// <summary>
         /// The generation number that is either about to execute, or is executing.
         /// </summary>
         int CurrentGeneration { get; }

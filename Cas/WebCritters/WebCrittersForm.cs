@@ -117,6 +117,8 @@ namespace WebCritters
                     cell.AddRandomResources(startingResourceCount);
 
                     agent.Cells.Add(cell);
+                    this.CasSimulation.Register(agent);
+
                     location.Agents.Add(agent);
                 }
             }

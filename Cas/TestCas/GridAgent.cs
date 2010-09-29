@@ -9,6 +9,33 @@ namespace Cas.TestImplementation
 {
     public class GridAgent : AgentBase
     {
+        private const string TagSeparator = "^";
+
+        /// <summary>
+        /// A key that can be used to uniquely identify the agent based on its entire genome.
+        /// </summary>
+        public override string UniqueKey
+        {
+            get
+            {
+                if (uniqueKey == null)
+                {
+                    if (this.IsMultiAgent() || this.Cells.Count == 0)
+                    {
+                        // TODO: This needs to work for multiagents
+                        throw new NotImplementedException();
+                    }
+                    else
+                    {
+                        var cell = this.Cells[0];
+                        uniqueKey = string.Join(TagSeparator, cell.Offense.ToString(), cell.Defense.ToString(), cell.Exchange.ToString());
+                    }
+                }
+                return uniqueKey;
+            }
+        }
+        private string uniqueKey = null;
+
         /// <summary>
         /// An agent should die if any of its composite parts (cells, sub-agents) 
         /// are eligible for death.
@@ -26,14 +53,15 @@ namespace Cas.TestImplementation
 
         public override string ToString()
         {
+            string speciesId = (Species == null) ? string.Empty : string.Format("#{0}, ", this.Species.Id);
             if (!this.IsMultiAgent())
             {
                 string cellString = (this.Cells.Count == 0) ? "Empty" : this.Cells[0].ToString();
-                return string.Format("{0} - {1} generations", cellString, this.Age);
+                return string.Format("{0}{1} - {2} generations", speciesId, cellString, this.Age);
             }
             else
             {
-                return string.Format("Multiagent: {0} cells, {1} agents - {2} generations", this.Cells.Count, this.Agents.Count, this.Age);
+                return string.Format("{0}{1} cells, {2} agents - {3} generations", speciesId, this.Cells.Count, this.Agents.Count, this.Age);
             }
         }
 

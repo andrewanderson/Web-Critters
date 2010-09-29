@@ -18,6 +18,16 @@ namespace Cas.Core.Interfaces
     public interface IAgent : IBoundary, IInteractable, IIsAlive
     {
         /// <summary>
+        /// A key that can be used to uniquely identify the agent based on its entire genome.
+        /// </summary>
+        string UniqueKey { get; }
+
+        /// <summary>
+        /// The species to which this agent is a member.
+        /// </summary>
+        ISpecies Species { get; set; }
+
+        /// <summary>
         /// The free-floating cells that make up the agent.
         /// </summary>
         /// <remarks>

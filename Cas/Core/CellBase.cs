@@ -15,12 +15,12 @@ namespace Cas.Core
         private const int CurrentlyImplementedTagCount = 3;
 
         internal List<Resource> Reservoir { get; private set; }
+        private string toString;
 
         protected CellBase()
         {
             Reservoir = new List<Resource>();
             ActiveTagsInModel = GetActiveTagCount();
-            Id = Guid.NewGuid();
         }
 
         /// <summary>
@@ -111,8 +111,6 @@ namespace Cas.Core
 
         #region IInteractable Members
 
-        public Guid Id { get; private set; }
-
         public Tag Offense { get; set; }
 
         public Tag Defense { get; set; }
@@ -176,7 +174,8 @@ namespace Cas.Core
 
         public override string ToString()
         {
-            return string.Format("{0} {1} {2}", Offense, Defense, Exchange);
+            if (toString == null) toString = string.Format("{0} {1} {2}", Offense, Defense, Exchange);
+            return toString;
         }
 
     }

@@ -2,30 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cas.Core.Interfaces;
 
 namespace Cas.Core.Events
 {
     public class TargetOfEvent : EventBase
     {
-        public Guid ActorId { get; private set; }
+        public IIsUnique Actor { get; private set; }
 
-        public Type ActorType { get; private set; }
+        public int Result { get; private set; }
 
-        public string Result { get; private set; }
-
-        public TargetOfEvent(Guid locationId, int generation, Guid actorId, Type actorType, string result)
+        public TargetOfEvent(Guid locationId, int generation, IIsUnique actor, int result)
             : base(locationId, generation)
         {
-            if (actorType == null) throw new ArgumentNullException("actorType");
+            if (actor == null) throw new ArgumentNullException("actor");
 
-            this.ActorId = actorId;
-            this.ActorType = actorType;
+            this.Actor = actor;
             this.Result = result;
         }
 
         public override string ToString()
         {
-            return string.Format("{0}: Lost encounter ({3}) with ({2}) {1}", this.Generation, ActorId, ActorType.Name, Result);
+            return string.Format("{0}: Lost encounter ({3}) with ({2}) {1}", this.Generation, Actor, Actor.GetType().Name, Result);
         }
     }
 }

@@ -15,13 +15,11 @@ namespace Cas.Core
         protected readonly List<IResourceNode> currentResourceNodes;
         protected readonly List<Resource> newResources;
         protected ICell currentInteractionContactPoint;
-        protected readonly Guid id;
         protected readonly List<IEvent> history;
         private long age;
 
         protected AgentBase()
         {
-            id = Guid.NewGuid();
             agents = new List<IAgent>();
             cells = new List<ICell>();
             currentResourceNodes = new List<IResourceNode>();
@@ -29,6 +27,16 @@ namespace Cas.Core
             history = new List<IEvent>();
             age = 0;
         }
+
+        /// <summary>
+        /// The species to which this agent is a member.
+        /// </summary>
+        public ISpecies Species { get; set; }
+
+        /// <summary>
+        /// A key that can be used to uniquely identify the agent based on its entire genome.
+        /// </summary>
+        public abstract string UniqueKey { get; }
 
         public List<ICell> Cells
         {
@@ -161,14 +169,6 @@ namespace Cas.Core
         #endregion
 
         #region IInteractable implementation
-
-        public Guid Id
-        {
-            get
-            {
-                return this.id;
-            }
-        }
 
         public Tag Offense
         {

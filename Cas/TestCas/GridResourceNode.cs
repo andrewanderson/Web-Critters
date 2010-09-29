@@ -14,17 +14,23 @@ namespace Cas.TestImplementation
     /// </summary>
     public class GridResourceNode : IResourceNode
     {
+        private static long NextAvailableId = 1;
+
         internal List<Resource> Reservoir { get; private set; }
+        private readonly string toString;
 
         private GridResourceNode(int maximumTagSize) : base()
         {
             RenewableResources = new List<Resource>();
             Reservoir = new List<Resource>();
-            
-            Id = Guid.NewGuid();
+
+            Id = NextAvailableId++;
             Offense = Tag.New(maximumTagSize, false);
             Defense = Tag.New(maximumTagSize, false);
             Exchange = Tag.New(maximumTagSize, false);
+
+            string renewableResources = string.Concat(this.RenewableResources.Select(x => x.ToString()));
+            toString = string.Format("#{0}, {1} defense => {2}", this.Id, this.Defense, renewableResources);
         }
 
         private GridResourceNode(IResourceNode node)
@@ -81,10 +87,10 @@ namespace Cas.TestImplementation
             return grn;
         }
 
+
         public override string ToString()
         {
-            string renewableResources = string.Concat(this.RenewableResources.Select(x => x.ToString()));
-            return string.Format("{0} defense => {1}", renewableResources, this.Defense);
+            return toString;
         }
 
         #region IResourceNode Members
@@ -115,8 +121,6 @@ namespace Cas.TestImplementation
         #endregion
 
         #region IInteractable Members
-
-        public Guid Id { get; private set; }
 
         public Tag Offense { get; set; }
 
@@ -160,6 +164,12 @@ namespace Cas.TestImplementation
         {
             return string.Join(delimiter, this.Reservoir.Select(x => x.Label.ToString()));
         }
+
+        #endregion
+
+        #region IIsUnique members
+        
+        public long Id { get; private set; }
 
         #endregion
 

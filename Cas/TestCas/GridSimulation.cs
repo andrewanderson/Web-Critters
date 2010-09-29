@@ -75,7 +75,6 @@ namespace Cas.TestImplementation
             if (targets == null) throw new ArgumentNullException("targets");
 
             // TODO: Pick an interaction from a list when we have more than one
-            // TODO: How about migration?
             // TODO: Other interaction types
 
             // Pick a target
@@ -87,7 +86,6 @@ namespace Cas.TestImplementation
 
             // TODO: Check that we should interact (via tags)
 
-            // TODO: log if target evaded
 
             // Resolve action
             var result = this.attackInteraction.Interact(actor, target);
@@ -99,14 +97,13 @@ namespace Cas.TestImplementation
             }
 
             // Log the action 
-            // TODO: For now we only log successful attacks due to history bloat
             if (result > 0)
             {
-                actor.History.Add(new TargetedEvent(location.Id, CurrentGeneration, target.Id, target.GetType(), result.ToString()));
+                actor.History.Add(new TargetedEvent(location.Id, CurrentGeneration, EventBase.ToUnique(target), result));
                 if (target is IAgent)
                 {
                     var targetAgent = target as IAgent;
-                    targetAgent.History.Add(new TargetOfEvent(location.Id, CurrentGeneration, actor.Id, actor.GetType(), result.ToString()));
+                    targetAgent.History.Add(new TargetOfEvent(location.Id, CurrentGeneration, EventBase.ToUnique(actor), result));
                 }
             }
         }
@@ -158,9 +155,10 @@ namespace Cas.TestImplementation
             var childCell = asexualReproductionInteraction.Interact(parent.Cells[0], null);
             var childAgent = new GridAgent();
             childAgent.Cells.Add(childCell);
+            this.Register(childAgent);
 
-            parent.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), Guid.Empty, childAgent.Id));
-            childAgent.History.Add(new BirthEvent(location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), parent.Id));
+            parent.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), null, childAgent.Species));
+            childAgent.History.Add(new BirthEvent(location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), parent.Species));
 
             return childAgent;
         }
@@ -189,15 +187,17 @@ namespace Cas.TestImplementation
 
             var child1 = new GridAgent();
             child1.Cells.Add(childCells[0]);
+            this.Register(child1);
 
             var child2 = new GridAgent();
             child2.Cells.Add(childCells[1]);
+            this.Register(child2);
 
             // Events
-            parent1.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, interaction.GetType(), Guid.Empty, child1.Id, child2.Id));
-            parent2.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, interaction.GetType(), Guid.Empty, child1.Id, child2.Id));
-            child1.History.Add(new BirthEvent(location.Id, CurrentGeneration, interaction.GetType(), parent1.Id, parent2.Id));
-            child2.History.Add(new BirthEvent(location.Id, CurrentGeneration, interaction.GetType(), parent1.Id, parent2.Id));
+            parent1.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, interaction.GetType(), parent2.Species, child1.Species, child2.Species));
+            parent2.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, interaction.GetType(), parent1.Species, child1.Species, child2.Species));
+            child1.History.Add(new BirthEvent(location.Id, CurrentGeneration, interaction.GetType(), parent1.Species, parent2.Species));
+            child2.History.Add(new BirthEvent(location.Id, CurrentGeneration, interaction.GetType(), parent1.Species, parent2.Species));
 
             return new[] {child1, child2};
         }

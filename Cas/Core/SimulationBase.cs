@@ -76,6 +76,45 @@ namespace Cas.Core
             }
         }
 
+        /// <summary>
+        /// A catalog of all unique species in the simulation.
+        /// </summary>
+        public List<ISpecies> Species 
+        {
+            get
+            {
+                return this.SpeciesByKey
+                    .OrderBy(kvp => kvp.Value.Id)
+                    .Select(kvp => kvp.Value)
+                    .ToList();
+            }
+        }
+
+        protected readonly Dictionary<string, ISpecies> SpeciesByKey = new Dictionary<string, ISpecies>();
+
+        /// <summary>
+        /// Performs work required to add a new agent to the simulation.
+        /// </summary>
+        /// <remarks>
+        /// The key piece of work is to ensure that a species exists for
+        /// this agent.
+        /// </remarks>
+        public void Register(IAgent agent)
+        {
+            if (agent == null) throw new ArgumentNullException("agent");
+
+            string key = agent.UniqueKey;
+
+            ISpecies species;
+            if (!SpeciesByKey.TryGetValue(key, out species))
+            {
+                species = new Species(this, agent);
+                SpeciesByKey.Add(key, species);
+            }
+
+            agent.Species = species;
+        }
+
         public int CurrentGeneration { get; protected set; }
 
         /// <summary>

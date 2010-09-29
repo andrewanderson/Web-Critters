@@ -13,6 +13,9 @@ namespace Cas.Core.Interfaces
     /// </summary>
     public interface IIsUnique
     {
-        // No methods; this is just a grouping interface.
+        /// <summary>
+        /// Unique identifier for the object.
+        /// </summary>
+        long Id { get; }
     }
 }

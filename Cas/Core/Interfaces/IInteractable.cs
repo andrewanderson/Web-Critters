@@ -14,11 +14,6 @@ namespace Cas.Core.Interfaces
     public interface IInteractable : IContainsResources
     {
         /// <summary>
-        /// A unique identifier for the interactable unit.
-        /// </summary>
-        Guid Id { get; }
-
-        /// <summary>
         /// The offense tag for the Interactable unit.
         /// </summary>
         Tag Offense { get; set; } // pg. 101

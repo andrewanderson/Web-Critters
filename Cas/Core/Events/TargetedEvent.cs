@@ -1,28 +1,26 @@
 ﻿using System;
+using Cas.Core.Interfaces;
 
 namespace Cas.Core.Events
 {
     public class TargetedEvent : EventBase
     {
-        public Guid TargetId { get; private set; }
+        public IIsUnique Target { get; private set; }
 
-        public Type TargetType { get; private set; }
+        public int Result { get; private set; }
 
-        public string Result { get; private set; }
-
-        public TargetedEvent(Guid locationId, int generation, Guid targetId, Type targetType, string result) 
+        public TargetedEvent(Guid locationId, int generation, IIsUnique target, int result) 
             : base(locationId, generation)
         {
-            if (targetType == null) throw new ArgumentNullException("targetType");
+            if (target == null) throw new ArgumentNullException("target");
 
-            this.TargetId = targetId;
-            this.TargetType = targetType;
+            this.Target = target;
             this.Result = result;
         }
 
         public override string ToString()
         {
-            return string.Format("{0}: Won encounter ({3}) against ({2}) {1}", this.Generation, TargetId, TargetType.Name, Result);
+            return string.Format("{0}: Won encounter ({3}) against ({2}) {1}", this.Generation, Target, Target.GetType().Name, Result);
         }
     }
 }
