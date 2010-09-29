@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cas.Core.Events;
 
 namespace Cas.Core.Interfaces
 {
@@ -30,12 +31,17 @@ namespace Cas.Core.Interfaces
         /// The key piece of work is to ensure that a species exists for
         /// this agent.
         /// </remarks>
-        void RegisterBirth(IAgent agent);
+        void RegisterBirth(IAgent agent, IEvent birthEvent);
 
         /// <summary>
         /// Records the death of an agent, which updates the underlying species.
         /// </summary>
         void RegisterDeath(IAgent agent);
+
+        /// <summary>
+        /// Attaches a history event to the specified agent
+        /// </summary>
+        void AddEventToAgent(IAgent agent, IEvent newEvent);
 
         /// <summary>
         /// The generation number that is either about to execute, or is executing.
@@ -68,6 +74,11 @@ namespace Cas.Core.Interfaces
         void RunGeneration();
 
         #region Settings
+
+        /// <summary>
+        /// Should events be logged on agents?
+        /// </summary>
+        bool LogHistory { get; set; }
 
         /// <summary>
         /// The number of interactions that will take place in a given location for

@@ -79,6 +79,7 @@
             this.numberOfResources = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.createSimulation = new System.Windows.Forms.Button();
+            this.trackAgentHistory = new System.Windows.Forms.CheckBox();
             this.label37 = new System.Windows.Forms.Label();
             this.generationsBetweenUpdate = new System.Windows.Forms.TextBox();
             this.updateGuiWhileProcessing = new System.Windows.Forms.CheckBox();
@@ -283,6 +284,7 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer.Panel2.Controls.Add(this.trackAgentHistory);
             this.splitContainer.Panel2.Controls.Add(this.label37);
             this.splitContainer.Panel2.Controls.Add(this.generationsBetweenUpdate);
             this.splitContainer.Panel2.Controls.Add(this.updateGuiWhileProcessing);
@@ -721,10 +723,23 @@
             this.createSimulation.UseVisualStyleBackColor = false;
             this.createSimulation.Click += new System.EventHandler(this.createSimulation_Click);
             // 
+            // trackAgentHistory
+            // 
+            this.trackAgentHistory.AutoSize = true;
+            this.trackAgentHistory.Checked = true;
+            this.trackAgentHistory.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.trackAgentHistory.Location = new System.Drawing.Point(605, 6);
+            this.trackAgentHistory.Name = "trackAgentHistory";
+            this.trackAgentHistory.Size = new System.Drawing.Size(87, 17);
+            this.trackAgentHistory.TabIndex = 39;
+            this.trackAgentHistory.Text = "Track history";
+            this.trackAgentHistory.UseVisualStyleBackColor = true;
+            this.trackAgentHistory.CheckedChanged += new System.EventHandler(this.trackAgentHistory_CheckedChanged);
+            // 
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(694, 12);
+            this.label37.Location = new System.Drawing.Point(813, 7);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(62, 13);
             this.label37.TabIndex = 38;
@@ -732,7 +747,7 @@
             // 
             // generationsBetweenUpdate
             // 
-            this.generationsBetweenUpdate.Location = new System.Drawing.Point(664, 9);
+            this.generationsBetweenUpdate.Location = new System.Drawing.Point(783, 4);
             this.generationsBetweenUpdate.Name = "generationsBetweenUpdate";
             this.generationsBetweenUpdate.Size = new System.Drawing.Size(27, 20);
             this.generationsBetweenUpdate.TabIndex = 37;
@@ -745,7 +760,7 @@
             this.updateGuiWhileProcessing.AutoSize = true;
             this.updateGuiWhileProcessing.Checked = true;
             this.updateGuiWhileProcessing.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.updateGuiWhileProcessing.Location = new System.Drawing.Point(579, 11);
+            this.updateGuiWhileProcessing.Location = new System.Drawing.Point(698, 6);
             this.updateGuiWhileProcessing.Name = "updateGuiWhileProcessing";
             this.updateGuiWhileProcessing.Size = new System.Drawing.Size(90, 17);
             this.updateGuiWhileProcessing.TabIndex = 36;
@@ -1372,6 +1387,7 @@
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.TextBox uniqueResourceCount;
         private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.CheckBox trackAgentHistory;
     }
 }
 

@@ -101,11 +101,11 @@ namespace Cas.TestImplementation
             {
                 actor.Species.RecordConsumptionOf(ToUnique(target), result);
 
-                actor.History.Add(new TargetedEvent(location.Id, CurrentGeneration, ToUnique(target), result));
+                this.AddEventToAgent(actor, new TargetedEvent(location.Id, CurrentGeneration, ToUnique(target), result));
                 if (target is IAgent)
                 {
                     var targetAgent = target as IAgent;
-                    targetAgent.History.Add(new TargetOfEvent(location.Id, CurrentGeneration, ToUnique(actor), result));
+                    this.AddEventToAgent(targetAgent, new TargetOfEvent(location.Id, CurrentGeneration, ToUnique(actor), result));
                 }
             }
         }
@@ -157,10 +157,9 @@ namespace Cas.TestImplementation
             var childCell = asexualReproductionInteraction.Interact(parent.Cells[0], null);
             var childAgent = new GridAgent();
             childAgent.Cells.Add(childCell);
-            this.RegisterBirth(childAgent);
+            this.RegisterBirth(childAgent, new BirthEvent(location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), parent.Species));
 
-            parent.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), null, childAgent.Species));
-            childAgent.History.Add(new BirthEvent(location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), parent.Species));
+            this.AddEventToAgent(parent, new ReproductionEvent(location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), null, childAgent.Species));
 
             return childAgent;
         }
@@ -189,17 +188,15 @@ namespace Cas.TestImplementation
 
             var child1 = new GridAgent();
             child1.Cells.Add(childCells[0]);
-            this.RegisterBirth(child1);
+            this.RegisterBirth(child1, new BirthEvent(location.Id, CurrentGeneration, interaction.GetType(), parent1.Species, parent2.Species));
 
             var child2 = new GridAgent();
             child2.Cells.Add(childCells[1]);
-            this.RegisterBirth(child2);
+            this.RegisterBirth(child2, new BirthEvent(location.Id, CurrentGeneration, interaction.GetType(), parent1.Species, parent2.Species));
 
             // Events
-            parent1.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, interaction.GetType(), parent2.Species, child1.Species, child2.Species));
-            parent2.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, interaction.GetType(), parent1.Species, child1.Species, child2.Species));
-            child1.History.Add(new BirthEvent(location.Id, CurrentGeneration, interaction.GetType(), parent1.Species, parent2.Species));
-            child2.History.Add(new BirthEvent(location.Id, CurrentGeneration, interaction.GetType(), parent1.Species, parent2.Species));
+            this.AddEventToAgent(parent1, new ReproductionEvent(location.Id, CurrentGeneration, interaction.GetType(), parent2.Species, child1.Species, child2.Species));
+            this.AddEventToAgent(parent2, new ReproductionEvent(location.Id, CurrentGeneration, interaction.GetType(), parent1.Species, child1.Species, child2.Species));
 
             return new[] {child1, child2};
         }

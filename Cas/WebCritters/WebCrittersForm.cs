@@ -62,6 +62,7 @@ namespace WebCritters
                 double.Parse(randomDeathPercent.Text) / 100.0);
 
             CasSimulation.GenerationFinished += new EventHandler(CasSimulation_GenerationFinished);
+            CasSimulation.LogHistory = this.trackAgentHistory.Checked;
 
             CasSimulation.Initialize(
                 int.Parse(numberOfResources.Text), 
@@ -110,14 +111,13 @@ namespace WebCritters
                 for (int i = 0; i < agentsToAdd; i++)
                 {
                     var agent = new GridAgent();
-                    agent.History.Add(new CreationEvent(location.Id, 0));
                     var cell = GridCell.New(tagComplexity);
 
                     int startingResourceCount = (int)(cell.Size / 100.0 * startingResourcePercent);
                     cell.AddRandomResources(startingResourceCount);
 
                     agent.Cells.Add(cell);
-                    this.CasSimulation.RegisterBirth(agent);
+                    this.CasSimulation.RegisterBirth(agent, new CreationEvent(location.Id, 0));
 
                     location.Agents.Add(agent);
                 }
@@ -366,6 +366,8 @@ namespace WebCritters
 
         private void agentList_DrawItem(object sender, DrawItemEventArgs e)
         {
+            if (e.Index == -1) return;
+
             e.DrawBackground();
 
             Brush myBrush = Brushes.Black;
@@ -387,6 +389,11 @@ namespace WebCritters
             e.Graphics.DrawString(((ListBox)sender).Items[e.Index].ToString(), e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
 
             e.DrawFocusRectangle();
+        }
+
+        private void trackAgentHistory_CheckedChanged(object sender, EventArgs e)
+        {
+            CasSimulation.LogHistory = this.trackAgentHistory.Checked;
         }
 
     }

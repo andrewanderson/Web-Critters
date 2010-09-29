@@ -19,7 +19,7 @@ namespace Cas.TestImplementation
         /// </summary>
         public int Y { get; set; }
 
-        public GridLocation(int x, int y, List<IResourceNode> resourceAllocation, int upkeep)
+        public GridLocation(int x, int y, ISimulation simulation, List<IResourceNode> resourceAllocation, int upkeep) : base(simulation)
         {
             if (resourceAllocation == null) throw new ArgumentNullException("resourceAllocation");
             if (x < 0) throw new ArgumentOutOfRangeException("x", x, "x must be zero or greater");

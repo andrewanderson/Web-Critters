@@ -76,7 +76,6 @@
     </Compile>
     <Compile Include="Events\BirthEvent.cs" />
     <Compile Include="Events\CreationEvent.cs" />
-    <Compile Include="Events\DeathEvent.cs" />
     <Compile Include="Events\EventBase.cs" />
     <Compile Include="Events\IEvent.cs" />
     <Compile Include="Events\MigrationEvent.cs" />

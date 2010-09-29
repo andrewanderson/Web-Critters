@@ -12,6 +12,8 @@ namespace Cas.Core
     {
         public Guid Id { get; private set; }
 
+        protected ISimulation Simulation { get; set; }
+
         /// <summary>
         /// The cost, in resources, that the location levies on its agents.  Must be
         /// a positive whole number.
@@ -38,9 +40,12 @@ namespace Cas.Core
         /// </summary>
         public List<IResourceNode> ResourceAllocation { get; protected set; }
 
-        protected LocationBase()
+        protected LocationBase(ISimulation simulation)
         {
+            if (simulation == null) throw new ArgumentNullException("simulation");
+
             this.Id = Guid.NewGuid();
+            this.Simulation = simulation;
         }
 
         public void ConnectTo(ILocation location)
@@ -74,7 +79,7 @@ namespace Cas.Core
         {
             foreach (var agent in Agents)
             {
-                agent.History.Add(new PayUpkeepEvent(this.Id, this.UpkeepCost, generation));
+                this.Simulation.AddEventToAgent(agent, new PayUpkeepEvent(this.Id, this.UpkeepCost, generation));
                 if (agent.IsMultiAgent() || agent.Cells.Count == 0)
                 {
                     // TODO: How do we extract payment if the base agent has no resources?  

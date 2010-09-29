@@ -99,13 +99,14 @@ namespace Cas.Core
         /// The key piece of work is to ensure that a species exists for
         /// this agent.
         /// </remarks>
-        public void RegisterBirth(IAgent agent)
+        public void RegisterBirth(IAgent agent, IEvent birthEvent)
         {
             if (agent == null) throw new ArgumentNullException("agent");
 
-            string key = agent.UniqueKey;
+            this.AddEventToAgent(agent, birthEvent);
 
             ISpecies species;
+            string key = agent.UniqueKey;
             if (!SpeciesByKey.TryGetValue(key, out species))
             {
                 species = new Species(this, agent);
@@ -193,6 +194,8 @@ namespace Cas.Core
         #endregion
 
         #region Settings
+
+        public bool LogHistory { get; set; }
 
         public double InteractionsPerGenerationFactor { get; protected set; }
 
@@ -289,10 +292,7 @@ namespace Cas.Core
             // Deaths (remove from the back first)
             for (int i = deathIndecies.Count - 1; i >= 0; i--)
             {
-                // TODO: Should we record where this thing died?
                 var condemned = location.Agents[deathIndecies[i]];
-                condemned.History.Add(new DeathEvent(Guid.Empty, CurrentGeneration));
-
                 location.Agents.RemoveAt(deathIndecies[i]);
                 this.RegisterDeath(condemned);
             }
@@ -380,7 +380,7 @@ namespace Cas.Core
                 var destination = kvp.Value;
 
                 location.Agents.Remove(agent);
-                agent.History.Add(new MigrationEvent(location.Id, destination.Id, destination.UpkeepCost, this.CurrentGeneration));
+                this.AddEventToAgent(agent, new MigrationEvent(location.Id, destination.Id, destination.UpkeepCost, this.CurrentGeneration));
                 pendingMigrations.Add(kvp);
             });
         }
@@ -394,6 +394,14 @@ namespace Cas.Core
             double percentFull = Math.Max(1, agent.CurrentResourceCount / agent.Size);
             
             return MigrationBaseChance + ((1 - percentFull) * MaximumMigrationBonus);
+        }
+
+        public void AddEventToAgent(IAgent agent, IEvent newEvent) 
+        {
+            if (agent == null) throw new ArgumentNullException("agent");
+            if (newEvent == null) throw new ArgumentNullException("newEvent");
+
+            if (this.LogHistory) agent.History.Add(newEvent);
         }
 
         /// <summary>
