@@ -43,6 +43,11 @@ namespace Cas.Core.Interfaces
         void RecordConsumptionOf(IIsUnique prey, int amount);
 
         /// <summary>
+        /// Report that an agent of this species was successfully attacked by a predator.
+        /// </summary>
+        void RecordPredation(ISpecies predator);
+
+        /// <summary>
         /// The total number of agents in the simulation with this species.
         /// </summary>
         long Population { get; set; }

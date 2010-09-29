@@ -121,8 +121,8 @@ namespace Cas.Core
             if (prey is ISpecies)
             {
                 ResourcesFromAgents += amount;
-                
 
+                (prey as ISpecies).RecordPredation(this);
             }
             else // IResourceNode
             {
@@ -137,7 +137,10 @@ namespace Cas.Core
             preyCounts[prey] += 1;
         }
 
-        internal void RecordPredation(ISpecies predator)
+        /// <summary>
+        /// Report that an agent of this species was successfully attacked by a predator.
+        /// </summary>
+        public void RecordPredation(ISpecies predator)
         {
             // Increment the counter for this consumption
             if (!predatorCounts.ContainsKey(predator))
