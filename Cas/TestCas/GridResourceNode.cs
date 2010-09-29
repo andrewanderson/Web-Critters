@@ -14,23 +14,19 @@ namespace Cas.TestImplementation
     /// </summary>
     public class GridResourceNode : IResourceNode
     {
-        private static long NextAvailableId = 1;
+        private static long NextAvailableId = -1;
 
         internal List<Resource> Reservoir { get; private set; }
-        private readonly string toString;
 
         private GridResourceNode(int maximumTagSize) : base()
         {
             RenewableResources = new List<Resource>();
             Reservoir = new List<Resource>();
 
-            Id = NextAvailableId++;
+            Id = NextAvailableId--;
             Offense = Tag.New(maximumTagSize, false);
             Defense = Tag.New(maximumTagSize, false);
             Exchange = Tag.New(maximumTagSize, false);
-
-            string renewableResources = string.Concat(this.RenewableResources.Select(x => x.ToString()));
-            toString = string.Format("#{0}, {1} defense => {2}", this.Id, this.Defense, renewableResources);
         }
 
         private GridResourceNode(IResourceNode node)
@@ -87,9 +83,14 @@ namespace Cas.TestImplementation
             return grn;
         }
 
-
+        private string toString;
         public override string ToString()
         {
+            if (toString == null)
+            {
+                string renewableResources = string.Concat(this.RenewableResources.Select(x => x.ToString()));
+                toString = string.Format("#{0}, {1} defense => {2}", this.Id, this.Defense, renewableResources);
+            }
             return toString;
         }
 
@@ -167,6 +168,9 @@ namespace Cas.TestImplementation
 
         #region IIsUnique members
         
+        /// <summary>
+        /// The unique identifier for this ResourceNode, which is always a negative number.
+        /// </summary>
         public long Id { get; private set; }
 
         #endregion

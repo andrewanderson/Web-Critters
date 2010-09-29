@@ -18,4 +18,22 @@ namespace Cas.Core.Interfaces
         /// </summary>
         long Id { get; }
     }
+
+    public class IIsUnqiueEqualityComparer : IEqualityComparer<IIsUnique>
+    {
+        public bool Equals(IIsUnique x, IIsUnique y)
+        {
+            if (Object.ReferenceEquals(x, y)) return true;
+            if (Object.ReferenceEquals(x, null) || Object.ReferenceEquals(y, null)) return false;
+            return x.Id == y.Id;
+        }
+
+        public int GetHashCode(IIsUnique obj)
+        {
+            return obj.Id.GetHashCode();
+        }
+
+        public static IIsUnqiueEqualityComparer Instance = new IIsUnqiueEqualityComparer();
+    }
+
 }

@@ -89,8 +89,8 @@ namespace Cas.Core
         private readonly ISimulation Simulation;
         private readonly string toString;
 
-        protected readonly Dictionary<IIsUnique, long> preyCounts = new Dictionary<IIsUnique,long>();
-        protected readonly Dictionary<ISpecies, long> predatorCounts = new Dictionary<ISpecies,long>();
+        protected readonly Dictionary<IIsUnique, long> preyCounts = new Dictionary<IIsUnique,long>(IIsUnqiueEqualityComparer.Instance);
+        protected readonly Dictionary<ISpecies, long> predatorCounts = new Dictionary<ISpecies, long>(IIsUnqiueEqualityComparer.Instance);
 
         public Species(ISimulation simulation, IAgent exemplar)
         {
