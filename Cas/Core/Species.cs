@@ -153,7 +153,10 @@ namespace Cas.Core
         {
             get 
             {
-                return this.Simulation.Environment.Locations.Sum(loc => loc.Agents.Count);
+                return this.Simulation
+                    .Environment
+                    .Locations
+                    .Sum(loc => loc.Agents.Where(agent => agent.Species == this).Count());
             }
         }
 
