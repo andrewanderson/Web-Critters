@@ -102,6 +102,7 @@ namespace Cas.Core
             this.id = NextAvailableId++;
             this.ResourcesFromResourceNodes = 0;
             this.ResourcesFromAgents = 0;
+            this.Population = 0;
 
             this.exemplar = exemplar.DeepCopy();
 
@@ -149,16 +150,7 @@ namespace Cas.Core
         /// <summary>
         /// The total number of agents in the simulation with this species.
         /// </summary>
-        public long Population
-        {
-            get 
-            {
-                return this.Simulation
-                    .Environment
-                    .Locations
-                    .Sum(loc => loc.Agents.Where(agent => agent.Species == this).Count());
-            }
-        }
+        public long Population { get; set; }
 
         /// <summary>
         /// The locations in the simulation where at least one member of this species can be found.

@@ -99,7 +99,7 @@ namespace Cas.Core
         /// The key piece of work is to ensure that a species exists for
         /// this agent.
         /// </remarks>
-        public void Register(IAgent agent)
+        public void RegisterBirth(IAgent agent)
         {
             if (agent == null) throw new ArgumentNullException("agent");
 
@@ -112,9 +112,24 @@ namespace Cas.Core
                 SpeciesByKey.Add(key, species);
             }
 
+            species.Population++;
             agent.Species = species;
         }
 
+        /// <summary>
+        /// Records the death of an agent, which updates the underlying species.
+        /// </summary>
+        public void RegisterDeath(IAgent agent)
+        {
+            if (agent == null) throw new ArgumentNullException("agent");
+            if (agent.Species == null) throw new ArgumentException("Agent cannot have a null species.", "agent");
+
+            if (--agent.Species.Population <= 0)
+            {
+                this.SpeciesByKey.Remove(agent.UniqueKey);
+            }
+        }
+        
         public int CurrentGeneration { get; protected set; }
 
         /// <summary>
@@ -279,6 +294,7 @@ namespace Cas.Core
                 condemned.History.Add(new DeathEvent(Guid.Empty, CurrentGeneration));
 
                 location.Agents.RemoveAt(deathIndecies[i]);
+                this.RegisterDeath(condemned);
             }
 
             // Age all surviving agents

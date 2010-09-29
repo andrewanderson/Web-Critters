@@ -45,7 +45,7 @@ namespace Cas.Core.Interfaces
         /// <summary>
         /// The total number of agents in the simulation with this species.
         /// </summary>
-        long Population { get; }
+        long Population { get; set; }
 
         /// <summary>
         /// The locations in the simulation where at least one member of this species can be found.

@@ -30,7 +30,12 @@ namespace Cas.Core.Interfaces
         /// The key piece of work is to ensure that a species exists for
         /// this agent.
         /// </remarks>
-        void Register(IAgent agent);
+        void RegisterBirth(IAgent agent);
+
+        /// <summary>
+        /// Records the death of an agent, which updates the underlying species.
+        /// </summary>
+        void RegisterDeath(IAgent agent);
 
         /// <summary>
         /// The generation number that is either about to execute, or is executing.

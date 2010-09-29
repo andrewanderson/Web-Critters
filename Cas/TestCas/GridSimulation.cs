@@ -157,7 +157,7 @@ namespace Cas.TestImplementation
             var childCell = asexualReproductionInteraction.Interact(parent.Cells[0], null);
             var childAgent = new GridAgent();
             childAgent.Cells.Add(childCell);
-            this.Register(childAgent);
+            this.RegisterBirth(childAgent);
 
             parent.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), null, childAgent.Species));
             childAgent.History.Add(new BirthEvent(location.Id, CurrentGeneration, asexualReproductionInteraction.GetType(), parent.Species));
@@ -189,11 +189,11 @@ namespace Cas.TestImplementation
 
             var child1 = new GridAgent();
             child1.Cells.Add(childCells[0]);
-            this.Register(child1);
+            this.RegisterBirth(child1);
 
             var child2 = new GridAgent();
             child2.Cells.Add(childCells[1]);
-            this.Register(child2);
+            this.RegisterBirth(child2);
 
             // Events
             parent1.History.Add(new ReproductionEvent(location.Id, CurrentGeneration, interaction.GetType(), parent2.Species, child1.Species, child2.Species));
