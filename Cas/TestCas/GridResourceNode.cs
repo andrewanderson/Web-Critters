@@ -43,7 +43,7 @@ namespace Cas.TestImplementation
             this.Exchange = node.Exchange;
 
             this.RenewableResources = new List<Resource>();
-            this.RenewableResources.AddRange(node.RenewableResources.Select(x=>x.DeepCopy()));
+            this.RenewableResources.AddRange(node.RenewableResources);
 
             this.Reservoir = new List<Resource>();
             this.RefreshReservoir();
@@ -108,9 +108,7 @@ namespace Cas.TestImplementation
         public void RefreshReservoir()
         {
             Reservoir.Clear();
-            Reservoir = new List<Resource>(
-                RenewableResources.Select(resource => resource.DeepCopy()).ToList()
-            );
+            Reservoir = new List<Resource>(RenewableResources);
         }
 
         public IResourceNode DeepCopy()

@@ -28,11 +28,6 @@ namespace Cas.Core
         /// </summary>
         public char Label { get; set; }
 
-        public Resource DeepCopy()
-        {
-            return new Resource(this.Label);
-        }
-
         public override string ToString()
         {
             return this.Label.ToString();
