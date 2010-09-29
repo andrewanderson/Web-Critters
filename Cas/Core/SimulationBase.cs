@@ -425,5 +425,21 @@ namespace Cas.Core
         /// Perform any implementation-specific tear-down.
         /// </summary>
         protected abstract void InnerReset();
+
+        public static IIsUnique ToUnique(IInteractable agentOrResourceNode)
+        {
+            if (agentOrResourceNode is IResourceNode)
+            {
+                return agentOrResourceNode as IIsUnique;
+            }
+            else if (agentOrResourceNode is IAgent)
+            {
+                return (agentOrResourceNode as IAgent).Species;
+            }
+            else
+            {
+                throw new InvalidCastException("Could not cast to IIsUnique");
+            }
+        }
     }
 }

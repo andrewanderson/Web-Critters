@@ -1075,11 +1075,13 @@
             // 
             // agentList
             // 
+            this.agentList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.agentList.FormattingEnabled = true;
             this.agentList.Location = new System.Drawing.Point(222, 329);
             this.agentList.Name = "agentList";
             this.agentList.Size = new System.Drawing.Size(375, 329);
             this.agentList.TabIndex = 12;
+            this.agentList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.agentList_DrawItem);
             this.agentList.SelectedIndexChanged += new System.EventHandler(this.agentList_SelectedIndexChanged);
             // 
             // label12

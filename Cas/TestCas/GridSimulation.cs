@@ -99,11 +99,13 @@ namespace Cas.TestImplementation
             // Log the action 
             if (result > 0)
             {
-                actor.History.Add(new TargetedEvent(location.Id, CurrentGeneration, EventBase.ToUnique(target), result));
+                actor.Species.RecordConsumptionOf(ToUnique(target), result);
+
+                actor.History.Add(new TargetedEvent(location.Id, CurrentGeneration, ToUnique(target), result));
                 if (target is IAgent)
                 {
                     var targetAgent = target as IAgent;
-                    targetAgent.History.Add(new TargetOfEvent(location.Id, CurrentGeneration, EventBase.ToUnique(actor), result));
+                    targetAgent.History.Add(new TargetOfEvent(location.Id, CurrentGeneration, ToUnique(actor), result));
                 }
             }
         }

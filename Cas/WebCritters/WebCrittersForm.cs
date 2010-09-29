@@ -364,6 +364,31 @@ namespace WebCritters
             }
         }
 
+        private void agentList_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+
+            Brush myBrush = Brushes.Black;
+
+            var agent = agentList.Items[e.Index] as IAgent;
+            switch (agent.Species.DietType)
+            {
+                case DietType.Carnivore:
+                    myBrush = Brushes.Red;
+                    break;
+                case DietType.Herbivore:
+                    myBrush = Brushes.Green;
+                    break;
+                case DietType.Omnivore:
+                    myBrush = Brushes.Blue;
+                    break;
+            }
+
+            e.Graphics.DrawString(((ListBox)sender).Items[e.Index].ToString(), e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
+
+            e.DrawFocusRectangle();
+        }
+
     }
 
 }
