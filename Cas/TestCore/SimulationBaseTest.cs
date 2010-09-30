@@ -16,7 +16,7 @@ namespace TestCore
         private static GridSimulation GetTestSimulation()
         {
             Cas.TestImplementation.GridSimulation testSimulation = new Cas.TestImplementation.GridSimulation(5, 6, 2, 25, 10, 50, 4);
-            testSimulation.Initialize(ResourceCount, 1, 10);
+            testSimulation.Initialize(ResourceCount, 1, 10, 0.55);
             return testSimulation;
         }
 

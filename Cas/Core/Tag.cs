@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using Cas.Core.Interfaces;
 
 namespace Cas.Core
@@ -133,6 +134,13 @@ namespace Cas.Core
             if (chars == null) throw new ArgumentNullException("chars");
 
             return new Tag(chars);
+        }
+
+        public static Tag New(Tag tag)
+        {
+            if (tag == null) throw new ArgumentNullException("tag");
+
+            return new Tag(tag.Data.Select(r => r.Label).ToArray());
         }
 
         #endregion

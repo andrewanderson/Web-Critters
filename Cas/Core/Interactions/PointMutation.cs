@@ -16,9 +16,18 @@ namespace Cas.Core.Interactions
         /// <summary>
         /// The chance for any given resource node to mutate.
         /// 
-        /// Expressed as a number between 0.0 and 100.0 %.
+        /// Expressed as a number between 0.0 and 1.0.
+        /// 
+        /// Default: 0.15%
         /// </summary>
-        private const double MutationChancePerResource = 0.55;           
+        private static double PointMutationChance = 0.0015;
+
+        public static void SetMutationPercentage(double percent)
+        {
+            if (percent < 0 || percent > 100) throw new ArgumentOutOfRangeException("percent", "Must be between 0 and 100");
+
+            PointMutationChance = percent / 100.0;
+        }
 
         /// <summary>
         /// Perform a single point crossover.
@@ -57,9 +66,9 @@ namespace Cas.Core.Interactions
 
         private static bool ShouldMutateThisPoint()
         {
-            double rand = RandomProvider.NextDouble(); // (0 - 100)
-            bool shouldMutate = (rand < MutationChancePerResource/100);
-            //if (shouldMutate) Console.WriteLine("MUTATING");
+            double rand = RandomProvider.NextDouble();
+            bool shouldMutate = (rand < PointMutationChance);
+            if (shouldMutate) Console.WriteLine("MUTATING");
             return shouldMutate;
         }
 

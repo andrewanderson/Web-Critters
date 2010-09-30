@@ -61,7 +61,10 @@ namespace Cas.Core.Interfaces
         /// <param name="maximumTagSize">
         /// The largest size that a tag can reach in the simulation.
         /// </param>
-        void Initialize(int distinctResources, int normalToWildcardResourceRatio, int maximumTagSize);
+        /// <param name="mutationPercent">
+        /// The percentage chance that any given point within a cell mutates during a reproduction.
+        /// </param>
+        void Initialize(int distinctResources, int normalToWildcardResourceRatio, int maximumTagSize, double mutationPercent);
 
         /// <summary>
         /// Discard the current simulation configuration.

@@ -38,13 +38,13 @@ namespace Cas.Core.Interactions
             {
                 if (i < crossoverIndex)
                 {
-                    child1.SetTagByIndex(i, actor.GetTagByIndex(i));
-                    child2.SetTagByIndex(i, target.GetTagByIndex(i));
+                    child1.SetTagByIndex(i, Tag.New(actor.GetTagByIndex(i)));
+                    child2.SetTagByIndex(i, Tag.New(target.GetTagByIndex(i)));
                 }
                 else if (i > crossoverIndex)
                 {
-                    child1.SetTagByIndex(i, target.GetTagByIndex(i));
-                    child2.SetTagByIndex(i, actor.GetTagByIndex(i));                    
+                    child1.SetTagByIndex(i, Tag.New(target.GetTagByIndex(i)));
+                    child2.SetTagByIndex(i, Tag.New(actor.GetTagByIndex(i))); 
                 }
                 else // i == crossoverIndex
                 {

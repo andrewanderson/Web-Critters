@@ -48,9 +48,9 @@ namespace Cas.TestImplementation
         {
             var clone = GridCell.New();
 
-            clone.Offense = Tag.New(this.Offense.Data.Select(d => d.Label).ToArray());
-            clone.Defense = Tag.New(this.Defense.Data.Select(d => d.Label).ToArray());
-            clone.Exchange = Tag.New(this.Exchange.Data.Select(d => d.Label).ToArray());
+            clone.Offense = Tag.New(this.Offense);
+            clone.Defense = Tag.New(this.Defense);
+            clone.Exchange = Tag.New(this.Exchange);
 
             return clone;
         }

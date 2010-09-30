@@ -38,6 +38,8 @@
             this.minStartingPopulation = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.mutationPercent = new System.Windows.Forms.TextBox();
+            this.label47 = new System.Windows.Forms.Label();
             this.uniqueResourceCount = new System.Windows.Forms.TextBox();
             this.label46 = new System.Windows.Forms.Label();
             this.maxComplexity = new System.Windows.Forms.TextBox();
@@ -231,6 +233,8 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer.Panel1.Controls.Add(this.mutationPercent);
+            this.splitContainer.Panel1.Controls.Add(this.label47);
             this.splitContainer.Panel1.Controls.Add(this.uniqueResourceCount);
             this.splitContainer.Panel1.Controls.Add(this.label46);
             this.splitContainer.Panel1.Controls.Add(this.maxComplexity);
@@ -330,6 +334,25 @@
             this.splitContainer.Size = new System.Drawing.Size(1304, 670);
             this.splitContainer.SplitterDistance = 250;
             this.splitContainer.TabIndex = 8;
+            // 
+            // mutationPercent
+            // 
+            this.mutationPercent.Location = new System.Drawing.Point(108, 572);
+            this.mutationPercent.Name = "mutationPercent";
+            this.mutationPercent.Size = new System.Drawing.Size(59, 20);
+            this.mutationPercent.TabIndex = 52;
+            this.mutationPercent.Text = "0.15";
+            this.mutationPercent.Validating += new System.ComponentModel.CancelEventHandler(this.doubleTextBox_Validating);
+            this.mutationPercent.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(9, 574);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(59, 13);
+            this.label47.TabIndex = 51;
+            this.label47.Text = "Mutation %";
             // 
             // uniqueResourceCount
             // 
@@ -726,8 +749,6 @@
             // trackAgentHistory
             // 
             this.trackAgentHistory.AutoSize = true;
-            this.trackAgentHistory.Checked = true;
-            this.trackAgentHistory.CheckState = System.Windows.Forms.CheckState.Checked;
             this.trackAgentHistory.Location = new System.Drawing.Point(605, 6);
             this.trackAgentHistory.Name = "trackAgentHistory";
             this.trackAgentHistory.Size = new System.Drawing.Size(87, 17);
@@ -751,7 +772,7 @@
             this.generationsBetweenUpdate.Name = "generationsBetweenUpdate";
             this.generationsBetweenUpdate.Size = new System.Drawing.Size(27, 20);
             this.generationsBetweenUpdate.TabIndex = 37;
-            this.generationsBetweenUpdate.Text = "5";
+            this.generationsBetweenUpdate.Text = "50";
             this.generationsBetweenUpdate.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.generationsBetweenUpdate.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -1388,6 +1409,8 @@
         private System.Windows.Forms.TextBox uniqueResourceCount;
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.CheckBox trackAgentHistory;
+        private System.Windows.Forms.TextBox mutationPercent;
+        private System.Windows.Forms.Label label47;
     }
 }
 

@@ -22,7 +22,7 @@ namespace Cas.Core.Interactions
             var child = actor.CreateEmptyCell();
             for (int i = 0; i < actor.ActiveTagsInModel; i++)
             {
-                child.SetTagByIndex(i, actor.GetTagByIndex(i));
+                child.SetTagByIndex(i, Tag.New(actor.GetTagByIndex(i)));
             }
 
             PayInteractionFee(actor);

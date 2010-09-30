@@ -67,7 +67,8 @@ namespace WebCritters
             CasSimulation.Initialize(
                 int.Parse(numberOfResources.Text), 
                 int.Parse(normalToWildcardRatio.Text), 
-                int.Parse(maxComplexity.Text));
+                int.Parse(maxComplexity.Text),
+                double.Parse(mutationPercent.Text));
 
             // TODO: Load up some default agents
             LoadStartingAgents(

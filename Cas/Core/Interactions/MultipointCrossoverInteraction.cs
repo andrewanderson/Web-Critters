@@ -55,8 +55,8 @@ namespace Cas.Core.Interactions
                 }
                 else
                 {
-                    child1.SetTagByIndex(i, actor.GetTagByIndex(i));
-                    child2.SetTagByIndex(i, target.GetTagByIndex(i));
+                    child1.SetTagByIndex(i, Tag.New(actor.GetTagByIndex(i)));
+                    child2.SetTagByIndex(i, Tag.New(target.GetTagByIndex(i)));
                 }
             }
             

@@ -72,14 +72,14 @@ namespace TestCore.Interactions
         {
             var interaction = new AsexualInteraction(true, 0);
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 var parent = GridCell.New(TagSize);
                 parent.AddRandomResources(parent.Size * 2);
 
                 var child = interaction.Interact(parent, null);
 
-                Console.Out.WriteLine("{0}: Asexual reproduction by {1} resulted in {2}", i,parent, child);
+                Console.Out.WriteLine("{0}: Asexual reproduction by {1} resulted in {2}", i, parent, child);
             }
         }
     }
