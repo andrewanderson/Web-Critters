@@ -1281,9 +1281,9 @@
             this.label48.AutoSize = true;
             this.label48.Location = new System.Drawing.Point(5, 18);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(60, 13);
+            this.label48.Size = new System.Drawing.Size(48, 13);
             this.label48.TabIndex = 4;
-            this.label48.Text = "Population:";
+            this.label48.Text = "Species:";
             // 
             // totalSpecies
             // 
