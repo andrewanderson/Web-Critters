@@ -46,14 +46,10 @@ namespace Cas.Core.Interactions
 
                 if (actorIndex >= targetTag.Data.Count)
                 {
-                    if (actorData.Equals(Resource.WildcardResource))
-                    {
-                        result += InteractionLocus[(int)InteractionLocusIndecies.Wildcard];
-                    }
-                    else
-                    {
-                        result += InteractionLocus[(int)InteractionLocusIndecies.Extra];
-                    }
+                    result += 
+                        actorData.Equals(Resource.WildcardResource)
+                        ? InteractionLocus[(int)InteractionLocusIndecies.Wildcard] 
+                        : InteractionLocus[(int)InteractionLocusIndecies.Extra];
                     continue;
                 }
 
@@ -78,9 +74,14 @@ namespace Cas.Core.Interactions
                 }
             }
 
+            // target is longer, and receives a bonus for each extra non-wildcard
             if (targetTag.Data.Count > actorTag.Data.Count)
             {
-                result -= InteractionLocus[(int)InteractionLocusIndecies.Extra] * (targetTag.Data.Count - actorTag.Data.Count);
+                for (int i = actorTag.Data.Count; i < targetTag.Data.Count; i++)
+                {
+                    Resource targetData = targetTag.Data[i];
+                    result -= targetData.Equals(Resource.WildcardResource) ? 0 : InteractionLocus[(int)InteractionLocusIndecies.Extra];
+                }
             }
 
             return result;
