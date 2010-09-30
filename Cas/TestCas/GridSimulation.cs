@@ -44,7 +44,7 @@ namespace Cas.TestImplementation
             StartingTagComplexity = tagComplexity;
             UniqueResourceCount = uniqueResourceCount;
 
-            attackInteraction = new AttackInteraction();
+            attackInteraction = new AttackInteraction(2, -2, 0, 1, 1.0, 1);
             crossoverInteraction = new CrossoverInteraction(true, ReproductionInheritance);
             multipointCrossoverInteraction = new MultipointCrossoverInteraction(true, ReproductionInheritance);
             asexualReproductionInteraction = new AsexualInteraction(true, ReproductionInheritance);
