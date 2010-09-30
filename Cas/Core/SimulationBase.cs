@@ -139,6 +139,9 @@ namespace Cas.Core
         /// <param name="distinctResources">
         /// The number of resources available in the simulation.  These will be represented using letters starting with 'a'.
         /// </param>
+        /// <param name="allowWildcards">
+        /// Should tags be allowed the use of the wildcard resource?
+        /// </param>
         /// <param name="normalToWildcardResourceRatio">
         /// The prominence of wildcard resources
         /// </param>
@@ -155,13 +158,13 @@ namespace Cas.Core
         /// This method must be called before any other class methods.  Once it is called,
         /// it may not be called again without first calling <see cref="Reset"/>.
         /// </remarks>
-        public void Initialize(int distinctResources, int normalToWildcardResourceRatio, int maximumTagSize, double mutationPercent)
+        public void Initialize(int distinctResources, bool allowWildcards, int normalToWildcardResourceRatio, int maximumTagSize, double mutationPercent)
         {
             if (Initialized) throw new InvalidOperationException("The Simulation is already initialized.");
 
             Initializing = true;
 
-            Resource.Initialize(distinctResources, normalToWildcardResourceRatio);
+            Resource.Initialize(distinctResources, normalToWildcardResourceRatio, allowWildcards);
             Tag.Initialize(maximumTagSize);
             PointMutation.SetMutationPercentage(mutationPercent);
 

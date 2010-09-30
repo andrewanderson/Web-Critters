@@ -66,6 +66,7 @@ namespace WebCritters
 
             CasSimulation.Initialize(
                 int.Parse(numberOfResources.Text), 
+                allowWildcards.Checked,
                 int.Parse(normalToWildcardRatio.Text), 
                 int.Parse(maxComplexity.Text),
                 double.Parse(mutationPercent.Text));

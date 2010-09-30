@@ -42,7 +42,7 @@ namespace TestCore
         [TestInitialize()]
         public void MyTestInitialize()
         {
-            Resource.Initialize(4, 1);
+            Resource.Initialize(4, 1, true);
         }
         
         [TestMethod]

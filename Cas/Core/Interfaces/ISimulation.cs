@@ -55,6 +55,9 @@ namespace Cas.Core.Interfaces
         /// <param name="distinctResources">
         /// The number of resources available in the simulation.  These will be represented using letters starting with 'a'.
         /// </param>
+        /// <param name="allowWildcards">
+        /// Should tags be allowed the use of the wildcard resource?
+        /// </param>
         /// <param name="normalToWildcardResourceRatio">
         /// The prominence of wildcard resources
         /// </param>
@@ -64,7 +67,7 @@ namespace Cas.Core.Interfaces
         /// <param name="mutationPercent">
         /// The percentage chance that any given point within a cell mutates during a reproduction.
         /// </param>
-        void Initialize(int distinctResources, int normalToWildcardResourceRatio, int maximumTagSize, double mutationPercent);
+        void Initialize(int distinctResources, bool allowWildcards, int normalToWildcardResourceRatio, int maximumTagSize, double mutationPercent);
 
         /// <summary>
         /// Discard the current simulation configuration.

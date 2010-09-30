@@ -16,7 +16,7 @@ namespace TestCore.Interactions
         [TestInitialize()]
         public void MyTestInitialize()
         {
-            Resource.Initialize(10, 1);
+            Resource.Initialize(10, 1, true);
         }
 
         [TestMethod]

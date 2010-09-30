@@ -92,7 +92,6 @@ namespace Cas.TestImplementation
             return grn;
         }
 
-        private string toString;
         public override string ToString()
         {
             string renewableResources = string.Concat(this.RenewableResources.Select(x => x.ToString()));

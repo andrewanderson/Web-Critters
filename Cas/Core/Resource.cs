@@ -66,6 +66,13 @@ namespace Cas.Core
         private static readonly Dictionary<char, Resource> resourceMap;
 
         /// <summary>
+        /// An switch that determines whether or not wildcard resources will ever be generated.  
+        /// 
+        /// This overrides the allowWildcard parameter on the Random method.
+        /// </summary>
+        public static bool GlobalAllowWildcard { get; set; }
+
+        /// <summary>
         /// Retrieve the wildcard character within the simulation.
         /// </summary>
         public static Resource WildcardResource
@@ -73,7 +80,6 @@ namespace Cas.Core
             get
             {
                 return wildcardResource;
-                // return (Resource)wildcardResource.Clone();  // TODO: Is cloning required?
             }
         }
 
@@ -87,9 +93,10 @@ namespace Cas.Core
         /// <summary>
         /// Populate the Resource Map with resource characters from 'a' to 'a'+numberOfResources.
         /// </summary>
-        public static void Initialize(int numberOfResources, int normalToWildcardRatio)
+        public static void Initialize(int numberOfResources, int normalToWildcardRatio, bool allowWildcards)
         {
             NormalToWildcardRatio = normalToWildcardRatio;
+            GlobalAllowWildcard = allowWildcards;
 
             resourceList.Clear();
             resourceMap.Clear();
@@ -111,7 +118,6 @@ namespace Cas.Core
             if (index >= resourceList.Count) throw new ArgumentException("Index cannot exceed the number of resources.", "index");
 
             return resourceList[index];
-            //return (Resource) resourceList[index].Clone(); // TODO: Is cloning required?
         }
 
         /// <summary>
@@ -126,7 +132,6 @@ namespace Cas.Core
             else if (resourceMap.ContainsKey(c))
             {
                 return resourceMap[c];
-                //return (Resource)resourceMap[c].Clone();  // TODO: Is cloning required?
             }
             else
             {
@@ -144,10 +149,10 @@ namespace Cas.Core
         public static Resource Random(bool allowWildcard)
         {
             int range = (resourceList.Count * NormalToWildcardRatio) - 1;
-            if (allowWildcard) range++;
+            if (allowWildcard && GlobalAllowWildcard) range++;
 
             int rand = RandomProvider.Next(range+1);
-            if (allowWildcard && rand == range)
+            if (allowWildcard && GlobalAllowWildcard && rand == range)
             {
                 return WildcardResource;
             }
