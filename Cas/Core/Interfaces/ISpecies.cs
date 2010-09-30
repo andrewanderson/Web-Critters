@@ -55,18 +55,18 @@ namespace Cas.Core.Interfaces
         /// <summary>
         /// The locations in the simulation where at least one member of this species can be found.
         /// </summary>
-        List<ILocation> Habitat { get; }
+        IEnumerable<ILocation> Habitat { get; }
 
         /// <summary>
         /// The foods that this species has consumed across all time, ordered by number of
         /// occurences.
         /// </summary>
-        List<IIsUnique> Prey { get; }
+        IEnumerable<IIsUnique> Prey { get; }
 
         /// <summary>
         /// The agents that this species has been predated by across all time, ordered by number of
         /// occurences.
         /// </summary>
-        List<ISpecies> Predators { get; }
+        IEnumerable<IIsUnique> Predators { get; }
     }
 }

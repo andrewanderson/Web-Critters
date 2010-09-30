@@ -88,8 +88,8 @@ namespace Cas.Core
 
         private readonly ISimulation Simulation;
 
-        protected readonly Dictionary<IIsUnique, long> preyCounts = new Dictionary<IIsUnique,long>(IIsUnqiueEqualityComparer.Instance);
-        protected readonly Dictionary<ISpecies, long> predatorCounts = new Dictionary<ISpecies, long>(IIsUnqiueEqualityComparer.Instance);
+        protected readonly Dictionary<long, long> preyCounts = new Dictionary<long, long>();
+        protected readonly Dictionary<long, long> predatorCounts = new Dictionary<long, long>();
 
         public Species(ISimulation simulation, IAgent exemplar)
         {
@@ -126,11 +126,11 @@ namespace Cas.Core
             }
 
             // Increment the counter for this consumption
-            if (!preyCounts.ContainsKey(prey))
+            if (!preyCounts.ContainsKey(prey.Id))
             {
-                preyCounts.Add(prey, 0);
+                preyCounts.Add(prey.Id, 0);
             }
-            preyCounts[prey] += 1;
+            preyCounts[prey.Id] += 1;
         }
 
         /// <summary>
@@ -139,11 +139,11 @@ namespace Cas.Core
         public void RecordPredation(ISpecies predator)
         {
             // Increment the counter for this consumption
-            if (!predatorCounts.ContainsKey(predator))
+            if (!predatorCounts.ContainsKey(predator.Id))
             {
-                predatorCounts.Add(predator, 0);
+                predatorCounts.Add(predator.Id, 0);
             }
-            predatorCounts[predator] += 1;
+            predatorCounts[predator.Id] += 1;
         }
 
         /// <summary>
@@ -154,15 +154,14 @@ namespace Cas.Core
         /// <summary>
         /// The locations in the simulation where at least one member of this species can be found.
         /// </summary>
-        public List<ILocation> Habitat
+        public IEnumerable<ILocation> Habitat
         {
             get 
             {
                 return this.Simulation
                     .Environment
                     .Locations
-                    .Where(loc => loc.Agents.Any(agent => agent.Species == this))
-                    .ToList();
+                    .Where(loc => loc.Agents.Any(agent => agent.Species == this));
             }
         }
 
@@ -170,14 +169,18 @@ namespace Cas.Core
         /// The foods that this species has consumed across all time, ordered by number of
         /// occurences.
         /// </summary>
-        public List<IIsUnique> Prey
+        public IEnumerable<IIsUnique> Prey
         {
             get 
             {
                 return this.preyCounts
                     .OrderBy(kvp => kvp.Value)
-                    .Select(kvp => kvp.Key)
-                    .ToList();
+                    .Select(kvp =>
+                    {
+                        return (kvp.Key < 0) ? 
+                            this.Simulation.Environment.FindResourceNodeById(kvp.Key)
+                            : GetSpeciesOrFossil(kvp.Key);
+                    });
             }
         }
 
@@ -185,15 +188,20 @@ namespace Cas.Core
         /// The agents that this species has been predated by across all time, ordered by number of
         /// occurences.
         /// </summary>
-        public List<ISpecies> Predators
+        public IEnumerable<IIsUnique> Predators
         {
             get 
             {
                 return this.predatorCounts
                     .OrderBy(kvp => kvp.Value)
-                    .Select(kvp => kvp.Key)
-                    .ToList();
+                    .Select(kvp => GetSpeciesOrFossil(kvp.Key));
             }
+        }
+
+        private IIsUnique GetSpeciesOrFossil(long id)
+        {
+            var species = this.Simulation.Species.Where(s => s.Id == id).FirstOrDefault();
+            return species ?? (IIsUnique)new Fossil(id);
         }
 
         public override string ToString()

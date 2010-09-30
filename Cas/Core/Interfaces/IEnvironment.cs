@@ -26,5 +26,10 @@ namespace Cas.Core.Interfaces
         /// </summary>
         void Initialize();
 
+        /// <summary>
+        /// Retrieve a resource node fromt he environment using its 
+        /// (negative) unique identifier as a look-up.
+        /// </summary>
+        IResourceNode FindResourceNodeById(long id);
     }
 }

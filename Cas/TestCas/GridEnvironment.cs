@@ -65,6 +65,11 @@ namespace Cas.TestImplementation
         /// </summary>
         public List<ILocation> Locations { get; private set; }
 
+        public IResourceNode FindResourceNodeById(long id)
+        {
+            return this.GlobalResources.Where(rn => rn.Id == id).FirstOrDefault();
+        }   
+
         #endregion
 
         #region IDisposable Members
