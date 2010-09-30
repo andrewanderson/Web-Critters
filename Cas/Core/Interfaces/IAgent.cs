@@ -70,5 +70,10 @@ namespace Cas.Core.Interfaces
         /// Copies the structure, but not the state, of an agent.
         /// </summary>
         IAgent DeepCopy();
+
+        /// <summary>
+        /// Returns a terse representation of the agent.
+        /// </summary>
+        string ToShortString();
     }
 }

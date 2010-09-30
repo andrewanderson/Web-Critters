@@ -54,14 +54,18 @@ namespace Cas.TestImplementation
         public override string ToString()
         {
             string speciesId = (Species == null) ? string.Empty : string.Format("#{0}, ", this.Species.Id);
+            return string.Format("{0}{1} - {2} generations", speciesId, this.ToShortString(), this.Age);
+        }
+
+        public override string ToShortString()
+        {
             if (!this.IsMultiAgent())
             {
-                string cellString = (this.Cells.Count == 0) ? "Empty" : this.Cells[0].ToString();
-                return string.Format("{0}{1} - {2} generations", speciesId, cellString, this.Age);
+                return (this.Cells.Count == 0) ? "Empty" : this.Cells[0].ToString();
             }
             else
             {
-                return string.Format("{0}{1} cells, {2} agents - {3} generations", speciesId, this.Cells.Count, this.Agents.Count, this.Age);
+                return string.Format("{0} cells, {1} agents", this.Cells.Count, this.Agents.Count);
             }
         }
 

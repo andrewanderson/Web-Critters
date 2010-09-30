@@ -206,7 +206,7 @@ namespace Cas.Core
 
         public override string ToString()
         {
-            return string.Format("#{0}, {1}", this.id, this.exemplar);
+            return string.Format("#{0}, {1}", this.id, this.exemplar.ToShortString());
         }
     }
 }

@@ -96,6 +96,8 @@ namespace Cas.Core
 
         public abstract IAgent DeepCopy();
 
+        public abstract string ToShortString();
+
         #region IBoundary implementation
 
         /// <summary>
