@@ -102,7 +102,6 @@
             this.agentResourceCount = new System.Windows.Forms.Label();
             this.agentHistoryList = new System.Windows.Forms.ListBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.agentResourceList = new System.Windows.Forms.ListBox();
             this.label16 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cellReservoir = new System.Windows.Forms.Label();
@@ -138,6 +137,13 @@
             this.currentGeneration = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label48 = new System.Windows.Forms.Label();
+            this.totalSpecies = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.percentHerbivore = new System.Windows.Forms.Label();
+            this.percentOmnivore = new System.Windows.Forms.Label();
+            this.percentCarnivore = new System.Windows.Forms.Label();
+            this.agentResourceList = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -791,11 +797,17 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.percentCarnivore);
+            this.panel3.Controls.Add(this.percentOmnivore);
+            this.panel3.Controls.Add(this.label50);
+            this.panel3.Controls.Add(this.percentHerbivore);
+            this.panel3.Controls.Add(this.label48);
+            this.panel3.Controls.Add(this.totalSpecies);
             this.panel3.Controls.Add(this.label36);
             this.panel3.Controls.Add(this.totalPopulation);
             this.panel3.Location = new System.Drawing.Point(12, 84);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(203, 34);
+            this.panel3.Size = new System.Drawing.Size(203, 66);
             this.panel3.TabIndex = 35;
             // 
             // label36
@@ -810,7 +822,7 @@
             // totalPopulation
             // 
             this.totalPopulation.AutoSize = true;
-            this.totalPopulation.Location = new System.Drawing.Point(101, 1);
+            this.totalPopulation.Location = new System.Drawing.Point(153, 1);
             this.totalPopulation.Name = "totalPopulation";
             this.totalPopulation.Size = new System.Drawing.Size(13, 13);
             this.totalPopulation.TabIndex = 3;
@@ -946,16 +958,6 @@
             this.label17.Size = new System.Drawing.Size(42, 13);
             this.label17.TabIndex = 21;
             this.label17.Text = "History:";
-            // 
-            // agentResourceList
-            // 
-            this.agentResourceList.FormattingEnabled = true;
-            this.agentResourceList.Location = new System.Drawing.Point(604, 101);
-            this.agentResourceList.MultiColumn = true;
-            this.agentResourceList.Name = "agentResourceList";
-            this.agentResourceList.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.agentResourceList.Size = new System.Drawing.Size(439, 43);
-            this.agentResourceList.TabIndex = 20;
             // 
             // label16
             // 
@@ -1197,9 +1199,9 @@
             // locationList
             // 
             this.locationList.FormattingEnabled = true;
-            this.locationList.Location = new System.Drawing.Point(10, 134);
+            this.locationList.Location = new System.Drawing.Point(10, 173);
             this.locationList.Name = "locationList";
-            this.locationList.Size = new System.Drawing.Size(205, 524);
+            this.locationList.Size = new System.Drawing.Size(205, 485);
             this.locationList.TabIndex = 7;
             this.locationList.SelectedIndexChanged += new System.EventHandler(this.locationList_SelectedIndexChanged);
             // 
@@ -1274,6 +1276,73 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(5, 18);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(60, 13);
+            this.label48.TabIndex = 4;
+            this.label48.Text = "Population:";
+            // 
+            // totalSpecies
+            // 
+            this.totalSpecies.AutoSize = true;
+            this.totalSpecies.Location = new System.Drawing.Point(154, 18);
+            this.totalSpecies.Name = "totalSpecies";
+            this.totalSpecies.Size = new System.Drawing.Size(13, 13);
+            this.totalSpecies.TabIndex = 5;
+            this.totalSpecies.Text = "0";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(5, 34);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(29, 13);
+            this.label50.TabIndex = 6;
+            this.label50.Text = "Diet:";
+            // 
+            // percentHerbivore
+            // 
+            this.percentHerbivore.AutoSize = true;
+            this.percentHerbivore.ForeColor = System.Drawing.Color.Green;
+            this.percentHerbivore.Location = new System.Drawing.Point(79, 34);
+            this.percentHerbivore.Name = "percentHerbivore";
+            this.percentHerbivore.Size = new System.Drawing.Size(21, 13);
+            this.percentHerbivore.TabIndex = 7;
+            this.percentHerbivore.Text = "0%";
+            // 
+            // percentOmnivore
+            // 
+            this.percentOmnivore.AutoSize = true;
+            this.percentOmnivore.ForeColor = System.Drawing.Color.Blue;
+            this.percentOmnivore.Location = new System.Drawing.Point(116, 34);
+            this.percentOmnivore.Name = "percentOmnivore";
+            this.percentOmnivore.Size = new System.Drawing.Size(21, 13);
+            this.percentOmnivore.TabIndex = 8;
+            this.percentOmnivore.Text = "0%";
+            // 
+            // percentCarnivore
+            // 
+            this.percentCarnivore.AutoSize = true;
+            this.percentCarnivore.ForeColor = System.Drawing.Color.Red;
+            this.percentCarnivore.Location = new System.Drawing.Point(154, 34);
+            this.percentCarnivore.Name = "percentCarnivore";
+            this.percentCarnivore.Size = new System.Drawing.Size(21, 13);
+            this.percentCarnivore.TabIndex = 9;
+            this.percentCarnivore.Text = "0%";
+            // 
+            // agentResourceList
+            // 
+            this.agentResourceList.FormattingEnabled = true;
+            this.agentResourceList.Location = new System.Drawing.Point(604, 101);
+            this.agentResourceList.MultiColumn = true;
+            this.agentResourceList.Name = "agentResourceList";
+            this.agentResourceList.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.agentResourceList.Size = new System.Drawing.Size(439, 43);
+            this.agentResourceList.TabIndex = 20;
+            // 
             // WebCrittersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1341,7 +1410,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label agentName;
-        private System.Windows.Forms.ListBox agentResourceList;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label exchangeTag;
         private System.Windows.Forms.Label defenseTag;
@@ -1411,6 +1479,13 @@
         private System.Windows.Forms.CheckBox trackAgentHistory;
         private System.Windows.Forms.TextBox mutationPercent;
         private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label percentCarnivore;
+        private System.Windows.Forms.Label percentOmnivore;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label percentHerbivore;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Label totalSpecies;
+        private System.Windows.Forms.ListBox agentResourceList;
     }
 }
 

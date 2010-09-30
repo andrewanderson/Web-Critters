@@ -132,6 +132,10 @@ namespace WebCritters
                 this.shortSimulationDescription.Text = "Not Loaded";
                 this.currentGeneration.Text = "0";
                 this.totalPopulation.Text = "0";
+                this.totalSpecies.Text = "0";
+                this.percentCarnivore.Text = "0%";
+                this.percentHerbivore.Text = "0%";
+                this.percentOmnivore.Text = "0%";
 
                 this.locationList.DataSource = null;
             }
@@ -143,6 +147,35 @@ namespace WebCritters
                 long population = this.CasSimulation.Environment.Locations.Sum(loc => loc.Agents.Count);
                 this.totalPopulation.Text = population.ToString();
 
+                this.totalSpecies.Text = CasSimulation.Species.Count.ToString();
+
+                if (CasSimulation.Species.Count > 0)
+                {
+                    int carnivoreCount = 0;
+                    int herbivoreCount = 0;
+                    int omnivoreCount = 0;
+
+                    CasSimulation.Species.ForEach(species =>
+                        {
+                            switch (species.DietType)
+                            {
+                                case DietType.Carnivore:
+                                    carnivoreCount++;
+                                    break;
+                                case DietType.Herbivore:
+                                    herbivoreCount++;
+                                    break;
+                                case DietType.Omnivore:
+                                    omnivoreCount++;
+                                    break;
+                            }
+                        });
+
+                    this.percentCarnivore.Text = string.Format("{0}%", (carnivoreCount * 100) / CasSimulation.Species.Count);
+                    this.percentHerbivore.Text = string.Format("{0}%", (herbivoreCount * 100) / CasSimulation.Species.Count);
+                    this.percentOmnivore.Text = string.Format("{0}%", (omnivoreCount * 100) / CasSimulation.Species.Count);
+                }
+                
                 if (generationCompleted)
                 {
                     this.locationList.DataSource = null;
