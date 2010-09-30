@@ -1205,9 +1205,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(89, 10);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 13);
+            this.label7.Size = new System.Drawing.Size(62, 13);
             this.label7.TabIndex = 4;
-            this.label7.Text = "generation2";
+            this.label7.Text = "generations";
             // 
             // generationsToRun
             // 

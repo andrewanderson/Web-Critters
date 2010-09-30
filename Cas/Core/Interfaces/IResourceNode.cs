@@ -17,6 +17,13 @@ namespace Cas.Core.Interfaces
     public interface IResourceNode : IInteractable, IIsUnique
     {
         /// <summary>
+        /// The global resource node instance that spawned this node, if any.
+        /// 
+        /// Global resource nodes are identifiable by checking that this field is null
+        /// </summary>
+        IResourceNode Source { get; }
+
+        /// <summary>
         /// The Resources that can be derived from this Resource Node.
         /// </summary>
         List<Resource> RenewableResources { get; }

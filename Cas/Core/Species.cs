@@ -87,7 +87,6 @@ namespace Cas.Core
         }
 
         private readonly ISimulation Simulation;
-        private readonly string toString;
 
         protected readonly Dictionary<IIsUnique, long> preyCounts = new Dictionary<IIsUnique,long>(IIsUnqiueEqualityComparer.Instance);
         protected readonly Dictionary<ISpecies, long> predatorCounts = new Dictionary<ISpecies, long>(IIsUnqiueEqualityComparer.Instance);
@@ -105,9 +104,6 @@ namespace Cas.Core
             this.Population = 0;
 
             this.exemplar = exemplar.DeepCopy();
-
-
-            this.toString = string.Format("#{0}, {1}", this.id, this.exemplar);
         }
 
         /// <summary>
@@ -202,7 +198,7 @@ namespace Cas.Core
 
         public override string ToString()
         {
-            return this.toString;
+            return string.Format("#{0}, {1}", this.id, this.exemplar);
         }
     }
 }

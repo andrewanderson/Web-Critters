@@ -15,7 +15,6 @@ namespace Cas.Core
         private const int CurrentlyImplementedTagCount = 3;
 
         internal List<Resource> Reservoir { get; private set; }
-        private string toString;
 
         protected CellBase()
         {
@@ -174,8 +173,7 @@ namespace Cas.Core
 
         public override string ToString()
         {
-            if (toString == null) toString = string.Format("{0} {1} {2}", Offense, Defense, Exchange);
-            return toString;
+            return string.Format("{0} {1} {2}", Offense, Defense, Exchange);
         }
 
     }

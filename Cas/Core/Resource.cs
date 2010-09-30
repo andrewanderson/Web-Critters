@@ -26,7 +26,7 @@ namespace Cas.Core
         /// <summary>
         /// The actual character (nutrient?) that this resource represents.
         /// </summary>
-        public char Label { get; set; }
+        public char Label { get; private set; }
 
         public override string ToString()
         {

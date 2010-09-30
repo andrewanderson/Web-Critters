@@ -16,6 +16,13 @@ namespace Cas.TestImplementation
     {
         private static long NextAvailableId = -1;
 
+        /// <summary>
+        /// The global resource node instance that spawned this node, if any.
+        /// 
+        /// Global resource nodes are identifiable by checking that this field is null
+        /// </summary>
+        public IResourceNode Source { get; private set; }
+
         internal List<Resource> Reservoir { get; private set; }
 
         private GridResourceNode(int maximumTagSize) : base()
@@ -24,6 +31,7 @@ namespace Cas.TestImplementation
             Reservoir = new List<Resource>();
 
             Id = NextAvailableId--;
+            Source = null;
             Offense = Tag.New(maximumTagSize, false);
             Defense = Tag.New(maximumTagSize, false);
             Exchange = Tag.New(maximumTagSize, false);
@@ -34,6 +42,7 @@ namespace Cas.TestImplementation
             if (node == null) throw new ArgumentNullException("node");
 
             this.Id = node.Id;
+            this.Source = node;
             this.Offense = node.Offense;
             this.Defense = node.Defense;
             this.Exchange = node.Exchange;
@@ -86,12 +95,8 @@ namespace Cas.TestImplementation
         private string toString;
         public override string ToString()
         {
-            if (toString == null)
-            {
-                string renewableResources = string.Concat(this.RenewableResources.Select(x => x.ToString()));
-                toString = string.Format("#{0}, {1} defense => {2}", this.Id, this.Defense, renewableResources);
-            }
-            return toString;
+            string renewableResources = string.Concat(this.RenewableResources.Select(x => x.ToString()));
+            return string.Format("#{0}, {1} defense => {2}", this.Id, this.Defense, renewableResources);
         }
 
         #region IResourceNode Members
@@ -109,7 +114,7 @@ namespace Cas.TestImplementation
         public void RefreshReservoir()
         {
             Reservoir.Clear();
-            Reservoir = new List<Resource>(RenewableResources);
+            Reservoir.AddRange(RenewableResources);
         }
 
         public IResourceNode DeepCopy()

@@ -454,7 +454,8 @@ namespace Cas.Core
         {
             if (agentOrResourceNode is IResourceNode)
             {
-                return agentOrResourceNode as IIsUnique;
+                var rn = agentOrResourceNode as IResourceNode;
+                return rn.Source ?? rn;
             }
             else if (agentOrResourceNode is IAgent)
             {
