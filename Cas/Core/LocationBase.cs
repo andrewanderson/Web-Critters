@@ -69,7 +69,7 @@ namespace Cas.Core
         public void RefreshResourcePool()
         {
             CurrentResources.Clear();
-            CurrentResources.AddRange(ResourceAllocation.Select(x => x.DeepCopy()));
+            CurrentResources.AddRange(ResourceAllocation.Select(x => x.DeepCopy()).ToList());
         }
 
         /// <summary>
