@@ -167,7 +167,7 @@ namespace TestCore.Interactions
             
             int result = TestAttackInteraction.Interact(actor, target);
 
-            Assert.AreEqual(MatchValue * 1 - ExtraValue * 2, result);
+            Assert.AreEqual(MatchValue * 1, result);
 
             // resource check
             int transfer = CalculateTransferredResources(result);

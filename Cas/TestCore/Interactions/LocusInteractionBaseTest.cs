@@ -110,7 +110,7 @@ namespace TestCore.Interactions
         {
             int result = Interaction.Interact(Tag.New("a"), Tag.New("aaa"));
 
-            Assert.AreEqual(MatchValue * 1 - ExtraValue * 2, result);
+            Assert.AreEqual(MatchValue * 1, result);
         }
 
         [TestMethod]
