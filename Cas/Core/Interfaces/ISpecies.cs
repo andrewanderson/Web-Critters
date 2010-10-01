@@ -21,6 +21,17 @@ namespace Cas.Core.Interfaces
         long FirstSeen { get; }
 
         /// <summary>
+        /// The species id(s) that this species arose from, if any.
+        /// </summary>
+        /// <remarks>
+        /// Species that were created at the start of the simulation
+        /// will have an empty list, species that arose from AsexualReproduction
+        /// will have one Id, and species that arose from SexualReproduction
+        /// will have two Ids.
+        /// </remarks>
+        List<long> DerivedFromSpeciesIds { get; }
+
+        /// <summary>
         /// The number of resources consumed from ResourceNodes
         /// across all agents in this species.
         /// </summary>

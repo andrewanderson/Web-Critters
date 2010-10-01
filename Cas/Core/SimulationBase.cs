@@ -102,6 +102,7 @@ namespace Cas.Core
         public void RegisterBirth(IAgent agent, IEvent birthEvent)
         {
             if (agent == null) throw new ArgumentNullException("agent");
+            if (birthEvent == null) throw new ArgumentNullException("birthEvent");
 
             this.AddEventToAgent(agent, birthEvent);
 
@@ -109,7 +110,14 @@ namespace Cas.Core
             string key = agent.UniqueKey;
             if (!SpeciesByKey.TryGetValue(key, out species))
             {
-                species = new Species(this, agent);
+                // Work out the ancestors
+                var parentSpeciesIds = new List<long>();
+                if (birthEvent is BirthEvent)
+                {
+                    parentSpeciesIds.AddRange((birthEvent as BirthEvent).Parents.Select(s => s.Id));
+                }
+
+                species = new Species(this, agent, parentSpeciesIds.ToArray());
                 SpeciesByKey.Add(key, species);
             }
 

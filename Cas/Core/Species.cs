@@ -45,6 +45,24 @@ namespace Cas.Core
         private readonly long firstSeen;
 
         /// <summary>
+        /// The species id(s) that this species arose from, if any.
+        /// </summary>
+        /// <remarks>
+        /// Species that were created at the start of the simulation
+        /// will have an empty list, species that arose from AsexualReproduction
+        /// will have one Id, and species that arose from SexualReproduction
+        /// will have two Ids.
+        /// </remarks>
+        public List<long> DerivedFromSpeciesIds 
+        {
+            get
+            {
+                return this.derivedFromSpeciesIds;
+            }
+        }
+        private readonly List<long> derivedFromSpeciesIds = new List<long>();
+        
+        /// <summary>
         /// The number of resources consumed from ResourceNodes
         /// across all agents in this species.
         /// </summary>
@@ -91,7 +109,7 @@ namespace Cas.Core
         protected readonly Dictionary<long, long> preyCounts = new Dictionary<long, long>();
         protected readonly Dictionary<long, long> predatorCounts = new Dictionary<long, long>();
 
-        public Species(ISimulation simulation, IAgent exemplar)
+        public Species(ISimulation simulation, IAgent exemplar, params long[] derivedFromSpeciesIds)
         {
             if (simulation == null) throw new ArgumentNullException("simulation");
             if (exemplar == null) throw new ArgumentNullException("exemplar");
@@ -103,6 +121,7 @@ namespace Cas.Core
             this.ResourcesFromAgents = 0;
             this.Population = 0;
 
+            this.derivedFromSpeciesIds.AddRange(derivedFromSpeciesIds);
             this.exemplar = exemplar.DeepCopy();
         }
 
