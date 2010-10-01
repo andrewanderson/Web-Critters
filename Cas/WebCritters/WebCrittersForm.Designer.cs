@@ -38,6 +38,8 @@
             this.minStartingPopulation = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.allowWildcards = new System.Windows.Forms.CheckBox();
+            this.label49 = new System.Windows.Forms.Label();
             this.mutationPercent = new System.Windows.Forms.TextBox();
             this.label47 = new System.Windows.Forms.Label();
             this.uniqueResourceCount = new System.Windows.Forms.TextBox();
@@ -86,6 +88,12 @@
             this.generationsBetweenUpdate = new System.Windows.Forms.TextBox();
             this.updateGuiWhileProcessing = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.percentCarnivore = new System.Windows.Forms.Label();
+            this.percentOmnivore = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.percentHerbivore = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.totalSpecies = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.totalPopulation = new System.Windows.Forms.Label();
             this.stopButton = new System.Windows.Forms.Button();
@@ -102,6 +110,7 @@
             this.agentResourceCount = new System.Windows.Forms.Label();
             this.agentHistoryList = new System.Windows.Forms.ListBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.agentResourceList = new System.Windows.Forms.ListBox();
             this.label16 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.cellReservoir = new System.Windows.Forms.Label();
@@ -137,15 +146,6 @@
             this.currentGeneration = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label48 = new System.Windows.Forms.Label();
-            this.totalSpecies = new System.Windows.Forms.Label();
-            this.label50 = new System.Windows.Forms.Label();
-            this.percentHerbivore = new System.Windows.Forms.Label();
-            this.percentOmnivore = new System.Windows.Forms.Label();
-            this.percentCarnivore = new System.Windows.Forms.Label();
-            this.agentResourceList = new System.Windows.Forms.ListBox();
-            this.label49 = new System.Windows.Forms.Label();
-            this.allowWildcards = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -159,7 +159,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 274);
+            this.label1.Location = new System.Drawing.Point(9, 248);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 0;
@@ -167,7 +167,7 @@
             // 
             // gridHeight
             // 
-            this.gridHeight.Location = new System.Drawing.Point(139, 272);
+            this.gridHeight.Location = new System.Drawing.Point(139, 246);
             this.gridHeight.Name = "gridHeight";
             this.gridHeight.Size = new System.Drawing.Size(40, 20);
             this.gridHeight.TabIndex = 1;
@@ -178,7 +178,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(185, 274);
+            this.label2.Location = new System.Drawing.Point(185, 248);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(12, 13);
             this.label2.TabIndex = 2;
@@ -186,7 +186,7 @@
             // 
             // gridWidth
             // 
-            this.gridWidth.Location = new System.Drawing.Point(203, 272);
+            this.gridWidth.Location = new System.Drawing.Point(203, 246);
             this.gridWidth.Name = "gridWidth";
             this.gridWidth.Size = new System.Drawing.Size(36, 20);
             this.gridWidth.TabIndex = 3;
@@ -197,7 +197,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(179, 303);
+            this.label3.Location = new System.Drawing.Point(179, 277);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(10, 13);
             this.label3.TabIndex = 4;
@@ -205,7 +205,7 @@
             // 
             // maxStartingPopulation
             // 
-            this.maxStartingPopulation.Location = new System.Drawing.Point(195, 300);
+            this.maxStartingPopulation.Location = new System.Drawing.Point(195, 274);
             this.maxStartingPopulation.Name = "maxStartingPopulation";
             this.maxStartingPopulation.Size = new System.Drawing.Size(44, 20);
             this.maxStartingPopulation.TabIndex = 5;
@@ -215,7 +215,7 @@
             // 
             // minStartingPopulation
             // 
-            this.minStartingPopulation.Location = new System.Drawing.Point(139, 300);
+            this.minStartingPopulation.Location = new System.Drawing.Point(139, 274);
             this.minStartingPopulation.Name = "minStartingPopulation";
             this.minStartingPopulation.Size = new System.Drawing.Size(34, 20);
             this.minStartingPopulation.TabIndex = 7;
@@ -226,7 +226,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 302);
+            this.label4.Location = new System.Drawing.Point(9, 276);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 13);
             this.label4.TabIndex = 6;
@@ -345,13 +345,31 @@
             this.splitContainer.SplitterDistance = 250;
             this.splitContainer.TabIndex = 8;
             // 
+            // allowWildcards
+            // 
+            this.allowWildcards.AutoSize = true;
+            this.allowWildcards.Location = new System.Drawing.Point(107, 157);
+            this.allowWildcards.Name = "allowWildcards";
+            this.allowWildcards.Size = new System.Drawing.Size(15, 14);
+            this.allowWildcards.TabIndex = 54;
+            this.allowWildcards.UseVisualStyleBackColor = true;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(9, 156);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(79, 13);
+            this.label49.TabIndex = 53;
+            this.label49.Text = "Allow wildcards";
+            // 
             // mutationPercent
             // 
             this.mutationPercent.Location = new System.Drawing.Point(108, 591);
             this.mutationPercent.Name = "mutationPercent";
             this.mutationPercent.Size = new System.Drawing.Size(59, 20);
             this.mutationPercent.TabIndex = 52;
-            this.mutationPercent.Text = "0.15";
+            this.mutationPercent.Text = "0.05";
             this.mutationPercent.Validating += new System.ComponentModel.CancelEventHandler(this.doubleTextBox_Validating);
             this.mutationPercent.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -370,7 +388,7 @@
             this.uniqueResourceCount.Name = "uniqueResourceCount";
             this.uniqueResourceCount.Size = new System.Drawing.Size(59, 20);
             this.uniqueResourceCount.TabIndex = 50;
-            this.uniqueResourceCount.Text = "100";
+            this.uniqueResourceCount.Text = "15";
             this.uniqueResourceCount.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.uniqueResourceCount.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -423,7 +441,7 @@
             // 
             // minResourcesPerNode
             // 
-            this.minResourcesPerNode.Location = new System.Drawing.Point(139, 352);
+            this.minResourcesPerNode.Location = new System.Drawing.Point(139, 326);
             this.minResourcesPerNode.Name = "minResourcesPerNode";
             this.minResourcesPerNode.Size = new System.Drawing.Size(34, 20);
             this.minResourcesPerNode.TabIndex = 44;
@@ -434,7 +452,7 @@
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(9, 354);
+            this.label42.Location = new System.Drawing.Point(9, 328);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(100, 13);
             this.label42.TabIndex = 43;
@@ -442,18 +460,18 @@
             // 
             // maxResourcesPerNode
             // 
-            this.maxResourcesPerNode.Location = new System.Drawing.Point(195, 352);
+            this.maxResourcesPerNode.Location = new System.Drawing.Point(195, 326);
             this.maxResourcesPerNode.Name = "maxResourcesPerNode";
             this.maxResourcesPerNode.Size = new System.Drawing.Size(44, 20);
             this.maxResourcesPerNode.TabIndex = 42;
-            this.maxResourcesPerNode.Text = "40";
+            this.maxResourcesPerNode.Text = "20";
             this.maxResourcesPerNode.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.maxResourcesPerNode.Validated += new System.EventHandler(this.control_Validated);
             // 
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(179, 355);
+            this.label43.Location = new System.Drawing.Point(179, 329);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(10, 13);
             this.label43.TabIndex = 41;
@@ -461,18 +479,18 @@
             // 
             // minResourceNodes
             // 
-            this.minResourceNodes.Location = new System.Drawing.Point(139, 326);
+            this.minResourceNodes.Location = new System.Drawing.Point(139, 300);
             this.minResourceNodes.Name = "minResourceNodes";
             this.minResourceNodes.Size = new System.Drawing.Size(34, 20);
             this.minResourceNodes.TabIndex = 40;
-            this.minResourceNodes.Text = "2";
+            this.minResourceNodes.Text = "1";
             this.minResourceNodes.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.minResourceNodes.Validated += new System.EventHandler(this.control_Validated);
             // 
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(9, 328);
+            this.label40.Location = new System.Drawing.Point(9, 302);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(130, 13);
             this.label40.TabIndex = 39;
@@ -480,18 +498,18 @@
             // 
             // maxResourceNodes
             // 
-            this.maxResourceNodes.Location = new System.Drawing.Point(195, 326);
+            this.maxResourceNodes.Location = new System.Drawing.Point(195, 300);
             this.maxResourceNodes.Name = "maxResourceNodes";
             this.maxResourceNodes.Size = new System.Drawing.Size(44, 20);
             this.maxResourceNodes.TabIndex = 38;
-            this.maxResourceNodes.Text = "25";
+            this.maxResourceNodes.Text = "10";
             this.maxResourceNodes.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.maxResourceNodes.Validated += new System.EventHandler(this.control_Validated);
             // 
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(179, 329);
+            this.label41.Location = new System.Drawing.Point(179, 303);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(10, 13);
             this.label41.TabIndex = 37;
@@ -645,7 +663,7 @@
             this.upkeepPercent.Name = "upkeepPercent";
             this.upkeepPercent.Size = new System.Drawing.Size(59, 20);
             this.upkeepPercent.TabIndex = 21;
-            this.upkeepPercent.Text = "25";
+            this.upkeepPercent.Text = "50";
             this.upkeepPercent.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.upkeepPercent.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -710,7 +728,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(9, 256);
+            this.label25.Location = new System.Drawing.Point(9, 230);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(113, 13);
             this.label25.TabIndex = 12;
@@ -813,6 +831,63 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(203, 66);
             this.panel3.TabIndex = 35;
+            // 
+            // percentCarnivore
+            // 
+            this.percentCarnivore.AutoSize = true;
+            this.percentCarnivore.ForeColor = System.Drawing.Color.Red;
+            this.percentCarnivore.Location = new System.Drawing.Point(154, 34);
+            this.percentCarnivore.Name = "percentCarnivore";
+            this.percentCarnivore.Size = new System.Drawing.Size(21, 13);
+            this.percentCarnivore.TabIndex = 9;
+            this.percentCarnivore.Text = "0%";
+            // 
+            // percentOmnivore
+            // 
+            this.percentOmnivore.AutoSize = true;
+            this.percentOmnivore.ForeColor = System.Drawing.Color.Blue;
+            this.percentOmnivore.Location = new System.Drawing.Point(116, 34);
+            this.percentOmnivore.Name = "percentOmnivore";
+            this.percentOmnivore.Size = new System.Drawing.Size(21, 13);
+            this.percentOmnivore.TabIndex = 8;
+            this.percentOmnivore.Text = "0%";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(5, 34);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(29, 13);
+            this.label50.TabIndex = 6;
+            this.label50.Text = "Diet:";
+            // 
+            // percentHerbivore
+            // 
+            this.percentHerbivore.AutoSize = true;
+            this.percentHerbivore.ForeColor = System.Drawing.Color.Green;
+            this.percentHerbivore.Location = new System.Drawing.Point(79, 34);
+            this.percentHerbivore.Name = "percentHerbivore";
+            this.percentHerbivore.Size = new System.Drawing.Size(21, 13);
+            this.percentHerbivore.TabIndex = 7;
+            this.percentHerbivore.Text = "0%";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(5, 18);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(48, 13);
+            this.label48.TabIndex = 4;
+            this.label48.Text = "Species:";
+            // 
+            // totalSpecies
+            // 
+            this.totalSpecies.AutoSize = true;
+            this.totalSpecies.Location = new System.Drawing.Point(154, 18);
+            this.totalSpecies.Name = "totalSpecies";
+            this.totalSpecies.Size = new System.Drawing.Size(13, 13);
+            this.totalSpecies.TabIndex = 5;
+            this.totalSpecies.Text = "0";
             // 
             // label36
             // 
@@ -962,6 +1037,16 @@
             this.label17.Size = new System.Drawing.Size(42, 13);
             this.label17.TabIndex = 21;
             this.label17.Text = "History:";
+            // 
+            // agentResourceList
+            // 
+            this.agentResourceList.FormattingEnabled = true;
+            this.agentResourceList.Location = new System.Drawing.Point(604, 101);
+            this.agentResourceList.MultiColumn = true;
+            this.agentResourceList.Name = "agentResourceList";
+            this.agentResourceList.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.agentResourceList.Size = new System.Drawing.Size(439, 43);
+            this.agentResourceList.TabIndex = 20;
             // 
             // label16
             // 
@@ -1242,7 +1327,7 @@
             this.generationsToRun.Name = "generationsToRun";
             this.generationsToRun.Size = new System.Drawing.Size(43, 20);
             this.generationsToRun.TabIndex = 3;
-            this.generationsToRun.Text = "500";
+            this.generationsToRun.Text = "5000";
             this.generationsToRun.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.generationsToRun.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.generationsToRun_KeyPress);
             this.generationsToRun.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
@@ -1279,93 +1364,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(5, 18);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(48, 13);
-            this.label48.TabIndex = 4;
-            this.label48.Text = "Species:";
-            // 
-            // totalSpecies
-            // 
-            this.totalSpecies.AutoSize = true;
-            this.totalSpecies.Location = new System.Drawing.Point(154, 18);
-            this.totalSpecies.Name = "totalSpecies";
-            this.totalSpecies.Size = new System.Drawing.Size(13, 13);
-            this.totalSpecies.TabIndex = 5;
-            this.totalSpecies.Text = "0";
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(5, 34);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(29, 13);
-            this.label50.TabIndex = 6;
-            this.label50.Text = "Diet:";
-            // 
-            // percentHerbivore
-            // 
-            this.percentHerbivore.AutoSize = true;
-            this.percentHerbivore.ForeColor = System.Drawing.Color.Green;
-            this.percentHerbivore.Location = new System.Drawing.Point(79, 34);
-            this.percentHerbivore.Name = "percentHerbivore";
-            this.percentHerbivore.Size = new System.Drawing.Size(21, 13);
-            this.percentHerbivore.TabIndex = 7;
-            this.percentHerbivore.Text = "0%";
-            // 
-            // percentOmnivore
-            // 
-            this.percentOmnivore.AutoSize = true;
-            this.percentOmnivore.ForeColor = System.Drawing.Color.Blue;
-            this.percentOmnivore.Location = new System.Drawing.Point(116, 34);
-            this.percentOmnivore.Name = "percentOmnivore";
-            this.percentOmnivore.Size = new System.Drawing.Size(21, 13);
-            this.percentOmnivore.TabIndex = 8;
-            this.percentOmnivore.Text = "0%";
-            // 
-            // percentCarnivore
-            // 
-            this.percentCarnivore.AutoSize = true;
-            this.percentCarnivore.ForeColor = System.Drawing.Color.Red;
-            this.percentCarnivore.Location = new System.Drawing.Point(154, 34);
-            this.percentCarnivore.Name = "percentCarnivore";
-            this.percentCarnivore.Size = new System.Drawing.Size(21, 13);
-            this.percentCarnivore.TabIndex = 9;
-            this.percentCarnivore.Text = "0%";
-            // 
-            // agentResourceList
-            // 
-            this.agentResourceList.FormattingEnabled = true;
-            this.agentResourceList.Location = new System.Drawing.Point(604, 101);
-            this.agentResourceList.MultiColumn = true;
-            this.agentResourceList.Name = "agentResourceList";
-            this.agentResourceList.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.agentResourceList.Size = new System.Drawing.Size(439, 43);
-            this.agentResourceList.TabIndex = 20;
-            // 
-            // label49
-            // 
-            this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(9, 156);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(79, 13);
-            this.label49.TabIndex = 53;
-            this.label49.Text = "Allow wildcards";
-            // 
-            // allowWildcards
-            // 
-            this.allowWildcards.AutoSize = true;
-            this.allowWildcards.Checked = true;
-            this.allowWildcards.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.allowWildcards.Location = new System.Drawing.Point(107, 157);
-            this.allowWildcards.Name = "allowWildcards";
-            this.allowWildcards.Size = new System.Drawing.Size(15, 14);
-            this.allowWildcards.TabIndex = 54;
-            this.allowWildcards.UseVisualStyleBackColor = true;
             // 
             // WebCrittersForm
             // 

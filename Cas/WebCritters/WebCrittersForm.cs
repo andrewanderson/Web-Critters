@@ -430,7 +430,6 @@ namespace WebCritters
         {
             CasSimulation.LogHistory = this.trackAgentHistory.Checked;
         }
-
     }
 
 }
