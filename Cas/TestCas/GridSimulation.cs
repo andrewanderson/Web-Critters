@@ -125,7 +125,7 @@ namespace Cas.TestImplementation
             breeders.Remove(first);
 
             int reproSelector = RandomProvider.Next(100);
-            if (reproSelector < 33 || breeders.Count == 0)
+            if (reproSelector < 50 || breeders.Count == 0)
             {
                 // Asexual
                 var child = DoAsexualReproduction(first, location);
@@ -138,7 +138,7 @@ namespace Cas.TestImplementation
                 breeders.Remove(second);
 
                 IList<IAgent> children;
-                if (reproSelector < 66)
+                if (reproSelector < 76)
                 {
                     children = DoSexualReproduction(first, second, crossoverInteraction, location);
                 }
