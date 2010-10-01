@@ -25,13 +25,17 @@ namespace Cas.TestImplementation
 
         internal List<Resource> Reservoir { get; private set; }
 
-        private GridResourceNode(int maximumTagSize) : base()
+        private GridResourceNode()
         {
             RenewableResources = new List<Resource>();
             Reservoir = new List<Resource>();
 
             Id = NextAvailableId--;
             Source = null;
+        }
+
+        private GridResourceNode(int maximumTagSize) : this()
+        {
             Offense = Tag.New(maximumTagSize, false);
             Defense = Tag.New(maximumTagSize, false);
             Exchange = Tag.New(maximumTagSize, false);
@@ -68,17 +72,30 @@ namespace Cas.TestImplementation
         /// Creates a new GridResourceNode with resources that are scaled to the complexity of the
         /// node's defense tag.
         /// </summary>
-        public static GridResourceNode New(int maximumTagSize, int minResources, int maxResources)
+        public static GridResourceNode New(int minimumDefenseSize, int maximumDefenseSize, int maximumTagSize, int minResources, int maxResources)
         {
+            if (minimumDefenseSize <= 0) throw new ArgumentOutOfRangeException("minimumDefenseSize");
+            if (minimumDefenseSize > maximumDefenseSize) throw new ArgumentException("minimumDefenseSize cannot exceed maximumDefenseSize");                      
             if (maximumTagSize <= 0) throw new ArgumentOutOfRangeException("maximumTagSize");
             if (minResources < 0) throw new ArgumentOutOfRangeException("minResources");
             if (maxResources <= 0) throw new ArgumentOutOfRangeException("maxResources");
             if (minResources > maxResources) throw new ArgumentException("minResources cannot exceed maxResources");
 
-            var grn = new GridResourceNode(maximumTagSize);
+            var grn = new GridResourceNode();
+            grn.Offense = Tag.New(maximumTagSize, false);
+            grn.Defense = Tag.New(minimumDefenseSize, maximumDefenseSize, false);
+            grn.Exchange = Tag.New(maximumTagSize, false);
 
-            double range = maxResources - minResources;
-            int nodeSize = (int)(((double)grn.Defense.Data.Count / (double)maximumTagSize) * range) + minResources;
+            int nodeSize = 0;
+            int range = maxResources - minResources;
+            if (minimumDefenseSize == maximumDefenseSize)
+            {
+                nodeSize = minResources + RandomProvider.Next(range);
+            }
+            else
+            {
+                nodeSize = (int)(((double)grn.Defense.Data.Count / (double)maximumTagSize) * range) + minResources;
+            }
             
             var resources = new List<Resource>();
             for (int j = 0; j < nodeSize; j++)

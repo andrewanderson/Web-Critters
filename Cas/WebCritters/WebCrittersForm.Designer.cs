@@ -38,6 +38,10 @@
             this.minStartingPopulation = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.minResourceNodeSize = new System.Windows.Forms.TextBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.maxResourceNodeSize = new System.Windows.Forms.TextBox();
+            this.label52 = new System.Windows.Forms.Label();
             this.allowWildcards = new System.Windows.Forms.CheckBox();
             this.label49 = new System.Windows.Forms.Label();
             this.mutationPercent = new System.Windows.Forms.TextBox();
@@ -241,6 +245,10 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer.Panel1.Controls.Add(this.minResourceNodeSize);
+            this.splitContainer.Panel1.Controls.Add(this.label51);
+            this.splitContainer.Panel1.Controls.Add(this.maxResourceNodeSize);
+            this.splitContainer.Panel1.Controls.Add(this.label52);
             this.splitContainer.Panel1.Controls.Add(this.allowWildcards);
             this.splitContainer.Panel1.Controls.Add(this.label49);
             this.splitContainer.Panel1.Controls.Add(this.mutationPercent);
@@ -345,6 +353,44 @@
             this.splitContainer.SplitterDistance = 250;
             this.splitContainer.TabIndex = 8;
             // 
+            // minResourceNodeSize
+            // 
+            this.minResourceNodeSize.Location = new System.Drawing.Point(140, 351);
+            this.minResourceNodeSize.Name = "minResourceNodeSize";
+            this.minResourceNodeSize.Size = new System.Drawing.Size(34, 20);
+            this.minResourceNodeSize.TabIndex = 58;
+            this.minResourceNodeSize.Text = "6";
+            this.minResourceNodeSize.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.minResourceNodeSize.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(10, 353);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(90, 13);
+            this.label51.TabIndex = 57;
+            this.label51.Text = "Min-Max Defense";
+            // 
+            // maxResourceNodeSize
+            // 
+            this.maxResourceNodeSize.Location = new System.Drawing.Point(196, 351);
+            this.maxResourceNodeSize.Name = "maxResourceNodeSize";
+            this.maxResourceNodeSize.Size = new System.Drawing.Size(44, 20);
+            this.maxResourceNodeSize.TabIndex = 56;
+            this.maxResourceNodeSize.Text = "10";
+            this.maxResourceNodeSize.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.maxResourceNodeSize.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(180, 354);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(10, 13);
+            this.label52.TabIndex = 55;
+            this.label52.Text = "-";
+            // 
             // allowWildcards
             // 
             this.allowWildcards.AutoSize = true;
@@ -369,7 +415,7 @@
             this.mutationPercent.Name = "mutationPercent";
             this.mutationPercent.Size = new System.Drawing.Size(59, 20);
             this.mutationPercent.TabIndex = 52;
-            this.mutationPercent.Text = "0.05";
+            this.mutationPercent.Text = "0.10";
             this.mutationPercent.Validating += new System.ComponentModel.CancelEventHandler(this.doubleTextBox_Validating);
             this.mutationPercent.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -426,7 +472,7 @@
             this.startingComplexity.Name = "startingComplexity";
             this.startingComplexity.Size = new System.Drawing.Size(34, 20);
             this.startingComplexity.TabIndex = 46;
-            this.startingComplexity.Text = "8";
+            this.startingComplexity.Text = "6";
             this.startingComplexity.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.startingComplexity.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -521,7 +567,7 @@
             this.maxMigrationBonus.Name = "maxMigrationBonus";
             this.maxMigrationBonus.Size = new System.Drawing.Size(59, 20);
             this.maxMigrationBonus.TabIndex = 36;
-            this.maxMigrationBonus.Text = "2.0";
+            this.maxMigrationBonus.Text = "5.0";
             this.maxMigrationBonus.Validating += new System.ComponentModel.CancelEventHandler(this.doubleTextBox_Validating);
             this.maxMigrationBonus.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -1510,6 +1556,10 @@
         private System.Windows.Forms.ListBox agentResourceList;
         private System.Windows.Forms.CheckBox allowWildcards;
         private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.TextBox minResourceNodeSize;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.TextBox maxResourceNodeSize;
+        private System.Windows.Forms.Label label52;
     }
 }
 

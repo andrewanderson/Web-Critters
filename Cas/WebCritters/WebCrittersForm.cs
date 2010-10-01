@@ -50,6 +50,8 @@ namespace WebCritters
                 int.Parse(maxResourceNodes.Text),
                 int.Parse(minResourcesPerNode.Text),
                 int.Parse(maxResourcesPerNode.Text),
+                int.Parse(minResourceNodeSize.Text),
+                int.Parse(maxResourceNodeSize.Text),
                 int.Parse(startingComplexity.Text),
                 int.Parse(uniqueResourceCount.Text),
                 int.Parse(maximumUpkeep.Text),

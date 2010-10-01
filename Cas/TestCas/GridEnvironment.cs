@@ -41,6 +41,16 @@ namespace Cas.TestImplementation
         public int MaxResourcesPerNodePerLocation { get; private set; }
 
         /// <summary>
+        /// The minimum size a resource node's defense tag will be.
+        /// </summary>
+        private int MinResourceNodeDefense { get; set; }
+
+        /// <summary>
+        /// The maximum size a resource node's defense tag will be.
+        /// </summary>
+        private int MaxResourceNodeDefense { get; set; }
+
+        /// <summary>
         /// The maximum length of new tags (cells/resources) within the simulation
         /// </summary>
         public int StartingTagComplexity { get; private set; }
@@ -91,7 +101,7 @@ namespace Cas.TestImplementation
         /// Create a new length x width sized grid.
         /// </summary>
         public GridEnvironment(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, 
-            int tagComplexity, int uniqueResourceCount, GridSimulation simulation)
+            int minResourceNodeDefense, int maxResourceNodeDefense, int tagComplexity, int uniqueResourceCount, GridSimulation simulation)
         {
             if (length <= 0) throw  new ArgumentOutOfRangeException("length", length, "Length must be greater than zero.");
             if (width <= 0) throw new ArgumentOutOfRangeException("width", width, "Width must be greater than zero.");
@@ -101,6 +111,9 @@ namespace Cas.TestImplementation
             if (minResourcesPerNode <= 0) throw new ArgumentOutOfRangeException("minResourcesPerNode", minResourcesPerNode, "minResourcesPerNode must be greater than zero.");
             if (maxResourcesPerNode <= 0) throw new ArgumentOutOfRangeException("maxResourcesPerNode", maxResourcesPerNode, "maxResourcesPerNode must be greater than zero.");
             if (minResourcesPerNode > maxResourcesPerNode) throw new ArgumentException("minResourcesPerNode cannot exceed maxResourcesPerNode");
+            if (minResourceNodeDefense <= 0) throw new ArgumentOutOfRangeException("minResourceNodeDefense", minResourcesPerNode, "minResourceNodeDefense must be greater than zero.");
+            if (maxResourceNodeDefense <= 0) throw new ArgumentOutOfRangeException("maxResourceNodeDefense", maxResourcesPerNode, "maxResourceNodeDefense must be greater than zero.");
+            if (minResourceNodeDefense > maxResourceNodeDefense) throw new ArgumentException("minResourceNodeDefense cannot exceed maxResourceNodeDefense");
             if (tagComplexity <= 0) throw new ArgumentOutOfRangeException("tagComplexity", tagComplexity, "tagComplexity must be greater than zero.");
             if (uniqueResourceCount <= 0) throw new ArgumentOutOfRangeException("uniqueResourceCount", uniqueResourceCount, "uniqueResourceCount must be greater than zero.");
             if (simulation == null) throw new ArgumentNullException("simulation");
@@ -112,6 +125,8 @@ namespace Cas.TestImplementation
             MaxResourceNodesPerLocation = maxResourceNodes;
             MinResourcesPerNodePerLocation = minResourcesPerNode;
             MaxResourcesPerNodePerLocation = maxResourcesPerNode;
+            MinResourceNodeDefense = minResourceNodeDefense;
+            MaxResourceNodeDefense = maxResourceNodeDefense;
             StartingTagComplexity = tagComplexity;
             GlobalResourcePoolSize = uniqueResourceCount;
         }
@@ -166,7 +181,7 @@ namespace Cas.TestImplementation
                     globalResources = new List<IResourceNode>();
                     for (int i = 0; i < GlobalResourcePoolSize; i++)
                     {
-                        globalResources.Add(GridResourceNode.New(StartingTagComplexity, MinResourcesPerNodePerLocation, MaxResourcesPerNodePerLocation));
+                        globalResources.Add(GridResourceNode.New(MinResourceNodeDefense, MaxResourceNodeDefense, StartingTagComplexity, MinResourcesPerNodePerLocation, MaxResourcesPerNodePerLocation));
                     }
 
                 }

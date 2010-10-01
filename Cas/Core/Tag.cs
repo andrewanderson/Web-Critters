@@ -98,16 +98,25 @@ namespace Cas.Core
         }
 
         /// <summary>
-        /// Generates a new random tag of the desired length.
+        /// Generates a new random tag of random size within the specified limit.
         /// </summary>
         public static Tag New(int maxLength, bool allowWildCard)
         {
-            if (maxLength < 1 || maxLength > MaxSize) throw new ArgumentOutOfRangeException("length");
+            return Tag.New(1, maxLength, allowWildCard);
+        }
+
+        /// <summary>
+        /// Generates a new random tag of random size within the specified bounds.
+        /// </summary>
+        public static Tag New(int minLength, int maxLength, bool allowWildCard)
+        {
+            if (minLength < 1 || minLength > MaxSize || minLength > maxLength) throw new ArgumentOutOfRangeException("minLength");
+            if (maxLength < 1 || maxLength > MaxSize) throw new ArgumentOutOfRangeException("maxLength");
 
             Tag newTag = new Tag();
             newTag.Data = new List<Resource>();
 
-            int length = RandomProvider.Next(maxLength) + 1;
+            int length = minLength + RandomProvider.Next(maxLength - minLength) + 1;
             for (int i = 0; i < length; i++)
             {
                 newTag.Data.Add(Resource.Random(allowWildCard));

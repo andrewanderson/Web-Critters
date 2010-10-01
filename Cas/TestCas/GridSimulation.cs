@@ -18,6 +18,8 @@ namespace Cas.TestImplementation
         private int MaxResourceNodesPerLocation { get; set; }
         private int MinResourcesPerNodePerLocation { get; set; }
         private int MaxResourcesPerNodePerLocation { get; set; }
+        private int MinResourceNodeDefense { get; set; }
+        private int MaxResourceNodeDefense { get; set; }
         private int StartingTagComplexity { get; set; }
         private int UniqueResourceCount { get; set; }
 
@@ -26,12 +28,15 @@ namespace Cas.TestImplementation
         private readonly IInteraction<ICell, ICell, IList<ICell>> multipointCrossoverInteraction;
         private readonly IInteraction<ICell, ICell, ICell> asexualReproductionInteraction;
 
-        public GridSimulation(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, int tagComplexity) 
-            : this(length, width, minResourceNodes, maxResourceNodes, minResourcesPerNode, maxResourcesPerNode, tagComplexity, 100, 4, 0.25, 1.5, 1.75, 0.2, 0.005, 0.02, 0.005) { }
+        public GridSimulation(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, 
+                              int minResourceNodeDefense, int maxResourceNodeDefense, int tagComplexity) 
+            : this(length, width, minResourceNodes, maxResourceNodes, minResourcesPerNode, maxResourcesPerNode, minResourceNodeDefense, maxResourceNodeDefense, tagComplexity, 
+                   100, 4, 0.25, 1.5, 1.75, 0.2, 0.005, 0.02, 0.005) { }
 
-        public GridSimulation(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, int tagComplexity,
-                              int uniqueResourceCount, int maximumUpkeepCostPerLocation, double upkeepChance, double interactionsPerGeneration, 
-                              double reproductionThreshold, double reproductionInheritance, double migrationBaseChance, double maxMigrationBonus, double randomDeathChance)
+        public GridSimulation(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, 
+                              int minResourceNodeDefense, int maxResourceNodeDefense, int tagComplexity, int uniqueResourceCount, int maximumUpkeepCostPerLocation, 
+                              double upkeepChance, double interactionsPerGeneration, double reproductionThreshold, double reproductionInheritance, 
+                              double migrationBaseChance, double maxMigrationBonus, double randomDeathChance)
             : base(interactionsPerGeneration, maximumUpkeepCostPerLocation, upkeepChance, reproductionThreshold, reproductionInheritance, 
                    migrationBaseChance, maxMigrationBonus, randomDeathChance)
         {
@@ -41,6 +46,8 @@ namespace Cas.TestImplementation
             MaxResourceNodesPerLocation = maxResourceNodes;
             MinResourcesPerNodePerLocation = minResourcesPerNode;
             MaxResourcesPerNodePerLocation = maxResourcesPerNode;
+            MinResourceNodeDefense = minResourceNodeDefense;
+            MaxResourceNodeDefense = maxResourceNodeDefense;
             StartingTagComplexity = tagComplexity;
             UniqueResourceCount = uniqueResourceCount;
 
@@ -59,6 +66,8 @@ namespace Cas.TestImplementation
                 MaxResourceNodesPerLocation, 
                 MinResourcesPerNodePerLocation, 
                 MaxResourcesPerNodePerLocation,
+                MinResourceNodeDefense,
+                MaxResourceNodeDefense,
                 StartingTagComplexity,
                 UniqueResourceCount,
                 this);
