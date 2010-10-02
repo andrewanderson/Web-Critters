@@ -25,8 +25,7 @@ namespace WebCritters
         private SpeciesDetails SpeciesDetailsWindow = null;
 
         private bool IsStopping = false;
-        private bool IsRunning = false;
-
+        
         private void WebCrittersForm_Load(object sender, EventArgs e)
         {
             ToggleSimulationControls(false);
@@ -225,7 +224,6 @@ namespace WebCritters
             // Spawn this work on a different thread.
             System.Threading.Tasks.Task.Factory.StartNew(() =>
             {
-                IsRunning = true;
                 IsStopping = false;
 
                 for (int i = 0; (i < generationCount && !IsStopping); i++)
@@ -234,7 +232,6 @@ namespace WebCritters
                 }
 
                 IsStopping = false;
-                IsRunning = false;
             });
         }
 
@@ -399,6 +396,7 @@ namespace WebCritters
         private void stopButton_Click(object sender, EventArgs e)
         {
             IsStopping = true;
+            this.UpdateSimulationDetails(true);
         }
 
         private bool WasEnterPressed(object sender, KeyPressEventArgs e)
