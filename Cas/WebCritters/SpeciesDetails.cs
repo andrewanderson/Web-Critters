@@ -12,14 +12,17 @@ namespace WebCritters
 {
     public partial class SpeciesDetails : Form
     {
-        private  ISpecies CurrentSpecies { get; set; }
+        private WebCrittersForm ParentForm { get; set; }
+        private ISpecies CurrentSpecies { get; set; }
         private ISimulation Simulation { get; set; }
 
-        public SpeciesDetails(ISimulation simulation, ISpecies species)
+        public SpeciesDetails(WebCrittersForm parent, ISimulation simulation, ISpecies species)
         {
+            if (parent == null) throw new ArgumentNullException("parent");
             if (simulation == null) throw new ArgumentNullException("simulation");
             if (species == null) throw new ArgumentNullException("species");
 
+            ParentForm = parent;
             CurrentSpecies = species;
             Simulation = simulation;
 
@@ -60,7 +63,7 @@ namespace WebCritters
                     var species = Simulation.GetSpeciesOrFossil(parentSpeciesId);
 
                     label.Text = species.ToString();
-                    label.Enabled = true;
+                    label.Enabled = (species is ISpecies);
                 }
                 else
                 {
@@ -78,6 +81,30 @@ namespace WebCritters
         {
             // Format ResourceNodes more tersely
             e.Value = (e.ListItem is IResourceNode) ? (e.ListItem as IResourceNode).ToShortString() : e.ListItem.ToString();
+        }
+
+        private void parent1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SpeciesLinkClicked(0);
+        }
+
+        private void parent2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SpeciesLinkClicked(1);
+        }
+
+        public void SpeciesLinkClicked(int index)
+        {
+            var newSpecies = (CurrentSpecies.DerivedFromSpeciesIds.Count > index) 
+                ? Simulation.GetSpeciesOrFossil(CurrentSpecies.DerivedFromSpeciesIds[index]) as ISpecies 
+                : default(ISpecies);
+
+            if (newSpecies != null)
+            {
+                this.CurrentSpecies = newSpecies;
+                this.UpdateSpeciesDetails();
+                this.ParentForm.SelectSpecies(newSpecies);
+            }
         }
 
     }

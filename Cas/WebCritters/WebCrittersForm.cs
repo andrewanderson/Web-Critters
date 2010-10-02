@@ -20,9 +20,9 @@ namespace WebCritters
             InitializeComponent();
         }
 
-        public ISimulation CasSimulation;
+        private ISimulation CasSimulation;
 
-        public SpeciesDetails SpeciesDetailsWindow = null;
+        private SpeciesDetails SpeciesDetailsWindow = null;
 
         private bool IsStopping = false;
         private bool IsRunning = false;
@@ -475,6 +475,13 @@ namespace WebCritters
             CasSimulation.LogHistory = this.trackAgentHistory.Checked;
         }
 
+        public void SelectSpecies(ISpecies species) 
+        {
+            if (species == null) throw new ArgumentNullException("species");
+
+            this.speciesList.SelectedItem = species;
+        }
+
         private void speciesList_DoubleClick(object sender, EventArgs e)
         {
             if ((sender as ListBox).SelectedIndex > -1)
@@ -483,7 +490,7 @@ namespace WebCritters
 
                 if (SpeciesDetailsWindow == null || SpeciesDetailsWindow.IsDisposed)
                 {
-                    SpeciesDetailsWindow = new SpeciesDetails(this.CasSimulation, species);
+                    SpeciesDetailsWindow = new SpeciesDetails(this, this.CasSimulation, species);
                     SpeciesDetailsWindow.Show();
                 }
                 else

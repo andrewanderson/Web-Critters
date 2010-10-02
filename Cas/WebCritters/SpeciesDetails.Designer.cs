@@ -192,6 +192,7 @@
             this.parent1.TabIndex = 15;
             this.parent1.TabStop = true;
             this.parent1.Text = "N/A";
+            this.parent1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.parent1_LinkClicked);
             // 
             // parent2
             // 
@@ -202,6 +203,7 @@
             this.parent2.TabIndex = 16;
             this.parent2.TabStop = true;
             this.parent2.Text = "N/A";
+            this.parent2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.parent2_LinkClicked);
             // 
             // SpeciesDetails
             // 
