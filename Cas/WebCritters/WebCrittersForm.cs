@@ -422,7 +422,7 @@ namespace WebCritters
             if (e.Index == -1) return;
             var agent = agentList.Items[e.Index] as IAgent;
 
-            DrawListItemColoredByDietType((ListBox)sender, e, agent.Species);
+            DrawListItemColoredByDietType((ListBox)sender, e, agent.Species, false);
         }
 
         private void speciesList_DrawItem(object sender, DrawItemEventArgs e)
@@ -430,10 +430,10 @@ namespace WebCritters
             if (e.Index == -1) return;
             var species = speciesList.Items[e.Index] as ISpecies;
 
-            DrawListItemColoredByDietType((ListBox)sender, e, species);
+            DrawListItemColoredByDietType((ListBox)sender, e, species, true);
         }
 
-        private void DrawListItemColoredByDietType(ListBox sender, DrawItemEventArgs e, ISpecies species)
+        private void DrawListItemColoredByDietType(ListBox sender, DrawItemEventArgs e, ISpecies species, bool includeSpeciesPercentPopulation)
         {
             if (e.Index == -1) return;
 
@@ -454,7 +454,16 @@ namespace WebCritters
                     break;
             }
 
-            e.Graphics.DrawString(sender.Items[e.Index].ToString(), e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
+            string itemText = sender.Items[e.Index].ToString();
+            if (includeSpeciesPercentPopulation)
+            {
+                int totalPopulation = this.CasSimulation.Environment.Locations.Sum(loc => loc.Agents.Count);
+                double percentPopulation = (totalPopulation > 0) ? ((species.Population * 100.0) / (double)totalPopulation) : 0.0;
+
+                itemText = string.Format("{1:0.0}% - {0}", itemText, percentPopulation);
+            }
+            
+            e.Graphics.DrawString(itemText, e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
 
             e.DrawFocusRectangle();
         }

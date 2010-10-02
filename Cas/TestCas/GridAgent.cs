@@ -53,7 +53,7 @@ namespace Cas.TestImplementation
 
         public override string ToString()
         {
-            string speciesId = (Species == null) ? string.Empty : string.Format("#{0}, ", this.Species.Id);
+            string speciesId = (Species == null) ? string.Empty : string.Format("A.{0}: ", this.Species.Id);
             return string.Format("{0}{1} - {2} generations", speciesId, this.ToShortString(), this.Age);
         }
 

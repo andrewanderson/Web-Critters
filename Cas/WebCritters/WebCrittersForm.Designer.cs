@@ -87,6 +87,8 @@
             this.numberOfResources = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.createSimulation = new System.Windows.Forms.Button();
+            this.label53 = new System.Windows.Forms.Label();
+            this.speciesList = new System.Windows.Forms.ListBox();
             this.trackAgentHistory = new System.Windows.Forms.CheckBox();
             this.label37 = new System.Windows.Forms.Label();
             this.generationsBetweenUpdate = new System.Windows.Forms.TextBox();
@@ -150,8 +152,6 @@
             this.currentGeneration = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.speciesList = new System.Windows.Forms.ListBox();
-            this.label53 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -826,6 +826,27 @@
             this.createSimulation.UseVisualStyleBackColor = false;
             this.createSimulation.Click += new System.EventHandler(this.createSimulation_Click);
             // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label53.Location = new System.Drawing.Point(8, 393);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(66, 20);
+            this.label53.TabIndex = 41;
+            this.label53.Text = "Species";
+            // 
+            // speciesList
+            // 
+            this.speciesList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.speciesList.FormattingEnabled = true;
+            this.speciesList.Location = new System.Drawing.Point(10, 422);
+            this.speciesList.Name = "speciesList";
+            this.speciesList.Size = new System.Drawing.Size(265, 238);
+            this.speciesList.TabIndex = 40;
+            this.speciesList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.speciesList_DrawItem);
+            this.speciesList.DoubleClick += new System.EventHandler(this.speciesList_DoubleClick);
+            // 
             // trackAgentHistory
             // 
             this.trackAgentHistory.AutoSize = true;
@@ -881,7 +902,7 @@
             this.panel3.Controls.Add(this.totalPopulation);
             this.panel3.Location = new System.Drawing.Point(12, 84);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(203, 66);
+            this.panel3.Size = new System.Drawing.Size(263, 66);
             this.panel3.TabIndex = 35;
             // 
             // percentCarnivore
@@ -983,7 +1004,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(218, 43);
+            this.label22.Location = new System.Drawing.Point(280, 43);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(70, 20);
             this.label22.TabIndex = 32;
@@ -1219,7 +1240,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(222, 211);
+            this.label11.Location = new System.Drawing.Point(281, 210);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(69, 13);
             this.label11.TabIndex = 15;
@@ -1228,9 +1249,9 @@
             // connectionList
             // 
             this.connectionList.FormattingEnabled = true;
-            this.connectionList.Location = new System.Drawing.Point(222, 226);
+            this.connectionList.Location = new System.Drawing.Point(284, 226);
             this.connectionList.Name = "connectionList";
-            this.connectionList.Size = new System.Drawing.Size(375, 82);
+            this.connectionList.Size = new System.Drawing.Size(313, 82);
             this.connectionList.TabIndex = 14;
             this.connectionList.DoubleClick += new System.EventHandler(this.connectionList_DoubleClick);
             // 
@@ -1256,9 +1277,9 @@
             // 
             this.agentList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.agentList.FormattingEnabled = true;
-            this.agentList.Location = new System.Drawing.Point(222, 329);
+            this.agentList.Location = new System.Drawing.Point(284, 329);
             this.agentList.Name = "agentList";
-            this.agentList.Size = new System.Drawing.Size(375, 329);
+            this.agentList.Size = new System.Drawing.Size(313, 329);
             this.agentList.TabIndex = 12;
             this.agentList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.agentList_DrawItem);
             this.agentList.SelectedIndexChanged += new System.EventHandler(this.agentList_SelectedIndexChanged);
@@ -1266,7 +1287,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(219, 313);
+            this.label12.Location = new System.Drawing.Point(281, 313);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(43, 13);
             this.label12.TabIndex = 11;
@@ -1275,9 +1296,9 @@
             // locationResourceList
             // 
             this.locationResourceList.FormattingEnabled = true;
-            this.locationResourceList.Location = new System.Drawing.Point(222, 136);
+            this.locationResourceList.Location = new System.Drawing.Point(284, 136);
             this.locationResourceList.Name = "locationResourceList";
-            this.locationResourceList.Size = new System.Drawing.Size(375, 69);
+            this.locationResourceList.Size = new System.Drawing.Size(313, 69);
             this.locationResourceList.TabIndex = 10;
             // 
             // panel1
@@ -1285,9 +1306,9 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.upkeepCost);
-            this.panel1.Location = new System.Drawing.Point(222, 83);
+            this.panel1.Location = new System.Drawing.Point(284, 83);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(375, 34);
+            this.panel1.Size = new System.Drawing.Size(313, 34);
             this.panel1.TabIndex = 9;
             // 
             // label10
@@ -1321,7 +1342,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(219, 120);
+            this.label9.Location = new System.Drawing.Point(281, 120);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(61, 13);
             this.label9.TabIndex = 1;
@@ -1331,7 +1352,7 @@
             // 
             this.locationName.AutoSize = true;
             this.locationName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.locationName.Location = new System.Drawing.Point(221, 67);
+            this.locationName.Location = new System.Drawing.Point(281, 65);
             this.locationName.Name = "locationName";
             this.locationName.Size = new System.Drawing.Size(30, 13);
             this.locationName.TabIndex = 0;
@@ -1342,7 +1363,7 @@
             this.locationList.FormattingEnabled = true;
             this.locationList.Location = new System.Drawing.Point(10, 160);
             this.locationList.Name = "locationList";
-            this.locationList.Size = new System.Drawing.Size(205, 225);
+            this.locationList.Size = new System.Drawing.Size(265, 225);
             this.locationList.TabIndex = 7;
             this.locationList.SelectedIndexChanged += new System.EventHandler(this.locationList_SelectedIndexChanged);
             // 
@@ -1416,27 +1437,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // speciesList
-            // 
-            this.speciesList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.speciesList.FormattingEnabled = true;
-            this.speciesList.Location = new System.Drawing.Point(10, 422);
-            this.speciesList.Name = "speciesList";
-            this.speciesList.Size = new System.Drawing.Size(205, 238);
-            this.speciesList.TabIndex = 40;
-            this.speciesList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.speciesList_DrawItem);
-            this.speciesList.DoubleClick += new System.EventHandler(this.speciesList_DoubleClick);
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label53.Location = new System.Drawing.Point(8, 393);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(66, 20);
-            this.label53.TabIndex = 41;
-            this.label53.Text = "Species";
             // 
             // WebCrittersForm
             // 

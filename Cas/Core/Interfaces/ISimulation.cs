@@ -39,6 +39,12 @@ namespace Cas.Core.Interfaces
         void RegisterDeath(IAgent agent);
 
         /// <summary>
+        /// Retrieves a species from the list of currently active species, or retrieves the 
+        /// fossil record of the species.
+        /// </summary>
+        IIsUnique GetSpeciesOrFossil(long id);
+
+        /// <summary>
         /// Attaches a history event to the specified agent
         /// </summary>
         void AddEventToAgent(IAgent agent, IEvent newEvent);

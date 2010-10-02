@@ -42,6 +42,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.population = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.parent1 = new System.Windows.Forms.LinkLabel();
+            this.parent2 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -103,23 +106,24 @@
             this.habitat.FormattingEnabled = true;
             this.habitat.Location = new System.Drawing.Point(10, 106);
             this.habitat.Name = "habitat";
-            this.habitat.Size = new System.Drawing.Size(189, 225);
+            this.habitat.Size = new System.Drawing.Size(238, 225);
             this.habitat.TabIndex = 6;
             // 
             // prey
             // 
             this.prey.FormattingEnabled = true;
-            this.prey.Location = new System.Drawing.Point(216, 106);
+            this.prey.Location = new System.Drawing.Point(264, 106);
             this.prey.Name = "prey";
-            this.prey.Size = new System.Drawing.Size(189, 225);
+            this.prey.Size = new System.Drawing.Size(254, 225);
             this.prey.TabIndex = 7;
+            this.prey.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.prey_Format);
             // 
             // predators
             // 
             this.predators.FormattingEnabled = true;
-            this.predators.Location = new System.Drawing.Point(419, 106);
+            this.predators.Location = new System.Drawing.Point(534, 106);
             this.predators.Name = "predators";
-            this.predators.Size = new System.Drawing.Size(189, 225);
+            this.predators.Size = new System.Drawing.Size(240, 225);
             this.predators.TabIndex = 8;
             // 
             // label4
@@ -136,7 +140,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(213, 90);
+            this.label5.Location = new System.Drawing.Point(261, 90);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(28, 13);
             this.label5.TabIndex = 10;
@@ -146,7 +150,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(416, 90);
+            this.label6.Location = new System.Drawing.Point(531, 90);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 13);
             this.label6.TabIndex = 11;
@@ -170,11 +174,43 @@
             this.label8.TabIndex = 12;
             this.label8.Text = "Population:";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(242, 28);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(88, 13);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Descended from:";
+            // 
+            // parent1
+            // 
+            this.parent1.AutoSize = true;
+            this.parent1.Location = new System.Drawing.Point(337, 27);
+            this.parent1.Name = "parent1";
+            this.parent1.Size = new System.Drawing.Size(27, 13);
+            this.parent1.TabIndex = 15;
+            this.parent1.TabStop = true;
+            this.parent1.Text = "N/A";
+            // 
+            // parent2
+            // 
+            this.parent2.AutoSize = true;
+            this.parent2.Location = new System.Drawing.Point(337, 45);
+            this.parent2.Name = "parent2";
+            this.parent2.Size = new System.Drawing.Size(27, 13);
+            this.parent2.TabIndex = 16;
+            this.parent2.TabStop = true;
+            this.parent2.Text = "N/A";
+            // 
             // SpeciesDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 349);
+            this.ClientSize = new System.Drawing.Size(786, 349);
+            this.Controls.Add(this.parent2);
+            this.Controls.Add(this.parent1);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.population);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label6);
@@ -212,5 +248,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label population;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.LinkLabel parent1;
+        private System.Windows.Forms.LinkLabel parent2;
     }
 }

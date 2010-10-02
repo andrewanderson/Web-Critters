@@ -90,7 +90,7 @@ namespace Cas.Core
 
                 if (totalConsumed == 0) return DietType.None;
 
-                double percentMeat = ResourcesFromAgents / totalConsumed;
+                double percentMeat = (double)ResourcesFromAgents / (double)totalConsumed;
                 if (percentMeat < 0.15)
                 {
                     return DietType.Herbivore;
@@ -193,12 +193,12 @@ namespace Cas.Core
             get 
             {
                 return this.preyCounts
-                    .OrderBy(kvp => kvp.Value)
+                    .OrderByDescending(kvp => kvp.Value)
                     .Select(kvp =>
                     {
                         return (kvp.Key < 0) ? 
                             this.Simulation.Environment.FindResourceNodeById(kvp.Key)
-                            : GetSpeciesOrFossil(kvp.Key);
+                            : this.Simulation.GetSpeciesOrFossil(kvp.Key);
                     });
             }
         }
@@ -212,20 +212,14 @@ namespace Cas.Core
             get 
             {
                 return this.predatorCounts
-                    .OrderBy(kvp => kvp.Value)
-                    .Select(kvp => GetSpeciesOrFossil(kvp.Key));
+                    .OrderByDescending(kvp => kvp.Value)
+                    .Select(kvp => this.Simulation.GetSpeciesOrFossil(kvp.Key));
             }
-        }
-
-        private IIsUnique GetSpeciesOrFossil(long id)
-        {
-            var species = this.Simulation.Species.Where(s => s.Id == id).FirstOrDefault();
-            return species ?? (IIsUnique)new Fossil(id);
         }
 
         public override string ToString()
         {
-            return string.Format("#{0}, {1}", this.id, this.exemplar.ToShortString());
+            return string.Format("S.{0}: {1}", this.id, this.exemplar.ToShortString());
         }
     }
 }

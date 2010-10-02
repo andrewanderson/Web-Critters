@@ -138,6 +138,18 @@ namespace Cas.Core
                 this.SpeciesByKey.Remove(agent.UniqueKey);
             }
         }
+
+        /// <summary>
+        /// Retrieves a species from the list of currently active species, or retrieves the 
+        /// fossil record of the species.
+        /// </summary>
+        public IIsUnique GetSpeciesOrFossil(long id)
+        {
+            // TODO: Try to get the fossil from any saved records
+
+            var species = this.Species.Where(s => s.Id == id).FirstOrDefault();
+            return species ?? (IIsUnique)new Fossil(id);
+        }
         
         public int CurrentGeneration { get; protected set; }
 
@@ -325,6 +337,9 @@ namespace Cas.Core
         {
             if (location == null) throw new ArgumentNullException("location");
             if (interactionsToPerform < 0) throw new ArgumentOutOfRangeException("interactionsToPerform");
+
+            // Abort early if there are no agents.
+            if (location.Agents.Count == 0) return;
 
             // The targets of interactions are resource nodes and other agents
             var allTargets = location.Agents.ConvertAll(x => x as IInteractable).Concat(location.CurrentResources.ConvertAll(x => x as IInteractable)).ToList();
