@@ -150,6 +150,8 @@
             this.currentGeneration = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.speciesList = new System.Windows.Forms.ListBox();
+            this.label53 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -306,6 +308,8 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer.Panel2.Controls.Add(this.label53);
+            this.splitContainer.Panel2.Controls.Add(this.speciesList);
             this.splitContainer.Panel2.Controls.Add(this.trackAgentHistory);
             this.splitContainer.Panel2.Controls.Add(this.label37);
             this.splitContainer.Panel2.Controls.Add(this.generationsBetweenUpdate);
@@ -394,6 +398,8 @@
             // allowWildcards
             // 
             this.allowWildcards.AutoSize = true;
+            this.allowWildcards.Checked = true;
+            this.allowWildcards.CheckState = System.Windows.Forms.CheckState.Checked;
             this.allowWildcards.Location = new System.Drawing.Point(107, 157);
             this.allowWildcards.Name = "allowWildcards";
             this.allowWildcards.Size = new System.Drawing.Size(15, 14);
@@ -491,7 +497,7 @@
             this.minResourcesPerNode.Name = "minResourcesPerNode";
             this.minResourcesPerNode.Size = new System.Drawing.Size(34, 20);
             this.minResourcesPerNode.TabIndex = 44;
-            this.minResourcesPerNode.Text = "5";
+            this.minResourcesPerNode.Text = "20";
             this.minResourcesPerNode.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.minResourcesPerNode.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -510,7 +516,7 @@
             this.maxResourcesPerNode.Name = "maxResourcesPerNode";
             this.maxResourcesPerNode.Size = new System.Drawing.Size(44, 20);
             this.maxResourcesPerNode.TabIndex = 42;
-            this.maxResourcesPerNode.Text = "20";
+            this.maxResourcesPerNode.Text = "40";
             this.maxResourcesPerNode.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.maxResourcesPerNode.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -1334,9 +1340,9 @@
             // locationList
             // 
             this.locationList.FormattingEnabled = true;
-            this.locationList.Location = new System.Drawing.Point(10, 173);
+            this.locationList.Location = new System.Drawing.Point(10, 160);
             this.locationList.Name = "locationList";
-            this.locationList.Size = new System.Drawing.Size(205, 485);
+            this.locationList.Size = new System.Drawing.Size(205, 225);
             this.locationList.TabIndex = 7;
             this.locationList.SelectedIndexChanged += new System.EventHandler(this.locationList_SelectedIndexChanged);
             // 
@@ -1410,6 +1416,27 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // speciesList
+            // 
+            this.speciesList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.speciesList.FormattingEnabled = true;
+            this.speciesList.Location = new System.Drawing.Point(10, 422);
+            this.speciesList.Name = "speciesList";
+            this.speciesList.Size = new System.Drawing.Size(205, 238);
+            this.speciesList.TabIndex = 40;
+            this.speciesList.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.speciesList_DrawItem);
+            this.speciesList.DoubleClick += new System.EventHandler(this.speciesList_DoubleClick);
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label53.Location = new System.Drawing.Point(8, 393);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(66, 20);
+            this.label53.TabIndex = 41;
+            this.label53.Text = "Species";
             // 
             // WebCrittersForm
             // 
@@ -1560,6 +1587,8 @@
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.TextBox maxResourceNodeSize;
         private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.ListBox speciesList;
     }
 }
 

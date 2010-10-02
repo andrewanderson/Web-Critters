@@ -141,6 +141,7 @@ namespace WebCritters
                 this.percentOmnivore.Text = "0%";
 
                 this.locationList.DataSource = null;
+                this.speciesList.DataSource = null;
             }
             else
             {
@@ -178,13 +179,23 @@ namespace WebCritters
                     this.percentHerbivore.Text = string.Format("{0}%", (herbivoreCount * 100) / CasSimulation.Species.Count);
                     this.percentOmnivore.Text = string.Format("{0}%", (omnivoreCount * 100) / CasSimulation.Species.Count);
                 }
-                
+
+                int selectedLocationIndex = this.locationList.SelectedIndex;
                 if (generationCompleted)
                 {
                     this.locationList.DataSource = null;
                     this.locationList.SelectedItem = null;
+                    this.speciesList.DataSource = null;
+                    this.speciesList.SelectedItem = null;
                 }
                 this.locationList.DataSource = this.CasSimulation.Environment.Locations;
+
+                if (selectedLocationIndex != -1)
+                {
+                    this.locationList.SelectedIndex = selectedLocationIndex;
+                }
+
+                this.speciesList.DataSource = CasSimulation.Species;
             }
         }
 
@@ -401,29 +412,49 @@ namespace WebCritters
             }
         }
 
+        private static Brush CarnivoreBrush = Brushes.Red;
+        private static Brush HerbivoreBrush = Brushes.Green;
+        private static Brush OmnivoreBrush = Brushes.DodgerBlue;
+        private static Brush NeutralBush = Brushes.Black;
+
         private void agentList_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index == -1) return;
+            var agent = agentList.Items[e.Index] as IAgent;
+
+            DrawListItemColoredByDietType((ListBox)sender, e, agent.Species);
+        }
+
+        private void speciesList_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index == -1) return;
+            var species = speciesList.Items[e.Index] as ISpecies;
+
+            DrawListItemColoredByDietType((ListBox)sender, e, species);
+        }
+
+        private void DrawListItemColoredByDietType(ListBox sender, DrawItemEventArgs e, ISpecies species)
         {
             if (e.Index == -1) return;
 
             e.DrawBackground();
 
-            Brush myBrush = Brushes.Black;
+            Brush myBrush = NeutralBush;
 
-            var agent = agentList.Items[e.Index] as IAgent;
-            switch (agent.Species.DietType)
+            switch (species.DietType)
             {
                 case DietType.Carnivore:
-                    myBrush = Brushes.Red;
+                    myBrush = CarnivoreBrush;
                     break;
                 case DietType.Herbivore:
-                    myBrush = Brushes.Green;
+                    myBrush = HerbivoreBrush;
                     break;
                 case DietType.Omnivore:
-                    myBrush = Brushes.Blue;
+                    myBrush = OmnivoreBrush;
                     break;
             }
 
-            e.Graphics.DrawString(((ListBox)sender).Items[e.Index].ToString(), e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
+            e.Graphics.DrawString(sender.Items[e.Index].ToString(), e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
 
             e.DrawFocusRectangle();
         }
@@ -431,6 +462,17 @@ namespace WebCritters
         private void trackAgentHistory_CheckedChanged(object sender, EventArgs e)
         {
             CasSimulation.LogHistory = this.trackAgentHistory.Checked;
+        }
+
+        private void speciesList_DoubleClick(object sender, EventArgs e)
+        {
+            if ((sender as ListBox).SelectedIndex > -1)
+            {
+                var species = (sender as ListBox).SelectedItem as ISpecies;
+
+                var sd = new SpeciesDetails(this.CasSimulation, species);
+                sd.Show();
+            }
         }
     }
 

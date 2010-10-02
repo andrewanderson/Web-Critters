@@ -70,6 +70,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SpeciesDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpeciesDetails.Designer.cs">
+      <DependentUpon>SpeciesDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="WebCrittersForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="SpeciesDetails.resx">
+      <DependentUpon>SpeciesDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WebCrittersForm.resx">
       <DependentUpon>WebCrittersForm.cs</DependentUpon>
       <SubType>Designer</SubType>
