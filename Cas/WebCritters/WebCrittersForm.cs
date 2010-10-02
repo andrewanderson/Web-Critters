@@ -22,6 +22,8 @@ namespace WebCritters
 
         public ISimulation CasSimulation;
 
+        public SpeciesDetails SpeciesDetailsWindow = null;
+
         private bool IsStopping = false;
         private bool IsRunning = false;
 
@@ -479,8 +481,16 @@ namespace WebCritters
             {
                 var species = (sender as ListBox).SelectedItem as ISpecies;
 
-                var sd = new SpeciesDetails(this.CasSimulation, species);
-                sd.Show();
+                if (SpeciesDetailsWindow == null || SpeciesDetailsWindow.IsDisposed)
+                {
+                    SpeciesDetailsWindow = new SpeciesDetails(this.CasSimulation, species);
+                    SpeciesDetailsWindow.Show();
+                }
+                else
+                {
+                    SpeciesDetailsWindow.SetSpecies(species);
+                    SpeciesDetailsWindow.Focus();
+                }
             }
         }
     }

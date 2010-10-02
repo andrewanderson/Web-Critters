@@ -12,7 +12,7 @@ namespace WebCritters
 {
     public partial class SpeciesDetails : Form
     {
-        private ISpecies CurrentSpecies { get; set; }
+        private  ISpecies CurrentSpecies { get; set; }
         private ISimulation Simulation { get; set; }
 
         public SpeciesDetails(ISimulation simulation, ISpecies species)
@@ -27,6 +27,14 @@ namespace WebCritters
             UpdateSpeciesDetails();
         }
 
+        public void SetSpecies(ISpecies species)
+        {
+            if (species == null) throw new ArgumentNullException("species");
+
+            CurrentSpecies = species;
+            UpdateSpeciesDetails();
+        }
+        
         private void UpdateSpeciesDetails()
         {
             this.Text = string.Format("Species {0}", CurrentSpecies);
