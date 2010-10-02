@@ -45,6 +45,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.parent1 = new System.Windows.Forms.LinkLabel();
             this.parent2 = new System.Windows.Forms.LinkLabel();
+            this.nextSpeciesButton = new System.Windows.Forms.Button();
+            this.previousSpeciesButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -205,11 +207,33 @@
             this.parent2.Text = "N/A";
             this.parent2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.parent2_LinkClicked);
             // 
+            // nextSpeciesButton
+            // 
+            this.nextSpeciesButton.Location = new System.Drawing.Point(739, -2);
+            this.nextSpeciesButton.Name = "nextSpeciesButton";
+            this.nextSpeciesButton.Size = new System.Drawing.Size(34, 23);
+            this.nextSpeciesButton.TabIndex = 17;
+            this.nextSpeciesButton.Text = "=>";
+            this.nextSpeciesButton.UseVisualStyleBackColor = true;
+            this.nextSpeciesButton.Click += new System.EventHandler(this.nextSpeciesButton_Click);
+            // 
+            // previousSpeciesButton
+            // 
+            this.previousSpeciesButton.Location = new System.Drawing.Point(699, -1);
+            this.previousSpeciesButton.Name = "previousSpeciesButton";
+            this.previousSpeciesButton.Size = new System.Drawing.Size(34, 23);
+            this.previousSpeciesButton.TabIndex = 18;
+            this.previousSpeciesButton.Text = "<=";
+            this.previousSpeciesButton.UseVisualStyleBackColor = true;
+            this.previousSpeciesButton.Click += new System.EventHandler(this.previousSpeciesButton_Click);
+            // 
             // SpeciesDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(786, 349);
+            this.Controls.Add(this.previousSpeciesButton);
+            this.Controls.Add(this.nextSpeciesButton);
             this.Controls.Add(this.parent2);
             this.Controls.Add(this.parent1);
             this.Controls.Add(this.label7);
@@ -253,5 +277,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.LinkLabel parent1;
         private System.Windows.Forms.LinkLabel parent2;
+        private System.Windows.Forms.Button nextSpeciesButton;
+        private System.Windows.Forms.Button previousSpeciesButton;
     }
 }

@@ -32,10 +32,20 @@ namespace WebCritters
 
         public void SetSpecies(ISpecies species)
         {
+            SetSpecies(species, false);
+        }
+
+        private void SetSpecies(ISpecies species, bool updateParentForm)
+        {
             if (species == null) throw new ArgumentNullException("species");
 
             CurrentSpecies = species;
             UpdateSpeciesDetails();
+
+            if (updateParentForm)
+            {
+                this.ParentForm.SelectSpecies(species);
+            }
         }
         
         private void UpdateSpeciesDetails()
@@ -101,10 +111,40 @@ namespace WebCritters
 
             if (newSpecies != null)
             {
-                this.CurrentSpecies = newSpecies;
-                this.UpdateSpeciesDetails();
-                this.ParentForm.SelectSpecies(newSpecies);
+                SetSpecies(newSpecies, true);
             }
+        }
+
+        private void nextSpeciesButton_Click(object sender, EventArgs e)
+        {
+            var speciesList = this.Simulation.Species; // underlying method is Linq, so grab a local copy
+            int currentIndex = speciesList.IndexOf(CurrentSpecies);
+            
+            if (currentIndex < 0) return;
+
+            int nextIndex = 0;
+            if (currentIndex < speciesList.Count - 1)
+            {
+                nextIndex = currentIndex + 1;
+            }
+
+            SetSpecies(speciesList[nextIndex], true);
+        }
+
+        private void previousSpeciesButton_Click(object sender, EventArgs e)
+        {
+            var speciesList = this.Simulation.Species; // underlying method is Linq, so grab a local copy
+            int currentIndex = speciesList.IndexOf(CurrentSpecies);
+
+            if (currentIndex < 0) return;
+
+            int nextIndex = speciesList.Count - 1;
+            if (currentIndex > 0)
+            {
+                nextIndex = currentIndex - 1;
+            }
+
+            SetSpecies(speciesList[nextIndex], true);
         }
 
     }
