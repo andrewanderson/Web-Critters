@@ -57,8 +57,8 @@ namespace WebCritters
             this.diet.Text = string.Format("({0}) - {1} agents, {2} resource nodes", CurrentSpecies.DietType, CurrentSpecies.ResourcesFromAgents, CurrentSpecies.ResourcesFromResourceNodes);
             
             int totalPopulation = Simulation.Environment.Locations.Sum(loc => loc.Agents.Count);
-            int percentPopulation = (totalPopulation > 0) ? (int)((CurrentSpecies.Population * 100) / totalPopulation) : 0;
-            this.population.Text = string.Format("{0} ({1}%)", CurrentSpecies.Population, percentPopulation);
+            double percentPopulation = (totalPopulation > 0) ? ((double)CurrentSpecies.Population / totalPopulation * 100.0) : 0.0;
+            this.population.Text = string.Format("{0} ({1:0.0}%)", CurrentSpecies.Population, percentPopulation);
 
             this.habitat.DataSource = CurrentSpecies.Habitat.ToList();
             this.prey.DataSource = CurrentSpecies.Prey.ToList();

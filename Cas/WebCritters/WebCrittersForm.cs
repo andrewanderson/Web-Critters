@@ -176,9 +176,9 @@ namespace WebCritters
                             }
                         });
 
-                    this.percentCarnivore.Text = string.Format("{0}%", (carnivoreCount * 100) / CasSimulation.Species.Count);
-                    this.percentHerbivore.Text = string.Format("{0}%", (herbivoreCount * 100) / CasSimulation.Species.Count);
-                    this.percentOmnivore.Text = string.Format("{0}%", (omnivoreCount * 100) / CasSimulation.Species.Count);
+                    this.percentCarnivore.Text = string.Format("{0:0.0}%", ((double)carnivoreCount / CasSimulation.Species.Count * 100.0));
+                    this.percentHerbivore.Text = string.Format("{0:0.0}%", ((double)herbivoreCount / CasSimulation.Species.Count * 100.0));
+                    this.percentOmnivore.Text = string.Format("{0:0.0}%", ((double)omnivoreCount / CasSimulation.Species.Count * 100.0));
                 }
 
                 int selectedLocationIndex = this.locationList.SelectedIndex;
