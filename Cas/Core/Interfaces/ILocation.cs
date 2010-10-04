@@ -11,11 +11,6 @@ namespace Cas.Core.Interfaces
     public interface ILocation : IBoundary
     {
         /// <summary>
-        /// A unique identifier for the location
-        /// </summary>
-        Guid Id { get; }
-
-        /// <summary>
         /// The cost, in resources, that the location levies on its agents.  Must be
         /// a positive whole number.
         /// </summary>

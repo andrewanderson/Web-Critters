@@ -10,8 +10,6 @@ namespace Cas.Core
 {
     public abstract class LocationBase : ILocation
     {
-        public Guid Id { get; private set; }
-
         protected ISimulation Simulation { get; set; }
 
         /// <summary>
@@ -44,7 +42,6 @@ namespace Cas.Core
         {
             if (simulation == null) throw new ArgumentNullException("simulation");
 
-            this.Id = Guid.NewGuid();
             this.Simulation = simulation;
         }
 
