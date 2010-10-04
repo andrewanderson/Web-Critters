@@ -5,21 +5,22 @@ namespace Cas.Core.Events
 {
     public abstract class EventBase : IEvent
     {
-        public Guid LocationId { get; private set; }
+        public ILocation Location { get; private set; }
 
         public int Generation { get; private set; }
 
-        protected EventBase(Guid locationId,int generation) 
+        protected EventBase(ILocation location,int generation) 
         {
+            if (location == null) throw new ArgumentNullException("location");
             if (generation < 0) throw new ArgumentOutOfRangeException("generation");
 
-            this.LocationId = locationId;
+            this.Location = location;
             this.Generation = generation;
         }
 
         public override string ToString()
         {
-            return string.Format("{0}: {1} at location {2}", this.Generation, this.GetType().Name, this.LocationId);
+            return string.Format("{0}: {1} at {2}", this.Generation, this.GetType().Name, this.Location.ToShortString());
         }
     }
 }

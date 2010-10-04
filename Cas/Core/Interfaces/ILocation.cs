@@ -45,5 +45,10 @@ namespace Cas.Core.Interfaces
         /// Remove resources equal to the UpkeepCost from all agents in this location.
         /// </summary>
         void ChargeUpkeep(int generation);
+
+        /// <summary>
+        /// A terse representation of the Location.
+        /// </summary>
+        string ToShortString();
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System;
+using Cas.Core.Interfaces;
 
 namespace Cas.Core.Events
 {
     public class CreationEvent : EventBase
     {
-        public CreationEvent(Guid locationId, int generation) 
-            : base(locationId, generation)  {  }
+        public CreationEvent(ILocation location, int generation) 
+            : base(location, generation)  {  }
 
         public override string ToString()
         {
-            return string.Format("{0}: Created at location {1}", this.Generation, this.LocationId);
+            return string.Format("{0}: Created at {1}", this.Generation, this.Location.ToShortString());
         }
     }
 }

@@ -13,8 +13,8 @@ namespace Cas.Core.Events
 
         public Type ReproductionType { get; private set; }
 
-        public ReproductionEvent(Guid locationId, int generation, Type reproductionType, ISpecies mate, params ISpecies[] children)
-            : base(locationId, generation)
+        public ReproductionEvent(ILocation location, int generation, Type reproductionType, ISpecies mate, params ISpecies[] children)
+            : base(location, generation)
         {
             this.Mate = mate;
             this.Offspring = new List<ISpecies>(children);
@@ -27,11 +27,11 @@ namespace Cas.Core.Events
             if (Mate == null)
             {
 
-                return string.Format("{0}: {1} at location {2} produced offspring: {3}", this.Generation, ReproductionType.Name, LocationId, offspring);
+                return string.Format("{0}: {1} at {2} produced offspring: {3}", this.Generation, ReproductionType.Name, Location.ToShortString(), offspring);
             }
             else
             {
-                return string.Format("{0}: {1} with {2} at location {3} produced offspring: {4}", this.Generation, ReproductionType.Name, Mate, LocationId, offspring);
+                return string.Format("{0}: {1} with {2} at {3} produced offspring: {4}", this.Generation, ReproductionType.Name, Mate, Location.ToShortString(), offspring);
             }
         }
     }

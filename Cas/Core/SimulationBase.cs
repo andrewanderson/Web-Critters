@@ -410,7 +410,7 @@ namespace Cas.Core
                 var destination = kvp.Value;
 
                 location.Agents.Remove(agent);
-                this.AddEventToAgent(agent, new MigrationEvent(location.Id, destination.Id, destination.UpkeepCost, this.CurrentGeneration));
+                this.AddEventToAgent(agent, new MigrationEvent(location, destination, destination.UpkeepCost, this.CurrentGeneration));
                 pendingMigrations.Add(kvp);
             });
         }

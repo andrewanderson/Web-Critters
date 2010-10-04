@@ -17,6 +17,11 @@ namespace Cas.Core
             this.Id = id;
         }
 
+        public string ToShortString()
+        {
+            return this.ToString();
+        }
+
         public override string ToString()
         {
             return string.Format("F.{0}: extinct", this.Id);

@@ -12,8 +12,8 @@ namespace Cas.Core.Events
 
         public List<ISpecies> Parents { get; private set; }
 
-        public BirthEvent(Guid locationId, int generation, Type reproductionType, params ISpecies[] parents)
-            : base(locationId, generation)
+        public BirthEvent(ILocation location, int generation, Type reproductionType, params ISpecies[] parents)
+            : base(location, generation)
         {
             if (reproductionType == null) throw new ArgumentNullException("reproductionType");
 
@@ -24,7 +24,7 @@ namespace Cas.Core.Events
         public override string ToString()
         {
             string parents = string.Join(",", Parents.Select(x => x.ToString()));
-            return string.Format("{0}: Birthed by {1} at location {2} by parent(s): {3}", this.Generation, ReproductionType.Name, LocationId, parents);
+            return string.Format("{0}: Birthed by {1} at {2} by parent(s): {3}", this.Generation, ReproductionType.Name, Location.ToShortString(), parents);
         }
         
 

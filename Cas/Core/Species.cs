@@ -217,6 +217,11 @@ namespace Cas.Core
             }
         }
 
+        public string ToShortString()
+        {
+            return this.ToString();
+        }
+
         public override string ToString()
         {
             return string.Format("S.{0}: {1}", this.id, this.exemplar.ToShortString());

@@ -37,9 +37,14 @@ namespace Cas.TestImplementation
             ResourceAllocation = resourceAllocation;
         }
 
+        public override string ToShortString()
+        {
+            return string.Format("X={0}, Y={1}", X, Y);
+        }
+
         public override string ToString()
         {
-            return string.Format("X={0}, Y={1} : [{3} upkeep] : {2} agents", X, Y, this.Agents.Count, UpkeepCost);
+            return string.Format("{0} : [{1} upkeep] : {2} agents", this.ToShortString(), UpkeepCost, this.Agents.Count);
         }
     }
 }
