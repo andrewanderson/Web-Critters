@@ -358,13 +358,22 @@ namespace Cas.Core
                 var actor = candidateActors.RemoveRandom();
                 actor.SetInteractionContactPoint();
 
-                InnerDoInteraction(location, actor, allTargets);
+                // Pick a target
+                var target = SelectRandomTarget(allTargets, actor);
+                if (target is IAgent)
+                {
+                    (target as IAgent).SetInteractionContactPoint();
+                }
+
+                // TODO: Check that we should interact (via tags)
+
+                InnerDoInteraction(location, actor, target);
             }
 
             // TODO: We need to do interactions within multi-agents here
         } 
 
-        protected abstract void InnerDoInteraction(ILocation location, IAgent actor, List<IInteractable> targets);
+        protected abstract void InnerDoInteraction(ILocation location, IAgent actor, IInteractable target);
         
         private void DoReproduction(ILocation location, List<IAgent> breeders)
         {

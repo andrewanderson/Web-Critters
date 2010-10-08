@@ -78,23 +78,13 @@ namespace Cas.TestImplementation
             // No-op (for now)
         }
 
-        protected override void InnerDoInteraction(ILocation location, IAgent actor, List<IInteractable> targets)
+        protected override void InnerDoInteraction(ILocation location, IAgent actor, IInteractable target)
         {
             if (location == null) throw new ArgumentNullException("location");
-            if (targets == null) throw new ArgumentNullException("targets");
+            if (target == null) throw new ArgumentNullException("target");
 
             // TODO: Pick an interaction from a list when we have more than one
             // TODO: Other interaction types
-
-            // Pick a target
-            var target = SelectRandomTarget(targets, actor);
-            if (target is IAgent)
-            {
-                (target as IAgent).SetInteractionContactPoint();
-            }
-
-            // TODO: Check that we should interact (via tags)
-
 
             // Resolve action
             var result = this.attackInteraction.Interact(actor, target);

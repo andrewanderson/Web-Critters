@@ -68,7 +68,6 @@ namespace Cas.Core.Interactions
         {
             double rand = RandomProvider.NextDouble();
             bool shouldMutate = (rand < PointMutationChance);
-            if (shouldMutate) Console.WriteLine("MUTATING");
             return shouldMutate;
         }
 
