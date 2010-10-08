@@ -21,10 +21,11 @@ namespace Cas.Core
         #endregion
 
         protected SimulationBase() 
-            : this(1.5, 4, 0.25, 1.75, 0.2, 0.005, 0.02, 0.005) { }
+            : this(1.5, 4, 0.25, 1.75, 0.2, 0.005, 0.02, 0.005, 5) { }
 
         protected SimulationBase(double interactionsPerGenerationFactor, int maximumUpkeepCostPerLocation, double upkeepChance, 
-            double reproductionThreshold, double reproductionInheritance, double migrationBaseChance, double maxMigrationBonus, double randomDeathChance)
+            double reproductionThreshold, double reproductionInheritance, double migrationBaseChance, double maxMigrationBonus,
+            double randomDeathChance, int maximumAttemptsToFindSuitableTarget)
         {
             // Set some defaults
             InteractionsPerGenerationFactor = interactionsPerGenerationFactor;
@@ -38,6 +39,8 @@ namespace Cas.Core
             MaximumMigrationBonus = maxMigrationBonus;
 
             RandomDeathChance = randomDeathChance;
+
+            MaximumAttemptsToFindSuitableTarget = maximumAttemptsToFindSuitableTarget;
         }
 
         #region ISimulation Members
@@ -240,6 +243,8 @@ namespace Cas.Core
 
         public double RandomDeathChance { get; set; }
 
+        public int MaximumAttemptsToFindSuitableTarget { get; set; }
+
         #endregion
 
         #region RunGeneration
@@ -359,19 +364,15 @@ namespace Cas.Core
                 actor.SetInteractionContactPoint();
 
                 // Pick a target
-                var target = SelectRandomTarget(allTargets, actor);
-                if (target is IAgent)
+                var target = SelectTarget(allTargets, actor);
+                if (target != null)
                 {
-                    (target as IAgent).SetInteractionContactPoint();
+                    InnerDoInteraction(location, actor, target);
                 }
-
-                // TODO: Check that we should interact (via tags)
-
-                InnerDoInteraction(location, actor, target);
             }
 
             // TODO: We need to do interactions within multi-agents here
-        } 
+        }
 
         protected abstract void InnerDoInteraction(ILocation location, IAgent actor, IInteractable target);
         
@@ -444,6 +445,26 @@ namespace Cas.Core
         }
 
         /// <summary>
+        /// Selects a target for the actor to interact with, taking into account
+        /// the conditional exchange tags.
+        /// </summary>
+        protected IInteractable SelectTarget(List<IInteractable> allTargets, IAgent actor)
+        {
+            if (allTargets == null) throw new ArgumentNullException("allTargets");
+            if (allTargets == null) throw new ArgumentNullException("actor");
+
+            IInteractable target = null;
+            for (int i = 0; i < MaximumAttemptsToFindSuitableTarget; i++)
+            {
+                target = SelectRandomTarget(allTargets, actor);
+                if (target != null && target is IAgent) (target as IAgent).SetInteractionContactPoint();
+                if (target == null || !ShouldExchangeOccur(actor, target)) continue;
+            }
+            
+            return target;
+        } 
+
+        /// <summary>
         /// Retrieves a random target from the supplied list, ensuring that it
         /// does not match the supplied actor.
         /// </summary>
@@ -471,6 +492,48 @@ namespace Cas.Core
             return target;
         }
 
+        /// <summary>
+        /// Test to see whether or not an exchange interaction should take place.
+        /// </summary>
+        /// <remarks>
+        /// See Holland pg. 111-113, 148 for details and explanations on this.
+        /// </remarks>
+        protected static bool ShouldExchangeOccur(IAgent actor, IInteractable target)
+        {
+            if (actor == null) throw new ArgumentNullException("actor");
+            if (target == null) throw new ArgumentNullException("target");
+
+            return CalculateConditionalExchangeMatch(actor.Exchange, target.Offense);
+
+            // NOTE:
+            // Holland suggests also checking if the target matches the actor, and 
+            // if not then giving it a chance to flee.  I have not included this since
+            // I believe that Holland's model has agents encountering each other and
+            // attacking simultaneously, not a one way attack like I currently have 
+            // implemented.
+        }
+
+        /// <summary>
+        /// Determine whether or not the exchange tag of one individual is well matched
+        /// to the offense tag of another individual.
+        /// 
+        /// If the exchange tag matches the start of the offense tag then it is considered a match.
+        /// </summary>
+        protected static bool CalculateConditionalExchangeMatch(Tag exchange, Tag offense)
+        {
+            if (exchange == null) throw new ArgumentNullException("exchange");
+            if (offense == null) throw new ArgumentNullException("offense");
+
+            for (int i = 0; i < exchange.Data.Count; i++)
+            {
+                if (i >= offense.Data.Count) return false;
+                if (exchange.Data[i] == Resource.WildcardResource) continue;
+                if (exchange.Data[i] != offense.Data[i]) return false;
+            }
+
+            return true;
+        }
+        
         #endregion
 
         #region IDisposable Members

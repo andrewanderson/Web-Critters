@@ -31,14 +31,14 @@ namespace Cas.TestImplementation
         public GridSimulation(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, 
                               int minResourceNodeDefense, int maxResourceNodeDefense, int tagComplexity) 
             : this(length, width, minResourceNodes, maxResourceNodes, minResourcesPerNode, maxResourcesPerNode, minResourceNodeDefense, maxResourceNodeDefense, tagComplexity, 
-                   100, 4, 0.25, 1.5, 1.75, 0.2, 0.005, 0.02, 0.005) { }
+                   100, 4, 0.25, 1.5, 1.75, 0.2, 0.005, 0.02, 0.005, 5) { }
 
         public GridSimulation(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, 
                               int minResourceNodeDefense, int maxResourceNodeDefense, int tagComplexity, int uniqueResourceCount, int maximumUpkeepCostPerLocation, 
-                              double upkeepChance, double interactionsPerGeneration, double reproductionThreshold, double reproductionInheritance, 
-                              double migrationBaseChance, double maxMigrationBonus, double randomDeathChance)
-            : base(interactionsPerGeneration, maximumUpkeepCostPerLocation, upkeepChance, reproductionThreshold, reproductionInheritance, 
-                   migrationBaseChance, maxMigrationBonus, randomDeathChance)
+                              double upkeepChance, double interactionsPerGeneration, double reproductionThreshold, double reproductionInheritance,
+                              double migrationBaseChance, double maxMigrationBonus, double randomDeathChance, int maximumAttemptsToFindSuitableTarget)
+            : base(interactionsPerGeneration, maximumUpkeepCostPerLocation, upkeepChance, reproductionThreshold, reproductionInheritance,
+                   migrationBaseChance, maxMigrationBonus, randomDeathChance, maximumAttemptsToFindSuitableTarget)
         {
             Length = length;
             Width = width;

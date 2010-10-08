@@ -135,6 +135,12 @@ namespace Cas.Core.Interfaces
         /// </summary>
         double RandomDeathChance { get; }
 
+        /// <summary>
+        /// The total number of times, per interaction, that an agent will try to locate
+        /// an acceptable target.
+        /// </summary>
+        int MaximumAttemptsToFindSuitableTarget { get; }
+
         #endregion
 
     }

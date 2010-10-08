@@ -215,7 +215,7 @@
             this.maxStartingPopulation.Name = "maxStartingPopulation";
             this.maxStartingPopulation.Size = new System.Drawing.Size(44, 20);
             this.maxStartingPopulation.TabIndex = 5;
-            this.maxStartingPopulation.Text = "100";
+            this.maxStartingPopulation.Text = "200";
             this.maxStartingPopulation.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.maxStartingPopulation.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -225,7 +225,7 @@
             this.minStartingPopulation.Name = "minStartingPopulation";
             this.minStartingPopulation.Size = new System.Drawing.Size(34, 20);
             this.minStartingPopulation.TabIndex = 7;
-            this.minStartingPopulation.Text = "50";
+            this.minStartingPopulation.Text = "100";
             this.minStartingPopulation.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.minStartingPopulation.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -478,7 +478,7 @@
             this.startingComplexity.Name = "startingComplexity";
             this.startingComplexity.Size = new System.Drawing.Size(34, 20);
             this.startingComplexity.TabIndex = 46;
-            this.startingComplexity.Text = "6";
+            this.startingComplexity.Text = "3";
             this.startingComplexity.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.startingComplexity.Validated += new System.EventHandler(this.control_Validated);
             // 

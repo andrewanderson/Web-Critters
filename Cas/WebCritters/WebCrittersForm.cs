@@ -62,7 +62,9 @@ namespace WebCritters
                 int.Parse(reproductionInheritancePercent.Text) / 100.0,
                 double.Parse(migrationBaseChance.Text) / 100.0,
                 double.Parse(maxMigrationBonus.Text) / 100.0,
-                double.Parse(randomDeathPercent.Text) / 100.0);
+                double.Parse(randomDeathPercent.Text) / 100.0,
+                5 // TODO: Config me in form
+                );
 
             CasSimulation.GenerationFinished += new EventHandler(CasSimulation_GenerationFinished);
             CasSimulation.LogHistory = this.trackAgentHistory.Checked;
