@@ -20,10 +20,10 @@ namespace Cas.Core
 
         #endregion
 
-        protected SimulationBase() 
+        protected SimulationBase()
             : this(1.5, 4, 0.25, 1.75, 0.2, 0.005, 0.02, 0.005, 5) { }
 
-        protected SimulationBase(double interactionsPerGenerationFactor, int maximumUpkeepCostPerLocation, double upkeepChance, 
+        protected SimulationBase(double interactionsPerGenerationFactor, int maximumUpkeepCostPerLocation, double upkeepChance,
             double reproductionThreshold, double reproductionInheritance, double migrationBaseChance, double maxMigrationBonus,
             double randomDeathChance, int maximumAttemptsToFindSuitableTarget)
         {
@@ -44,7 +44,7 @@ namespace Cas.Core
         }
 
         #region ISimulation Members
-        
+
         public event EventHandler GenerationStarted;
         public event EventHandler GenerationFinished;
 
@@ -82,7 +82,7 @@ namespace Cas.Core
         /// <summary>
         /// A catalog of all unique species in the simulation.
         /// </summary>
-        public List<ISpecies> Species 
+        public List<ISpecies> Species
         {
             get
             {
@@ -153,7 +153,7 @@ namespace Cas.Core
             var species = this.Species.Where(s => s.Id == id).FirstOrDefault();
             return species ?? (IIsUnique)new Fossil(id);
         }
-        
+
         public int CurrentGeneration { get; protected set; }
 
         /// <summary>
@@ -290,7 +290,7 @@ namespace Cas.Core
             if (pendingMigrations == null) throw new ArgumentNullException("pendingMigrations");
 
             // Iterate all agents and have them interact with something (agent/resource node) or migrate (if healthy enough)
-            int interactionsToPerform = (int)(location.Agents.Count*InteractionsPerGenerationFactor);
+            int interactionsToPerform = (int)(location.Agents.Count * InteractionsPerGenerationFactor);
             DoInteractions(location, interactionsToPerform);
 
             // Prior to upkeep, select agents for migration
@@ -375,7 +375,7 @@ namespace Cas.Core
         }
 
         protected abstract void InnerDoInteraction(ILocation location, IAgent actor, IInteractable target);
-        
+
         private void DoReproduction(ILocation location, List<IAgent> breeders)
         {
             if (location == null) throw new ArgumentNullException("location");
@@ -432,11 +432,11 @@ namespace Cas.Core
         protected virtual double CalculateMigrationChance(IAgent agent)
         {
             double percentFull = Math.Max(1, agent.CurrentResourceCount / agent.Size);
-            
+
             return MigrationBaseChance + ((1 - percentFull) * MaximumMigrationBonus);
         }
 
-        public void AddEventToAgent(IAgent agent, IEvent newEvent) 
+        public void AddEventToAgent(IAgent agent, IEvent newEvent)
         {
             if (agent == null) throw new ArgumentNullException("agent");
             if (newEvent == null) throw new ArgumentNullException("newEvent");
@@ -451,18 +451,21 @@ namespace Cas.Core
         protected IInteractable SelectTarget(List<IInteractable> allTargets, IAgent actor)
         {
             if (allTargets == null) throw new ArgumentNullException("allTargets");
-            if (allTargets == null) throw new ArgumentNullException("actor");
+            if (actor == null) throw new ArgumentNullException("actor");
 
             IInteractable target = null;
             for (int i = 0; i < MaximumAttemptsToFindSuitableTarget; i++)
             {
                 target = SelectRandomTarget(allTargets, actor);
-                if (target != null && target is IAgent) (target as IAgent).SetInteractionContactPoint();
-                if (target == null || !ShouldExchangeOccur(actor, target)) continue;
+                if (target == null) continue;
+
+                if (target is IAgent) (target as IAgent).SetInteractionContactPoint();
+
+                if (ShouldExchangeOccur(actor, target)) break;
             }
-            
+
             return target;
-        } 
+        }
 
         /// <summary>
         /// Retrieves a random target from the supplied list, ensuring that it
@@ -471,11 +474,11 @@ namespace Cas.Core
         protected static TBase SelectRandomTarget<TBase, TSpecific>(List<TBase> allTargets, TSpecific actor) where TBase : class
         {
             if (allTargets == null) throw new ArgumentNullException("allTargets");
-            if (allTargets == null) throw new ArgumentNullException("actor");
+            if (actor == null) throw new ArgumentNullException("actor");
 
             TBase target = null;
 
-            if (allTargets.Count == 0 || (allTargets.Count == 1 && Object.ReferenceEquals(allTargets[0],actor)))
+            if (allTargets.Count == 0 || (allTargets.Count == 1 && Object.ReferenceEquals(allTargets[0], actor)))
             {
                 return null;
             }
@@ -533,7 +536,7 @@ namespace Cas.Core
 
             return true;
         }
-        
+
         #endregion
 
         #region IDisposable Members
