@@ -12,7 +12,7 @@ namespace WebCritters
 {
     public partial class SpeciesDetails : Form
     {
-        private WebCrittersForm ParentForm { get; set; }
+        private new WebCrittersForm ParentForm { get; set; }
         private ISpecies CurrentSpecies { get; set; }
         private ISimulation Simulation { get; set; }
 

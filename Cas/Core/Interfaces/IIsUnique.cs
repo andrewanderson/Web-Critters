@@ -17,6 +17,11 @@ namespace Cas.Core.Interfaces
         /// Unique identifier for the object.
         /// </summary>
         long Id { get; }
+
+        /// <summary>
+        /// A terse description of the object.
+        /// </summary>
+        string ToShortString();
     }
 
     public class IIsUnqiueEqualityComparer : IEqualityComparer<IIsUnique>

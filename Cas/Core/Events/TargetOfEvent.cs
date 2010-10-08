@@ -12,8 +12,8 @@ namespace Cas.Core.Events
 
         public int Result { get; private set; }
 
-        public TargetOfEvent(Guid locationId, int generation, IIsUnique actor, int result)
-            : base(locationId, generation)
+        public TargetOfEvent(ILocation location, int generation, IIsUnique actor, int result)
+            : base(location, generation)
         {
             if (actor == null) throw new ArgumentNullException("actor");
 
@@ -23,7 +23,7 @@ namespace Cas.Core.Events
 
         public override string ToString()
         {
-            return string.Format("{0}: Lost encounter ({3}) with ({2}) {1}", this.Generation, Actor, Actor.GetType().Name, Result);
+            return string.Format("{0}: Lost encounter ({3}) with ({2}) {1}", this.Generation, Actor.ToShortString(), Actor.GetType().Name, Result);
         }
     }
 }

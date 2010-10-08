@@ -124,7 +124,7 @@ namespace WebCritters
                     cell.AddRandomResources(startingResourceCount);
 
                     agent.Cells.Add(cell);
-                    this.CasSimulation.RegisterBirth(agent, new CreationEvent(location.Id, 0));
+                    this.CasSimulation.RegisterBirth(agent, new CreationEvent(location, 0));
 
                     location.Agents.Add(agent);
                 }

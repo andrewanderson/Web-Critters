@@ -1,13 +1,14 @@
 ﻿using System;
+using Cas.Core.Interfaces;
 
 namespace Cas.Core.Events
 {
     public interface IEvent
     {
         /// <summary>
-        /// The identifier of the location in which the event took place
+        /// The location at which the event took place
         /// </summary>
-        Guid LocationId { get; }
+        ILocation Location { get; }
 
         /// <summary>
         /// The generation in which the event occurred

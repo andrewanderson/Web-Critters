@@ -421,7 +421,7 @@
             this.mutationPercent.Name = "mutationPercent";
             this.mutationPercent.Size = new System.Drawing.Size(59, 20);
             this.mutationPercent.TabIndex = 52;
-            this.mutationPercent.Text = "0.10";
+            this.mutationPercent.Text = "0.05";
             this.mutationPercent.Validating += new System.ComponentModel.CancelEventHandler(this.doubleTextBox_Validating);
             this.mutationPercent.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -440,7 +440,7 @@
             this.uniqueResourceCount.Name = "uniqueResourceCount";
             this.uniqueResourceCount.Size = new System.Drawing.Size(59, 20);
             this.uniqueResourceCount.TabIndex = 50;
-            this.uniqueResourceCount.Text = "15";
+            this.uniqueResourceCount.Text = "10";
             this.uniqueResourceCount.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.uniqueResourceCount.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -516,7 +516,7 @@
             this.maxResourcesPerNode.Name = "maxResourcesPerNode";
             this.maxResourcesPerNode.Size = new System.Drawing.Size(44, 20);
             this.maxResourcesPerNode.TabIndex = 42;
-            this.maxResourcesPerNode.Text = "40";
+            this.maxResourcesPerNode.Text = "50";
             this.maxResourcesPerNode.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.maxResourcesPerNode.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -535,7 +535,7 @@
             this.minResourceNodes.Name = "minResourceNodes";
             this.minResourceNodes.Size = new System.Drawing.Size(34, 20);
             this.minResourceNodes.TabIndex = 40;
-            this.minResourceNodes.Text = "1";
+            this.minResourceNodes.Text = "3";
             this.minResourceNodes.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.minResourceNodes.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -592,7 +592,7 @@
             this.randomDeathPercent.Name = "randomDeathPercent";
             this.randomDeathPercent.Size = new System.Drawing.Size(59, 20);
             this.randomDeathPercent.TabIndex = 34;
-            this.randomDeathPercent.Text = "0.5";
+            this.randomDeathPercent.Text = "0.005";
             this.randomDeathPercent.Validating += new System.ComponentModel.CancelEventHandler(this.doubleTextBox_Validating);
             this.randomDeathPercent.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -715,7 +715,7 @@
             this.upkeepPercent.Name = "upkeepPercent";
             this.upkeepPercent.Size = new System.Drawing.Size(59, 20);
             this.upkeepPercent.TabIndex = 21;
-            this.upkeepPercent.Text = "50";
+            this.upkeepPercent.Text = "33";
             this.upkeepPercent.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.upkeepPercent.Validated += new System.EventHandler(this.control_Validated);
             // 

@@ -10,8 +10,6 @@ namespace Cas.Core
 {
     public abstract class LocationBase : ILocation
     {
-        public Guid Id { get; private set; }
-
         protected ISimulation Simulation { get; set; }
 
         /// <summary>
@@ -44,7 +42,6 @@ namespace Cas.Core
         {
             if (simulation == null) throw new ArgumentNullException("simulation");
 
-            this.Id = Guid.NewGuid();
             this.Simulation = simulation;
         }
 
@@ -79,7 +76,7 @@ namespace Cas.Core
         {
             foreach (var agent in Agents)
             {
-                this.Simulation.AddEventToAgent(agent, new PayUpkeepEvent(this.Id, this.UpkeepCost, generation));
+                this.Simulation.AddEventToAgent(agent, new PayUpkeepEvent(this, this.UpkeepCost, generation));
                 if (agent.IsMultiAgent() || agent.Cells.Count == 0)
                 {
                     // TODO: How do we extract payment if the base agent has no resources?  
@@ -92,5 +89,7 @@ namespace Cas.Core
                 }
             }
         }
+
+        public abstract string ToShortString();
     }
 }

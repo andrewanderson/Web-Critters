@@ -9,8 +9,8 @@ namespace Cas.Core.Events
 
         public int Result { get; private set; }
 
-        public TargetedEvent(Guid locationId, int generation, IIsUnique target, int result) 
-            : base(locationId, generation)
+        public TargetedEvent(ILocation location, int generation, IIsUnique target, int result) 
+            : base(location, generation)
         {
             if (target == null) throw new ArgumentNullException("target");
 
@@ -20,7 +20,7 @@ namespace Cas.Core.Events
 
         public override string ToString()
         {
-            return string.Format("{0}: Won encounter ({3}) against ({2}) {1}", this.Generation, Target, Target.GetType().Name, Result);
+            return string.Format("{0}: Won encounter ({3}) against ({2}) {1}", this.Generation, Target.ToShortString(), Target.GetType().Name, Result);
         }
     }
 }

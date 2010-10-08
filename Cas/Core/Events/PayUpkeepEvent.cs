@@ -1,4 +1,5 @@
 ﻿using System;
+using Cas.Core.Interfaces;
 
 namespace Cas.Core.Events
 {
@@ -6,15 +7,15 @@ namespace Cas.Core.Events
     {
         public int Cost { get; private set; }
 
-        public PayUpkeepEvent(Guid locationId, int cost, int generation)
-            : base(locationId, generation)
+        public PayUpkeepEvent(ILocation location, int cost, int generation)
+            : base(location, generation)
         {
             this.Cost = cost;
         }
 
         public override string ToString()
         {
-            return string.Format("{0}: Paid upkeep of {1} at location {2}", this.Generation, this.Cost, this.LocationId);
+            return string.Format("{0}: Paid upkeep of {1} at {2}", this.Generation, this.Cost, this.Location.ToShortString());
         }
     }
 }
