@@ -55,18 +55,13 @@ namespace Cas.Core.Interactions
 
                 Resource targetData = targetTag.Data[actorIndex];
 
-                if (actorData.Equals(Resource.WildcardResource) && targetData.Equals(Resource.WildcardResource))
+                if (actorData == targetData)
                 {
-                    // skip matching wildcards
-                    continue;
+                    result += InteractionLocus[(int)InteractionLocusIndecies.Match];
                 }
                 else if (actorData.Equals(Resource.WildcardResource))
                 {
                     result += InteractionLocus[(int)InteractionLocusIndecies.Wildcard];
-                }
-                else if (actorData == targetData)
-                {
-                    result += InteractionLocus[(int)InteractionLocusIndecies.Match];
                 }
                 else
                 {
