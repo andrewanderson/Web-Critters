@@ -141,6 +141,10 @@
             this.label12 = new System.Windows.Forms.Label();
             this.locationResourceList = new System.Windows.Forms.ListBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label57 = new System.Windows.Forms.Label();
+            this.locationRenewableCount = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.locationCapacity = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.upkeepCost = new System.Windows.Forms.Label();
             this.shortSimulationDescription = new System.Windows.Forms.Label();
@@ -156,10 +160,6 @@
             this.currentGeneration = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label56 = new System.Windows.Forms.Label();
-            this.locationCapacity = new System.Windows.Forms.Label();
-            this.label57 = new System.Windows.Forms.Label();
-            this.locationRenewableCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -547,7 +547,7 @@
             this.minResourcesPerNode.Name = "minResourcesPerNode";
             this.minResourcesPerNode.Size = new System.Drawing.Size(34, 20);
             this.minResourcesPerNode.TabIndex = 44;
-            this.minResourcesPerNode.Text = "20";
+            this.minResourcesPerNode.Text = "15";
             this.minResourcesPerNode.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.minResourcesPerNode.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -566,7 +566,7 @@
             this.maxResourcesPerNode.Name = "maxResourcesPerNode";
             this.maxResourcesPerNode.Size = new System.Drawing.Size(44, 20);
             this.maxResourcesPerNode.TabIndex = 42;
-            this.maxResourcesPerNode.Text = "50";
+            this.maxResourcesPerNode.Text = "40";
             this.maxResourcesPerNode.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.maxResourcesPerNode.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -585,7 +585,7 @@
             this.minResourceNodes.Name = "minResourceNodes";
             this.minResourceNodes.Size = new System.Drawing.Size(34, 20);
             this.minResourceNodes.TabIndex = 40;
-            this.minResourceNodes.Text = "3";
+            this.minResourceNodes.Text = "2";
             this.minResourceNodes.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.minResourceNodes.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -604,7 +604,7 @@
             this.maxResourceNodes.Name = "maxResourceNodes";
             this.maxResourceNodes.Size = new System.Drawing.Size(44, 20);
             this.maxResourceNodes.TabIndex = 38;
-            this.maxResourceNodes.Text = "10";
+            this.maxResourceNodes.Text = "7";
             this.maxResourceNodes.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.maxResourceNodes.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -765,7 +765,7 @@
             this.upkeepPercent.Name = "upkeepPercent";
             this.upkeepPercent.Size = new System.Drawing.Size(59, 20);
             this.upkeepPercent.TabIndex = 21;
-            this.upkeepPercent.Text = "33";
+            this.upkeepPercent.Text = "50";
             this.upkeepPercent.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.upkeepPercent.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -784,7 +784,7 @@
             this.maximumUpkeep.Name = "maximumUpkeep";
             this.maximumUpkeep.Size = new System.Drawing.Size(59, 20);
             this.maximumUpkeep.TabIndex = 19;
-            this.maximumUpkeep.Text = "2";
+            this.maximumUpkeep.Text = "3";
             this.maximumUpkeep.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.maximumUpkeep.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -1365,6 +1365,42 @@
             this.panel1.Size = new System.Drawing.Size(313, 41);
             this.panel1.TabIndex = 9;
             // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(149, 2);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(69, 13);
+            this.label57.TabIndex = 44;
+            this.label57.Text = "Renewables:";
+            // 
+            // locationRenewableCount
+            // 
+            this.locationRenewableCount.AutoSize = true;
+            this.locationRenewableCount.Location = new System.Drawing.Point(245, 2);
+            this.locationRenewableCount.Name = "locationRenewableCount";
+            this.locationRenewableCount.Size = new System.Drawing.Size(13, 13);
+            this.locationRenewableCount.TabIndex = 45;
+            this.locationRenewableCount.Text = "0";
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(5, 17);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(51, 13);
+            this.label56.TabIndex = 42;
+            this.label56.Text = "Capacity:";
+            // 
+            // locationCapacity
+            // 
+            this.locationCapacity.AutoSize = true;
+            this.locationCapacity.Location = new System.Drawing.Point(101, 17);
+            this.locationCapacity.Name = "locationCapacity";
+            this.locationCapacity.Size = new System.Drawing.Size(13, 13);
+            this.locationCapacity.TabIndex = 43;
+            this.locationCapacity.Text = "0";
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -1491,42 +1527,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(5, 17);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(51, 13);
-            this.label56.TabIndex = 42;
-            this.label56.Text = "Capacity:";
-            // 
-            // locationCapacity
-            // 
-            this.locationCapacity.AutoSize = true;
-            this.locationCapacity.Location = new System.Drawing.Point(101, 17);
-            this.locationCapacity.Name = "locationCapacity";
-            this.locationCapacity.Size = new System.Drawing.Size(13, 13);
-            this.locationCapacity.TabIndex = 43;
-            this.locationCapacity.Text = "0";
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(149, 2);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(69, 13);
-            this.label57.TabIndex = 44;
-            this.label57.Text = "Renewables:";
-            // 
-            // locationRenewableCount
-            // 
-            this.locationRenewableCount.AutoSize = true;
-            this.locationRenewableCount.Location = new System.Drawing.Point(245, 2);
-            this.locationRenewableCount.Name = "locationRenewableCount";
-            this.locationRenewableCount.Size = new System.Drawing.Size(13, 13);
-            this.locationRenewableCount.TabIndex = 45;
-            this.locationRenewableCount.Text = "0";
             // 
             // WebCrittersForm
             // 
