@@ -35,10 +35,5 @@ namespace Cas.Core.Interfaces
         void RefreshReservoir();
 
         IResourceNode DeepCopy();
-
-        /// <summary>
-        /// Returns a terse representation of the resource node.
-        /// </summary>
-        string ToShortString();
     }
 }
