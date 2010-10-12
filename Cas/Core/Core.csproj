@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="AgentBase.cs" />
     <Compile Include="CellBase.cs" />
+    <Compile Include="Corpse.cs" />
     <Compile Include="DietType.cs">
       <SubType>Code</SubType>
     </Compile>

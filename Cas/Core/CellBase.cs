@@ -169,6 +169,20 @@ namespace Cas.Core
             }
         }
 
+        public List<Resource> GeneticMaterial
+        {
+            get
+            {
+                var geneticResources = new List<Resource>();
+                for (int i = 0; i < this.ActiveTagsInModel; i++)
+                {
+                    geneticResources.AddRange(this.GetTagByIndex(i).Data);
+                }
+
+                return geneticResources;
+            }
+        }
+
         #endregion
 
         public override string ToString()

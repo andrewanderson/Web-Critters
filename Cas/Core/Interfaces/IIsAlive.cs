@@ -20,5 +20,9 @@ namespace Cas.Core.Interfaces
         /// </summary>
         bool IsEligableForDeath { get; }
 
+        /// <summary>
+        /// Resources corresponding to all of the tags in the living object.
+        /// </summary>
+        List<Resource> GeneticMaterial { get; }
     }
 }

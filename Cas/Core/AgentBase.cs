@@ -142,6 +142,25 @@ namespace Cas.Core
                 && agents.All(agent => agent.CanReplicate(reproductionThreshold));
         }
 
+        public List<Resource> GeneticMaterial
+        {
+            get
+            {
+                var geneticResources = new List<Resource>();
+                foreach (ICell cell in this.Cells)
+                {
+                    geneticResources.AddRange(cell.GeneticMaterial);
+                }
+
+                foreach (IAgent agent in this.Agents)
+                {
+                    geneticResources.AddRange(agent.GeneticMaterial);
+                }
+
+                return geneticResources;
+            }
+        }
+
         public abstract bool IsEligableForDeath { get; }
 
         #endregion
