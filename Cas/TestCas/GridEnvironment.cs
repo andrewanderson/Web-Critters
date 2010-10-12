@@ -143,8 +143,10 @@ namespace Cas.TestImplementation
             {
                 for (int y = 0; y < Width; y++)
                 {
-                    // Upkeep between 1 and MaximumUpkeepCostPerLocation
-                    GridLocation gl = new GridLocation(x, y, this.Simulation, AllocateRandomResources(), RandomProvider.Next(Simulation.MaximumUpkeepCostPerLocation) + 1); 
+                    int upkeep = RandomProvider.Next(Simulation.MaximumUpkeepCostPerLocation) + 1;
+                    int capacity = RandomProvider.Next(Simulation.MaximumLocationResourceCapacity - Simulation.MinimumLocationResourceCapacity) + Simulation.MinimumLocationResourceCapacity;
+
+                    GridLocation gl = new GridLocation(x, y, this.Simulation, AllocateRandomResources(), upkeep, capacity); 
                     grid[x, y] = gl; 
                     LinkToPreviousLocations(gl, grid);
                     Locations.Add(gl);

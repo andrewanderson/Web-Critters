@@ -31,14 +31,15 @@ namespace Cas.TestImplementation
         public GridSimulation(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, 
                               int minResourceNodeDefense, int maxResourceNodeDefense, int tagComplexity) 
             : this(length, width, minResourceNodes, maxResourceNodes, minResourcesPerNode, maxResourcesPerNode, minResourceNodeDefense, maxResourceNodeDefense, tagComplexity, 
-                   100, 4, 0.25, 1.5, 1.75, 0.2, 0.005, 0.02, 0.005, 5) { }
+                   100, 4, 0.25, 1.5, 1.75, 0.2, 0.005, 0.02, 0.005, 5, 10, 30) { }
 
         public GridSimulation(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, 
                               int minResourceNodeDefense, int maxResourceNodeDefense, int tagComplexity, int uniqueResourceCount, int maximumUpkeepCostPerLocation, 
                               double upkeepChance, double interactionsPerGeneration, double reproductionThreshold, double reproductionInheritance,
-                              double migrationBaseChance, double maxMigrationBonus, double randomDeathChance, int maximumAttemptsToFindSuitableTarget)
+                              double migrationBaseChance, double maxMigrationBonus, double randomDeathChance, int maximumAttemptsToFindSuitableTarget,
+                              int minimumLocationResourceCapacity, int maximumLocationResourceCapacity)
             : base(interactionsPerGeneration, maximumUpkeepCostPerLocation, upkeepChance, reproductionThreshold, reproductionInheritance,
-                   migrationBaseChance, maxMigrationBonus, randomDeathChance, maximumAttemptsToFindSuitableTarget)
+                   migrationBaseChance, maxMigrationBonus, randomDeathChance, maximumAttemptsToFindSuitableTarget, minimumLocationResourceCapacity, maximumLocationResourceCapacity)
         {
             Length = length;
             Width = width;

@@ -111,6 +111,15 @@ namespace Cas.Core
             }
         }
 
+        public int ResourceCapacity
+        {
+            get
+            {
+                // TODO: Can agents really store infinite resources?
+                return int.MaxValue;
+            }
+        }
+
         /// <summary>
         /// The resources that are common to this agent, and have
         /// been present since the start of the generation.

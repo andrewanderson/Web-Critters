@@ -12,6 +12,17 @@ namespace Cas.Core.Interfaces
     public interface IBoundary
     {
         /// <summary>
+        /// An upper bounds on the size of the CurrentResources list.
+        /// </summary>
+        /// <remarks>
+        /// Individual simulations can determine what happens when resources
+        /// are added to a "full" CurrentResources.  Options include rotting
+        /// old nodes, rejecting new nodes, or randomly purging excess nodes
+        /// at the end of a generation.
+        /// </remarks>
+        int ResourceCapacity { get; }
+
+        /// <summary>
         /// The individual agents that are currently living in this boundary.
         /// </summary>
         List<IAgent> Agents { get; }

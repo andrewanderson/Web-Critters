@@ -110,6 +110,16 @@ namespace Cas.Core.Interfaces
         double UpkeepChance { get; }
 
         /// <summary>
+        /// The lower bounds on any location's resource node capacity.
+        /// </summary>
+        int MinimumLocationResourceCapacity { get; }
+
+        /// <summary>
+        /// The upper bounds on any location's resource node capacity.
+        /// </summary>
+        int MaximumLocationResourceCapacity { get; }
+
+        /// <summary>
         /// The number of resources that an agent requires to initiate reproduction above and beyond
         /// the amount needed to replicate its genome.
         /// </summary>

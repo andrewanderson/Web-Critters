@@ -29,6 +29,11 @@ namespace Cas.Core
         public List<IAgent> Agents { get; protected set; }
 
         /// <summary>
+        /// An upper bounds on the size of the CurrentResources list.
+        /// </summary>
+        public int ResourceCapacity { get; protected set; }
+
+        /// <summary>
         /// The resources that are currently available at this location.
         /// </summary>
         public List<IResourceNode> CurrentResources { get; protected set; }

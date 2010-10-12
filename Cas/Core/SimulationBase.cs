@@ -21,15 +21,14 @@ namespace Cas.Core
         #endregion
 
         protected SimulationBase()
-            : this(1.5, 4, 0.25, 1.75, 0.2, 0.005, 0.02, 0.005, 5) { }
+            : this(1.5, 4, 0.25, 1.75, 0.2, 0.005, 0.02, 0.005, 5, 10, 30) { }
 
         protected SimulationBase(double interactionsPerGenerationFactor, int maximumUpkeepCostPerLocation, double upkeepChance,
             double reproductionThreshold, double reproductionInheritance, double migrationBaseChance, double maxMigrationBonus,
-            double randomDeathChance, int maximumAttemptsToFindSuitableTarget)
+            double randomDeathChance, int maximumAttemptsToFindSuitableTarget, int minimumLocationResourceCapacity, int maximumLocationResourceCapacity)
         {
             // Set some defaults
             InteractionsPerGenerationFactor = interactionsPerGenerationFactor;
-            MaximumUpkeepCostPerLocation = maximumUpkeepCostPerLocation;
             UpkeepChance = upkeepChance;
 
             ReproductionThreshold = reproductionThreshold;
@@ -41,6 +40,9 @@ namespace Cas.Core
             RandomDeathChance = randomDeathChance;
 
             MaximumAttemptsToFindSuitableTarget = maximumAttemptsToFindSuitableTarget;
+
+            MinimumLocationResourceCapacity = minimumLocationResourceCapacity;
+            MaximumLocationResourceCapacity = maximumLocationResourceCapacity;
         }
 
         #region ISimulation Members
@@ -232,6 +234,10 @@ namespace Cas.Core
         public int MaximumUpkeepCostPerLocation { get; set; }
 
         public double UpkeepChance { get; set; }
+
+        public int MinimumLocationResourceCapacity { get; set; }
+
+        public int MaximumLocationResourceCapacity { get; set; }
 
         public double ReproductionThreshold { get; set; }
 

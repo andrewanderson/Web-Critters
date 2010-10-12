@@ -63,7 +63,9 @@ namespace WebCritters
                 double.Parse(migrationBaseChance.Text) / 100.0,
                 double.Parse(maxMigrationBonus.Text) / 100.0,
                 double.Parse(randomDeathPercent.Text) / 100.0,
-                5 // TODO: Config me in form
+                5, // TODO: Config max attepts to find prey in form
+                int.Parse(minimumCapacity.Text),
+                int.Parse(maximumCapacity.Text)
                 );
 
             CasSimulation.GenerationFinished += new EventHandler(CasSimulation_GenerationFinished);
@@ -273,6 +275,8 @@ namespace WebCritters
             {
                 locationName.Text = "N/A";
                 upkeepCost.Text = "0";
+                locationCapacity.Text = "0";
+                locationRenewableCount.Text = "0";
 
                 BindListBox<IResourceNode>(locationResourceList, locationResourceCount, null);
                 BindListBox<IAgent>(agentList, locationAgentCount, null);
@@ -282,8 +286,10 @@ namespace WebCritters
             {
                 locationName.Text = location.ToString();
                 upkeepCost.Text = location.UpkeepCost.ToString();
+                locationCapacity.Text = location.ResourceCapacity.ToString();
+                locationRenewableCount.Text = location.ResourceAllocation.Count.ToString();
 
-                BindListBox<IResourceNode>(locationResourceList, locationResourceCount, location.ResourceAllocation);
+                BindListBox<IResourceNode>(locationResourceList, locationResourceCount, location.CurrentResources);
                 BindListBox<IAgent>(agentList, locationAgentCount, location.Agents);
                 BindListBox<ILocation>(connectionList, locationConnectionCount, location.Connections);
             }
