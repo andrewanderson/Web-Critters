@@ -146,7 +146,8 @@ namespace Cas.TestImplementation
                     int upkeep = RandomProvider.Next(Simulation.MaximumUpkeepCostPerLocation) + 1;
                     int capacity = RandomProvider.Next(Simulation.MaximumLocationResourceCapacity - Simulation.MinimumLocationResourceCapacity) + Simulation.MinimumLocationResourceCapacity;
 
-                    GridLocation gl = new GridLocation(x, y, this.Simulation, AllocateRandomResources(), upkeep, capacity); 
+                    GridLocation gl = new GridLocation(x, y, this.Simulation, AllocateRandomResources(), upkeep, capacity);
+                    gl.RefreshResourcePool(); // start with a full resource pool
                     grid[x, y] = gl; 
                     LinkToPreviousLocations(gl, grid);
                     Locations.Add(gl);
