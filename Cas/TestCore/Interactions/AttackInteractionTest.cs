@@ -113,7 +113,7 @@ namespace TestCore.Interactions
         }
 
         [TestMethod]
-        public void Interact_WildcardsCancelOut()
+        public void Interact_PairedWildcardsTreatedAsMatch()
         {
             ICell actor = GridCell.New();
             actor.Offense = Tag.New("ab#c");
@@ -125,7 +125,7 @@ namespace TestCore.Interactions
 
             int result = TestAttackInteraction.Interact(actor, target);
 
-            Assert.AreEqual(MatchValue * 3, result);
+            Assert.AreEqual(MatchValue * 4, result);
 
             // resource check
             int transfer = CalculateTransferredResources(result);

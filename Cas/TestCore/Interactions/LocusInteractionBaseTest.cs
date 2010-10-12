@@ -82,11 +82,11 @@ namespace TestCore.Interactions
         }
 
         [TestMethod]
-        public void Interact_WildcardsCancelOut()
+        public void Interact_PairedWildcardsTreatedAsMatch()
         {
             int result = Interaction.Interact(Tag.New("ab#c"), Tag.New("ab#c"));
 
-            Assert.AreEqual(MatchValue * 3, result);
+            Assert.AreEqual(MatchValue * 4, result);
         }
 
         [TestMethod]
