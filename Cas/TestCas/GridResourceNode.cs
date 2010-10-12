@@ -87,14 +87,15 @@ namespace Cas.TestImplementation
             grn.Exchange = Tag.New(maximumTagSize, false);
 
             int nodeSize = 0;
-            int range = maxResources - minResources;
+            int resourceRange = maxResources - minResources;
             if (minimumDefenseSize == maximumDefenseSize)
             {
-                nodeSize = minResources + RandomProvider.Next(range);
+                nodeSize = minResources + RandomProvider.Next(resourceRange);
             }
             else
             {
-                nodeSize = (int)(((double)grn.Defense.Data.Count / (double)maximumTagSize) * range) + minResources;
+                double sizeRange = maximumDefenseSize - minimumDefenseSize;
+                nodeSize = (int)(((double)(grn.Defense.Data.Count - minimumDefenseSize) / sizeRange) * resourceRange) + minResources;
             }
             
             var resources = new List<Resource>();
