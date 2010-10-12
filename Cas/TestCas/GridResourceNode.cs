@@ -111,8 +111,7 @@ namespace Cas.TestImplementation
 
         public override string ToString()
         {
-            string renewableResources = string.Concat(this.RenewableResources.Select(x => x.ToString()));
-            return string.Format("RN.{0}: {1} defense => {2}", Math.Abs(this.Id), this.Defense, renewableResources);
+            return string.Format("RN.{0}: {1} {2}, {3} resources", Math.Abs(this.Id), this.Offense, this.Defense, this.Reservoir.Count);
         }
 
         #region IResourceNode Members
@@ -140,7 +139,7 @@ namespace Cas.TestImplementation
 
         public string ToShortString()
         {
-            return string.Format("RN.{0}: {1} defense", Math.Abs(this.Id), this.Defense);
+            return string.Format("RN.{0}: {1} {2}", Math.Abs(this.Id), this.Offense, this.Defense);
         }
 
         #endregion

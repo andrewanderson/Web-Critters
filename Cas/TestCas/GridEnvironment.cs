@@ -181,7 +181,7 @@ namespace Cas.TestImplementation
                     globalResources = new List<IResourceNode>();
                     for (int i = 0; i < GlobalResourcePoolSize; i++)
                     {
-                        globalResources.Add(GridResourceNode.New(MinResourceNodeDefense, MaxResourceNodeDefense, StartingTagComplexity, MinResourcesPerNodePerLocation, MaxResourcesPerNodePerLocation));
+                        globalResources.Add(GridResourceNode.New(MinResourceNodeDefense, MaxResourceNodeDefense, MaxResourceNodeDefense, MinResourcesPerNodePerLocation, MaxResourcesPerNodePerLocation));
                     }
 
                 }
