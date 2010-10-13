@@ -330,9 +330,14 @@ namespace Cas.Core
             // Deaths (remove from the back first)
             for (int i = deathIndecies.Count - 1; i >= 0; i--)
             {
+                // Kill the agent
                 var condemned = location.Agents[deathIndecies[i]];
                 location.Agents.RemoveAt(deathIndecies[i]);
                 this.RegisterDeath(condemned);
+
+                // Add a corpse object with the dead agent's genetic material to the location
+                var corpse = new Corpse(condemned);
+                location.CurrentResources.Add(corpse);
             }
 
             // Age all surviving agents

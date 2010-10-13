@@ -375,7 +375,7 @@
             this.minimumCapacity.Name = "minimumCapacity";
             this.minimumCapacity.Size = new System.Drawing.Size(34, 20);
             this.minimumCapacity.TabIndex = 62;
-            this.minimumCapacity.Text = "10";
+            this.minimumCapacity.Text = "15";
             this.minimumCapacity.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.minimumCapacity.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -394,7 +394,7 @@
             this.maximumCapacity.Name = "maximumCapacity";
             this.maximumCapacity.Size = new System.Drawing.Size(44, 20);
             this.maximumCapacity.TabIndex = 60;
-            this.maximumCapacity.Text = "30";
+            this.maximumCapacity.Text = "35";
             this.maximumCapacity.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.maximumCapacity.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -585,7 +585,7 @@
             this.minResourceNodes.Name = "minResourceNodes";
             this.minResourceNodes.Size = new System.Drawing.Size(34, 20);
             this.minResourceNodes.TabIndex = 40;
-            this.minResourceNodes.Text = "2";
+            this.minResourceNodes.Text = "3";
             this.minResourceNodes.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.minResourceNodes.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -604,7 +604,7 @@
             this.maxResourceNodes.Name = "maxResourceNodes";
             this.maxResourceNodes.Size = new System.Drawing.Size(44, 20);
             this.maxResourceNodes.TabIndex = 38;
-            this.maxResourceNodes.Text = "7";
+            this.maxResourceNodes.Text = "10";
             this.maxResourceNodes.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.maxResourceNodes.Validated += new System.EventHandler(this.control_Validated);
             // 

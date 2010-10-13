@@ -139,6 +139,10 @@ namespace Cas.Core
 
                 (prey as ISpecies).RecordPredation(this);
             }
+            else if (prey is Corpse)
+            {
+                ResourcesFromAgents += amount;
+            }
             else // IResourceNode
             {
                 ResourcesFromResourceNodes += amount;
