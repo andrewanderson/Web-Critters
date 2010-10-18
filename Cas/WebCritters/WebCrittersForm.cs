@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cas.Core;
 using Cas.Core.Events;
@@ -24,7 +26,8 @@ namespace WebCritters
 
         private SpeciesDetails SpeciesDetailsWindow = null;
 
-        private bool IsStopping = false;
+        private CancellationTokenSource RunGenerationCTS = null;
+        //private bool IsStopping = false;
         
         private void WebCrittersForm_Load(object sender, EventArgs e)
         {
@@ -226,17 +229,43 @@ namespace WebCritters
             this.runProgressBar.Maximum = generationCount;
 
             // Spawn this work on a different thread.
-            System.Threading.Tasks.Task.Factory.StartNew(() =>
+            if (this.RunGenerationCTS != null && !this.RunGenerationCTS.IsCancellationRequested) this.RunGenerationCTS.Cancel();
+            this.RunGenerationCTS = new CancellationTokenSource();
+            var token = this.RunGenerationCTS.Token;
+            var task = Task.Factory.StartNew(() => this.CasSimulation.RunGeneration());
+            for (int i = 1; i < generationCount; i++)
             {
-                IsStopping = false;
+                task = task.ContinueWith(t =>
+                                             {
+                                                 if (t.IsFaulted && t.Exception != null) DisplayException(t.Exception);
+                                                 if (token.IsCancellationRequested) return;
+                                                 this.CasSimulation.RunGeneration();
+                                             });
+            }
+            task.ContinueWith(t =>
+                                  {
+                                      if (t.IsFaulted && t.Exception != null) DisplayException(t.Exception);
+                                      this.Invoke(new MethodInvoker(() => this.UpdateSimulationDetails(true)));
+                                  });
 
-                for (int i = 0; (i < generationCount && !IsStopping); i++)
-                {
-                    this.CasSimulation.RunGeneration();
-                }
+            this.stopButton.Enabled = true;
+            this.runGenerations.Enabled = false;
+        }
 
-                IsStopping = false;
-            });
+
+        private void DisplayException(Exception e)
+        {
+            if (e == null) return;
+
+            MessageBox.Show(
+                string.Format(
+                    @"{0} : {1}
+
+Trace:
+{2}",
+    e.GetType().Name,
+    e.Message,
+    e.StackTrace), "Generation processing exception");
         }
 
         #region Validation
@@ -403,8 +432,13 @@ namespace WebCritters
 
         private void stopButton_Click(object sender, EventArgs e)
         {
-            IsStopping = true;
-            this.UpdateSimulationDetails(true);
+            if (!(this.RunGenerationCTS == null || this.RunGenerationCTS.IsCancellationRequested))
+            {
+                this.RunGenerationCTS.Cancel();
+            }
+
+            this.stopButton.Enabled = false;
+            this.runGenerations.Enabled = true;
         }
 
         private bool WasEnterPressed(object sender, KeyPressEventArgs e)
