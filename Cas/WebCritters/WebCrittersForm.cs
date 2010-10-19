@@ -229,20 +229,18 @@ namespace WebCritters
             this.runProgressBar.Maximum = generationCount;
 
             // Spawn this work on a different thread.
-            if (this.RunGenerationCTS != null && !this.RunGenerationCTS.IsCancellationRequested) this.RunGenerationCTS.Cancel();
+            if (!(this.RunGenerationCTS == null || this.RunGenerationCTS.IsCancellationRequested)) this.RunGenerationCTS.Cancel();
             this.RunGenerationCTS = new CancellationTokenSource();
             var token = this.RunGenerationCTS.Token;
-            var task = Task.Factory.StartNew(() => this.CasSimulation.RunGeneration());
-            for (int i = 1; i < generationCount; i++)
-            {
-                task = task.ContinueWith(t =>
-                                             {
-                                                 if (t.IsFaulted && t.Exception != null) DisplayException(t.Exception);
-                                                 if (token.IsCancellationRequested) return;
-                                                 this.CasSimulation.RunGeneration();
-                                             });
-            }
-            task.ContinueWith(t =>
+            var task = Task.Factory.StartNew(() =>
+                                                 {
+                                                     for (int i = 0; i < generationCount; i++)
+                                                     {
+                                                         if (token.IsCancellationRequested) return;
+                                                         this.CasSimulation.RunGeneration();
+                                                     }
+                                                 })
+                .ContinueWith(t =>
                                   {
                                       if (t.IsFaulted && t.Exception != null) DisplayException(t.Exception);
                                       this.Invoke(new MethodInvoker(() => this.UpdateSimulationDetails(true)));
@@ -252,8 +250,7 @@ namespace WebCritters
             this.runGenerations.Enabled = false;
         }
 
-
-        private void DisplayException(Exception e)
+        private static void DisplayException(Exception e)
         {
             if (e == null) return;
 
