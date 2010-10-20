@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Cas.Core.Events;
 using Cas.Core.Extensions;
 using Cas.Core.Interactions;
@@ -29,6 +30,8 @@ namespace Cas.Core
         {
             // Set some defaults
             InteractionsPerGenerationFactor = interactionsPerGenerationFactor;
+
+            MaximumUpkeepCostPerLocation = maximumUpkeepCostPerLocation;
             UpkeepChance = upkeepChance;
 
             ReproductionThreshold = reproductionThreshold;
@@ -255,6 +258,17 @@ namespace Cas.Core
 
         #region RunGeneration
 
+        private List<KeyValuePair<IAgent, ILocation>> pendingMigrations;
+
+        /// <summary>
+        /// Queue up an agent to move to a new location at the end of the current generation.
+        /// </summary>
+        private void RegisterMigration(IAgent agent, ILocation location)
+        {
+            pendingMigrations.Add(new KeyValuePair<IAgent, ILocation>(agent, location));
+        }
+
+
         /// <summary>
         /// Execute a single generation of the CAS using the environment as an input.
         /// </summary>
@@ -265,10 +279,11 @@ namespace Cas.Core
             CurrentGeneration++;
             OnGenerationStarted(CurrentGeneration);
 
-            var pendingMigrations = new List<KeyValuePair<IAgent, ILocation>>();
+            pendingMigrations = new List<KeyValuePair<IAgent, ILocation>>();
+
             foreach (var location in this.Environment.Locations)
             {
-                ProcessLocation(location, pendingMigrations);
+                ProcessLocation(location);
             }
 
             // Relocate the migrants and charge them upkeep at their new location
@@ -287,20 +302,16 @@ namespace Cas.Core
         /// <param name="location">
         /// The location to operate on.
         /// </param>
-        /// <param name="pendingMigrations">
-        /// A list to append agents that wish to migrate on to.
-        /// </param>
-        private void ProcessLocation(ILocation location, List<KeyValuePair<IAgent, ILocation>> pendingMigrations)
+        private void ProcessLocation(ILocation location)
         {
             if (location == null) throw new ArgumentNullException("location");
-            if (pendingMigrations == null) throw new ArgumentNullException("pendingMigrations");
 
             // Iterate all agents and have them interact with something (agent/resource node) or migrate (if healthy enough)
             int interactionsToPerform = (int)(location.Agents.Count * InteractionsPerGenerationFactor);
             DoInteractions(location, interactionsToPerform);
 
             // Prior to upkeep, select agents for migration
-            QueueForMigration(location, pendingMigrations);
+            QueueForMigration(location);
 
             // Change upkeep for the location
             if (location.UpkeepCost > 0 && RandomProvider.NextDouble() < this.UpkeepChance)
@@ -410,14 +421,10 @@ namespace Cas.Core
         /// <param name="location">
         /// The location to perform migration actions on
         /// </param>
-        /// <param name="pendingMigrations">
-        /// A list to add all migrants to.
-        /// </param>
-        private void QueueForMigration(ILocation location, List<KeyValuePair<IAgent, ILocation>> pendingMigrations)
+        private void QueueForMigration(ILocation location)
         {
             if (location == null) throw new ArgumentNullException("location");
-            if (pendingMigrations == null) throw new ArgumentNullException("pendingMigrations");
-
+            
             if (location.Connections.Count == 0) return;
 
             var migrants = location.Agents
@@ -432,7 +439,7 @@ namespace Cas.Core
 
                 location.Agents.Remove(agent);
                 this.AddEventToAgent(agent, new MigrationEvent(location, destination, destination.UpkeepCost, this.CurrentGeneration));
-                pendingMigrations.Add(kvp);
+                this.RegisterMigration(agent, destination);
             });
         }
 
@@ -442,9 +449,9 @@ namespace Cas.Core
         /// </summary>
         protected virtual double CalculateMigrationChance(IAgent agent)
         {
-            double percentFull = Math.Max(1, agent.CurrentResourceCount / agent.Size);
+            double percentFull = Math.Min(1.0, (double)agent.CurrentResourceCount / (double)agent.Size);
 
-            return MigrationBaseChance + ((1 - percentFull) * MaximumMigrationBonus);
+            return MigrationBaseChance + ((1.0 - percentFull) * MaximumMigrationBonus);
         }
 
         public void AddEventToAgent(IAgent agent, IEvent newEvent)
