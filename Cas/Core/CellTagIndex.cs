@@ -13,5 +13,6 @@ namespace Cas.Core
         Offense = 0,
         Defense = 1,
         Exchange = 2,
+        Mating = 3,
     }
 }

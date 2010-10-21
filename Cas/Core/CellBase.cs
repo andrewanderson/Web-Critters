@@ -12,7 +12,7 @@ namespace Cas.Core
     /// </summary>
     public abstract class CellBase : ICell
     {
-        private const int CurrentlyImplementedTagCount = 3;
+        private const int CurrentlyImplementedTagCount = 4;
 
         internal List<Resource> Reservoir { get; private set; }
 
@@ -33,18 +33,13 @@ namespace Cas.Core
 
         #region ICell Members
 
+        public Tag Mating { get; set; }
+
         // Not yet implemented
 
         public Tag Transformation { get; set; }
 
         public Tag Adhesion { get; set; }
-
-        public Tag Mating { get; set; }
-
-        public string Chromosome
-        {
-            get { throw new NotImplementedException(); }
-        }
 
         public int ActiveTagsInModel { get; private set; }
 
@@ -58,6 +53,8 @@ namespace Cas.Core
                     return Defense;
                 case (int)CellTagIndex.Exchange:
                     return Exchange;
+                case (int)CellTagIndex.Mating:
+                    return Mating;
                 default:
                     throw new ArgumentOutOfRangeException("index", index, "No tag with specified index.");
             }
@@ -75,6 +72,9 @@ namespace Cas.Core
                     break;
                 case (int)CellTagIndex.Exchange:
                     Exchange = value;
+                    break;
+                case (int)CellTagIndex.Mating:
+                    Mating = value;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("index", index, "No tag with specified index.");
@@ -187,7 +187,7 @@ namespace Cas.Core
 
         public override string ToString()
         {
-            return string.Format("{0} {1} {2}", Offense, Defense, Exchange);
+            return string.Format("{0} {1} {2} {3}", Offense, Defense, Exchange, Mating);
         }
 
     }

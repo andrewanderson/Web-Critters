@@ -375,6 +375,7 @@ Trace:
                 offenseTag.Text = "-";
                 defenseTag.Text = "-";
                 exchangeTag.Text = "-";
+                matingTag.Text = "-";
                 cellReservoir.Text = "() -";
             }
             else
@@ -383,6 +384,7 @@ Trace:
                 offenseTag.Text = cell.Offense.ToString();
                 defenseTag.Text = cell.Defense.ToString();
                 exchangeTag.Text = cell.Exchange.ToString();
+                matingTag.Text = cell.Mating.ToString();
 
                 cellReservoir.Text = string.Format("({0}) - {1}", cell.CurrentResourceCount, cell.ShowResourcePool(","));
             }

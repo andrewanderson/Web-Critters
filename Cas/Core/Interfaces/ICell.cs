@@ -26,15 +26,6 @@ namespace Cas.Core.Interfaces
         Tag Mating { get; set; } // pg. 122
 
         /// <summary>
-        /// The string representation of the ICell's genetic material.
-        /// </summary>
-        /// <remarks>
-        /// In most implementations this should be derived (by combining all
-        /// tags) rather than stored.
-        /// </remarks>
-        string Chromosome { get; }
-
-        /// <summary>
         /// How many tags are we using in the model?
         /// </summary>
         int ActiveTagsInModel { get; }

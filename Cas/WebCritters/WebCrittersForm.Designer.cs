@@ -160,6 +160,8 @@
             this.currentGeneration = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.matingTag = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -1184,6 +1186,8 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.matingTag);
+            this.panel2.Controls.Add(this.label59);
             this.panel2.Controls.Add(this.cellReservoir);
             this.panel2.Controls.Add(this.label19);
             this.panel2.Controls.Add(this.exchangeTag);
@@ -1218,7 +1222,7 @@
             // exchangeTag
             // 
             this.exchangeTag.AutoSize = true;
-            this.exchangeTag.Location = new System.Drawing.Point(82, 40);
+            this.exchangeTag.Location = new System.Drawing.Point(82, 36);
             this.exchangeTag.Name = "exchangeTag";
             this.exchangeTag.Size = new System.Drawing.Size(10, 13);
             this.exchangeTag.TabIndex = 7;
@@ -1236,7 +1240,7 @@
             // offenseTag
             // 
             this.offenseTag.AutoSize = true;
-            this.offenseTag.Location = new System.Drawing.Point(82, 1);
+            this.offenseTag.Location = new System.Drawing.Point(81, 1);
             this.offenseTag.Name = "offenseTag";
             this.offenseTag.Size = new System.Drawing.Size(10, 13);
             this.offenseTag.TabIndex = 5;
@@ -1529,6 +1533,24 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // matingTag
+            // 
+            this.matingTag.AutoSize = true;
+            this.matingTag.Location = new System.Drawing.Point(310, 3);
+            this.matingTag.Name = "matingTag";
+            this.matingTag.Size = new System.Drawing.Size(10, 13);
+            this.matingTag.TabIndex = 11;
+            this.matingTag.Text = "-";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(233, 3);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(42, 13);
+            this.label59.TabIndex = 10;
+            this.label59.Text = "Mating:";
+            // 
             // WebCrittersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1688,6 +1710,8 @@
         private System.Windows.Forms.Label locationCapacity;
         private System.Windows.Forms.Label label57;
         private System.Windows.Forms.Label locationRenewableCount;
+        private System.Windows.Forms.Label matingTag;
+        private System.Windows.Forms.Label label59;
     }
 }
 

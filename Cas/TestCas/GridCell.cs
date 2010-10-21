@@ -35,6 +35,7 @@ namespace Cas.TestImplementation
             cell.Offense = Tag.New(tagSize, true);
             cell.Defense = Tag.New(tagSize, true);
             cell.Exchange = Tag.New(tagSize, true);
+            cell.Mating = Tag.New(tagSize, true);
 
             return cell;
         }
@@ -51,6 +52,7 @@ namespace Cas.TestImplementation
             clone.Offense = Tag.New(this.Offense);
             clone.Defense = Tag.New(this.Defense);
             clone.Exchange = Tag.New(this.Exchange);
+            clone.Mating = Tag.New(this.Mating);
 
             return clone;
         }
