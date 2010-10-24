@@ -136,6 +136,36 @@ namespace Cas.Core
 
         #region IIsAlive Members
 
+        public Tag Mating
+        {
+            get
+            {
+                EnsureContactPointSet();
+                return currentInteractionContactPoint.Mating;
+            }
+            set { throw new InvalidOperationException("Cannot set an Agent's tag."); }
+        }
+
+        public Tag Transformation
+        {
+            get
+            {
+                EnsureContactPointSet();
+                return currentInteractionContactPoint.Transformation;
+            }
+            set { throw new InvalidOperationException("Cannot set an Agent's tag."); }
+        }
+
+        public Tag Adhesion
+        {
+            get
+            {
+                EnsureContactPointSet();
+                return currentInteractionContactPoint.Adhesion;
+            }
+            set { throw new InvalidOperationException("Cannot set an Agent's tag."); }
+        }
+
         public bool CanReplicate(double reproductionThreshold)
         {
             return cells.All(cell => cell.CanReplicate(reproductionThreshold))

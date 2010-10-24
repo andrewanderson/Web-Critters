@@ -109,48 +109,15 @@ namespace Cas.TestImplementation
                 }
             }
         }
-
-        protected override void DoOneReproduction(ILocation location, List<IAgent> breeders)
-        {
-            var first = breeders.GetRandom();
-            breeders.Remove(first);
-
-            int reproSelector = RandomProvider.Next(100);
-            if (reproSelector < 50 || breeders.Count == 0)
-            {
-                // Asexual
-                var child = DoAsexualReproduction(first, location);
-                location.Agents.Add(child);
-            }
-            else
-            {
-                // Sexual
-                var second = breeders.GetRandom();
-                breeders.Remove(second);
-
-                IList<IAgent> children;
-                if (reproSelector < 76)
-                {
-                    children = DoSexualReproduction(first, second, crossoverInteraction, location);
-                }
-                else
-                {
-                    children = DoSexualReproduction(first, second, multipointCrossoverInteraction, location);
-                }
-
-                location.Agents.AddRange(children);
-            }
-        }
         
-        private IAgent DoAsexualReproduction(IAgent parent, ILocation location)
+        protected override IAgent DoAsexualReproduction(IAgent parent, ILocation location)
         {
             if (parent == null) throw new ArgumentNullException("parent");
             if (location == null) throw new ArgumentNullException("location");
-            if (parent.Cells.Count == 0) throw new ArgumentException("Agent must have at least one cell", "parent");
 
-            if (parent.Cells.Count > 1)
+            if (parent.IsMultiAgent())
             {
-                return DoMulticellularAsexualReproduction(parent);
+                return DoMulticellularAsexualReproduction(parent, location);
             }
 
             // Reproduce assuming this agent has a single cell
@@ -164,9 +131,26 @@ namespace Cas.TestImplementation
             return childAgent;
         }
 
-        private IAgent DoMulticellularAsexualReproduction(IAgent parent)
+        private IAgent DoMulticellularAsexualReproduction(IAgent parent, ILocation location)
         {
             throw new NotImplementedException();
+        }
+
+        protected override IList<IAgent> DoSexualReproduction(IAgent parent1, IAgent parent2, ILocation location)
+        {
+            if (parent1 == null) throw new ArgumentNullException("parent1");
+            if (parent2 == null) throw new ArgumentNullException("parent2");
+            if (location == null) throw new ArgumentNullException("location");
+
+            int reproSelector = RandomProvider.Next(100);
+            if (reproSelector < 50)
+            {
+                return DoSexualReproduction(parent1, parent2, crossoverInteraction, location);
+            }
+            else
+            {
+                return DoSexualReproduction(parent1, parent2, multipointCrossoverInteraction, location);
+            }
         }
 
         private IList<IAgent> DoSexualReproduction(IAgent parent1, IAgent parent2, IInteraction<ICell, ICell, IList<ICell>> interaction, ILocation location)
@@ -178,9 +162,9 @@ namespace Cas.TestImplementation
             if (interaction == null) throw new ArgumentNullException("interaction");
             if (location == null) throw new ArgumentNullException("location");
 
-            if (parent1.Cells.Count > 1 || parent2.Cells.Count > 1)
+            if (parent1.IsMultiAgent() || parent2.IsMultiAgent())
             {
-                return DoMulticellularSexualReproduction(parent1, parent2, interaction);
+                return DoMulticellularSexualReproduction(parent1, parent2, interaction, location);
             }
 
             // Reproduce assuming both agents have a single cell
@@ -201,7 +185,7 @@ namespace Cas.TestImplementation
             return new[] {child1, child2};
         }
 
-        private IList<IAgent> DoMulticellularSexualReproduction(IAgent parent1, IAgent parent2, IInteraction<ICell, ICell, IList<ICell>> interaction)
+        private IList<IAgent> DoMulticellularSexualReproduction(IAgent parent1, IAgent parent2, IInteraction<ICell, ICell, IList<ICell>> interaction, ILocation location)
         {
             throw new NotImplementedException();
         }

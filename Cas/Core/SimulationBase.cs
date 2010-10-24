@@ -7,6 +7,7 @@ using Cas.Core.Events;
 using Cas.Core.Extensions;
 using Cas.Core.Interactions;
 using Cas.Core.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace Cas.Core
 {
@@ -403,13 +404,60 @@ namespace Cas.Core
             if (location == null) throw new ArgumentNullException("location");
             if (breeders == null) throw new ArgumentNullException("breeders");
 
+            // Agents reproduce sexually if they can find a suitable mate, otherwise
+            // they reproduce asexually.
             while (breeders.Count > 0)
             {
-                DoOneReproduction(location, breeders);
+                var children = new List<IAgent>();
+
+                var first = breeders.GetRandom();
+                breeders.Remove(first);
+
+                var mate = FindMateFor(first, breeders);
+                if (mate != null)
+                {
+                    breeders.Remove(mate);
+                    children.AddRange(DoSexualReproduction(first, mate, location));
+                }
+                else
+                {
+                    children.Add(DoAsexualReproduction(first, location));
+                }
+
+                location.Agents.AddRange(children);
             }
         }
 
-        protected abstract void DoOneReproduction(ILocation location, List<IAgent> breeders);
+        private IAgent FindMateFor(IAgent agent, List<IAgent> breeders)
+        {
+            // Agents are considered valid mates if their mating tags match
+            // exactly (taking into account wildcards)
+
+            foreach (var b in breeders)
+            {
+                b.SetInteractionContactPoint();
+                if (b.Mating.Data.Count != agent.Mating.Data.Count) continue;
+
+                bool match = true;
+                for (int i = 0; i < b.Mating.Data.Count; i++)
+                {
+                    if (b.Mating.Data[i] == Resource.WildcardResource || agent.Mating.Data[i] == Resource.WildcardResource) continue;
+                    if (b.Mating.Data[i] != agent.Mating.Data[i])
+                    {
+                        match = false;
+                        break;
+                    }
+                }
+
+                if (match) return b;
+            }
+
+            return null;
+        }
+
+        protected abstract IAgent DoAsexualReproduction(IAgent parent, ILocation location);
+
+        protected abstract IList<IAgent> DoSexualReproduction(IAgent parent1, IAgent parent2, ILocation location);
 
         /// <summary>
         /// Selects agents from the location at random, and queues them to

@@ -10,22 +10,6 @@ namespace Cas.Core.Interfaces
     public interface ICell : IInteractable, IIsAlive
     {
         /// <summary>
-        /// Allows an agent to have a resource conversion. (i.e. a => b) which
-        /// may or may not have an associated cost.
-        /// </summary>
-        Tag Transformation { get; set; } // pg. 113
-
-        /// <summary>
-        /// Controls whether or not an ICell will enter into the Agents of other ICells.
-        /// </summary>
-        Tag Adhesion { get; set; } // pg. 115
-
-        /// <summary>
-        /// Constrains the potential mates that an Agent may have.
-        /// </summary>
-        Tag Mating { get; set; } // pg. 122
-
-        /// <summary>
         /// How many tags are we using in the model?
         /// </summary>
         int ActiveTagsInModel { get; }
