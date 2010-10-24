@@ -147,5 +147,28 @@ namespace WebCritters
             SetSpecies(speciesList[nextIndex], true);
         }
 
+        private void prey_DoubleClick(object sender, EventArgs e)
+        {
+            DoubleClickSpeciesInList(sender);
+        }
+
+        private void predators_DoubleClick(object sender, EventArgs e)
+        {
+            DoubleClickSpeciesInList(sender);
+        }
+
+        private void DoubleClickSpeciesInList(object sender)
+        {
+            if ((sender as ListBox).SelectedIndex > -1)
+            {
+                var species = (sender as ListBox).SelectedItem as ISpecies;
+
+                if (species != null)
+                {
+                    SetSpecies(species, true);
+                }
+            }
+        }
+
     }
 }

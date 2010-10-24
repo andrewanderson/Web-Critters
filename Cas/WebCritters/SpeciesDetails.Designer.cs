@@ -119,6 +119,7 @@
             this.prey.Size = new System.Drawing.Size(254, 225);
             this.prey.TabIndex = 7;
             this.prey.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.prey_Format);
+            this.prey.DoubleClick += new System.EventHandler(this.prey_DoubleClick);
             // 
             // predators
             // 
@@ -127,6 +128,7 @@
             this.predators.Name = "predators";
             this.predators.Size = new System.Drawing.Size(240, 225);
             this.predators.TabIndex = 8;
+            this.predators.DoubleClick += new System.EventHandler(this.predators_DoubleClick);
             // 
             // label4
             // 
