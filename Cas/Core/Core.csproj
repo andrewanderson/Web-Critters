@@ -99,7 +99,7 @@
     <Compile Include="Interfaces\IAgent.cs" />
     <Compile Include="Interfaces\IBoundary.cs" />
     <Compile Include="Interfaces\ICell.cs" />
-    <Compile Include="Interfaces\IConfiguration.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="Interfaces\IContainsResources.cs" />
     <Compile Include="Interfaces\IEnvironment.cs" />
     <Compile Include="Interfaces\IFossil.cs" />
