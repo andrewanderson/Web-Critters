@@ -22,37 +22,21 @@ namespace Cas.Core
 
         #endregion
 
-        protected SimulationBase()
-            : this(1.5, 4, 0.25, 1.75, 0.2, 0.005, 0.02, 0.005, 5, 10, 30) { }
-
-        protected SimulationBase(double interactionsPerGenerationFactor, int maximumUpkeepCostPerLocation, double upkeepChance,
-            double reproductionThreshold, double reproductionInheritance, double migrationBaseChance, double maxMigrationBonus,
-            double randomDeathChance, int maximumAttemptsToFindSuitableTarget, int minimumLocationResourceCapacity, int maximumLocationResourceCapacity)
+        protected SimulationBase(Configuration config)
         {
-            // Set some defaults
-            InteractionsPerGenerationFactor = interactionsPerGenerationFactor;
+            if (config == null) throw new ArgumentNullException("config");
 
-            MaximumUpkeepCostPerLocation = maximumUpkeepCostPerLocation;
-            UpkeepChance = upkeepChance;
-
-            ReproductionThreshold = reproductionThreshold;
-            ReproductionInheritance = reproductionInheritance;
-
-            MigrationBaseChance = migrationBaseChance;
-            MaximumMigrationBonus = maxMigrationBonus;
-
-            RandomDeathChance = randomDeathChance;
-
-            MaximumAttemptsToFindSuitableTarget = maximumAttemptsToFindSuitableTarget;
-
-            MinimumLocationResourceCapacity = minimumLocationResourceCapacity;
-            MaximumLocationResourceCapacity = maximumLocationResourceCapacity;
+            this.Configuration = config;
         }
 
         #region ISimulation Members
 
         public event EventHandler GenerationStarted;
         public event EventHandler GenerationFinished;
+
+        public bool LogHistory { get; set; }
+
+        public Configuration Configuration { get; set; }
 
         protected virtual void OnGenerationStarted(int generationNumber)
         {
@@ -187,15 +171,15 @@ namespace Cas.Core
         /// This method must be called before any other class methods.  Once it is called,
         /// it may not be called again without first calling <see cref="Reset"/>.
         /// </remarks>
-        public void Initialize(int distinctResources, bool allowWildcards, int normalToWildcardResourceRatio, int maximumTagSize, double mutationPercent)
+        public void Initialize()
         {
             if (Initialized) throw new InvalidOperationException("The Simulation is already initialized.");
 
             Initializing = true;
 
-            Resource.Initialize(distinctResources, normalToWildcardResourceRatio, allowWildcards);
-            Tag.Initialize(maximumTagSize);
-            PointMutation.SetMutationPercentage(mutationPercent);
+            Resource.Initialize(this.Configuration);
+            Tag.Initialize(this.Configuration);
+            PointMutation.SetMutationPercentage(this.Configuration.AgentSettings.MutationChance);
 
             InnerInitialize();
 
@@ -226,34 +210,6 @@ namespace Cas.Core
 
             CurrentGeneration = 0;
         }
-
-        #endregion
-
-        #region Settings
-
-        public bool LogHistory { get; set; }
-
-        public double InteractionsPerGenerationFactor { get; protected set; }
-
-        public int MaximumUpkeepCostPerLocation { get; set; }
-
-        public double UpkeepChance { get; set; }
-
-        public int MinimumLocationResourceCapacity { get; set; }
-
-        public int MaximumLocationResourceCapacity { get; set; }
-
-        public double ReproductionThreshold { get; set; }
-
-        public double ReproductionInheritance { get; set; }
-
-        public double MigrationBaseChance { get; set; }
-
-        public double MaximumMigrationBonus { get; set; }
-
-        public double RandomDeathChance { get; set; }
-
-        public int MaximumAttemptsToFindSuitableTarget { get; set; }
 
         #endregion
 
@@ -308,14 +264,14 @@ namespace Cas.Core
             if (location == null) throw new ArgumentNullException("location");
 
             // Iterate all agents and have them interact with something (agent/resource node) or migrate (if healthy enough)
-            int interactionsToPerform = (int)(location.Agents.Count * InteractionsPerGenerationFactor);
+            int interactionsToPerform = (int)(location.Agents.Count * this.Configuration.AgentSettings.InteractionsPerGeneration);
             DoInteractions(location, interactionsToPerform);
 
             // Prior to upkeep, select agents for migration
             QueueForMigration(location);
 
             // Change upkeep for the location
-            if (location.UpkeepCost > 0 && RandomProvider.NextDouble() < this.UpkeepChance)
+            if (location.UpkeepCost > 0 && RandomProvider.NextDouble() < this.Configuration.EnvironmentSettings.UpkeepChance)
             {
                 location.ChargeUpkeep(CurrentGeneration);
             }
@@ -327,13 +283,13 @@ namespace Cas.Core
             {
                 var agent = location.Agents[i];
 
-                if (RandomProvider.NextDouble() < this.RandomDeathChance || agent.IsEligableForDeath)
+                if (RandomProvider.NextDouble() < this.Configuration.AgentSettings.RandomDeathChance || agent.IsEligableForDeath)
                 {
                     deathIndecies.Add(i);
                     continue;
                 }
 
-                if (agent.CanReplicate(ReproductionThreshold))
+                if (agent.CanReplicate(this.Configuration.AgentSettings.ReproductionThreshold))
                 {
                     breeders.Add(agent);
                 }
@@ -499,7 +455,7 @@ namespace Cas.Core
         {
             double percentFull = Math.Min(1.0, (double)agent.CurrentResourceCount / (double)agent.Size);
 
-            return MigrationBaseChance + ((1.0 - percentFull) * MaximumMigrationBonus);
+            return this.Configuration.AgentSettings.MigrationBaseChance + ((1.0 - percentFull) * this.Configuration.AgentSettings.MaximumMigrationBonus);
         }
 
         public void AddEventToAgent(IAgent agent, IEvent newEvent)
@@ -520,7 +476,7 @@ namespace Cas.Core
             if (actor == null) throw new ArgumentNullException("actor");
 
             IInteractable target = null;
-            for (int i = 0; i < MaximumAttemptsToFindSuitableTarget; i++)
+            for (int i = 0; i < this.Configuration.AgentSettings.MaximumAttemptsToFindSuitableTarget; i++)
             {
                 target = SelectRandomTarget(allTargets, actor);
                 if (target == null) continue;

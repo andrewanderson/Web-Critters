@@ -70,33 +70,24 @@ namespace Cas.TestImplementation
 
         /// <summary>
         /// Creates a new GridResourceNode with resources that are scaled to the complexity of the
-        /// node's defense tag.
+        /// node's tags.
         /// </summary>
-        public static GridResourceNode New(int minimumDefenseSize, int maximumDefenseSize, int maximumTagSize, int minResources, int maxResources)
+        public static GridResourceNode New(int maximumTagSize, int minResources, int maxResources)
         {
-            if (minimumDefenseSize <= 0) throw new ArgumentOutOfRangeException("minimumDefenseSize");
-            if (minimumDefenseSize > maximumDefenseSize) throw new ArgumentException("minimumDefenseSize cannot exceed maximumDefenseSize");                      
             if (maximumTagSize <= 0) throw new ArgumentOutOfRangeException("maximumTagSize");
             if (minResources < 0) throw new ArgumentOutOfRangeException("minResources");
-            if (maxResources <= 0) throw new ArgumentOutOfRangeException("maxResources");
-            if (minResources > maxResources) throw new ArgumentException("minResources cannot exceed maxResources");
+            if (maxResources < minResources) throw new ArgumentOutOfRangeException("maxResources cannot be less than minResources");
 
             var grn = new GridResourceNode();
             grn.Offense = Tag.New(maximumTagSize, false);
-            grn.Defense = Tag.New(minimumDefenseSize, maximumDefenseSize, false);
+            grn.Defense = Tag.New(maximumTagSize, false);
             grn.Exchange = Tag.New(maximumTagSize, false);
 
             int nodeSize = 0;
             int resourceRange = maxResources - minResources;
-            if (minimumDefenseSize == maximumDefenseSize)
-            {
-                nodeSize = minResources + RandomProvider.Next(resourceRange);
-            }
-            else
-            {
-                double sizeRange = maximumDefenseSize - minimumDefenseSize;
-                nodeSize = (int)(((double)(grn.Defense.Data.Count - minimumDefenseSize) / sizeRange) * resourceRange) + minResources;
-            }
+            double maxSize = maximumTagSize * 3;
+            double sizeRange = maxSize - 3;
+            nodeSize = (int)(((double)(maxSize - grn.Size) / sizeRange) * resourceRange) + minResources;
             
             var resources = new List<Resource>();
             for (int j = 0; j < nodeSize; j++)
@@ -108,6 +99,14 @@ namespace Cas.TestImplementation
             grn.RefreshReservoir();
 
             return grn;
+        }
+
+        public int Size
+        {
+            get
+            {
+                return this.Offense.Data.Count + this.Defense.Data.Count + this.Exchange.Data.Count;
+            }
         }
 
         public override string ToString()

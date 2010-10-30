@@ -58,22 +58,7 @@ namespace Cas.Core.Interfaces
         /// Performs all start-up tasks associated with the simulation.  After executing this method
         /// the Simulation should be in a state whereby it can execute any number of generations.
         /// </summary>
-        /// <param name="distinctResources">
-        /// The number of resources available in the simulation.  These will be represented using letters starting with 'a'.
-        /// </param>
-        /// <param name="allowWildcards">
-        /// Should tags be allowed the use of the wildcard resource?
-        /// </param>
-        /// <param name="normalToWildcardResourceRatio">
-        /// The prominence of wildcard resources
-        /// </param>
-        /// <param name="maximumTagSize">
-        /// The largest size that a tag can reach in the simulation.
-        /// </param>
-        /// <param name="mutationPercent">
-        /// The percentage chance that any given point within a cell mutates during a reproduction.
-        /// </param>
-        void Initialize(int distinctResources, bool allowWildcards, int normalToWildcardResourceRatio, int maximumTagSize, double mutationPercent);
+        void Initialize();
 
         /// <summary>
         /// Discard the current simulation configuration.
@@ -85,73 +70,15 @@ namespace Cas.Core.Interfaces
         /// </summary>
         void RunGeneration();
 
-        #region Settings
-
         /// <summary>
         /// Should events be logged on agents?
         /// </summary>
         bool LogHistory { get; set; }
 
         /// <summary>
-        /// The number of interactions that will take place in a given location for
-        /// each generation in the simulation per agent that is present.  These interactions
-        /// will be randomly distributed.
+        /// The settings for the simulation.
         /// </summary>
-        double InteractionsPerGenerationFactor { get; }
-
-        /// <summary>
-        /// The maximum number of resources that a location may charge its residents each generation.
-        /// </summary>
-        int MaximumUpkeepCostPerLocation { get; }
-
-        /// <summary>
-        /// The percent chance of upkeep being charged per location (0-1)
-        /// </summary>
-        double UpkeepChance { get; }
-
-        /// <summary>
-        /// The lower bounds on any location's resource node capacity.
-        /// </summary>
-        int MinimumLocationResourceCapacity { get; }
-
-        /// <summary>
-        /// The upper bounds on any location's resource node capacity.
-        /// </summary>
-        int MaximumLocationResourceCapacity { get; }
-
-        /// <summary>
-        /// The number of resources that an agent requires to initiate reproduction above and beyond
-        /// the amount needed to replicate its genome.
-        /// </summary>
-        double ReproductionThreshold { get; }
-
-        /// <summary>
-        /// The percentage of resources that a parent agent will contribute to a newly formed child.
-        /// </summary>
-        double ReproductionInheritance { get; }
-
-        /// <summary>
-        /// The base percent chance (0-1) that an agent decides to migrate to a new location, per generation.
-        /// </summary>
-        double MigrationBaseChance { get; }
-
-        /// <summary>
-        /// The maximum bonus to MigrationBaseChance (0-1) that an agent can be awarded for being unfit.
-        /// </summary>
-        double MaximumMigrationBonus { get; }
-
-        /// <summary>
-        /// The percent chance (0-1) that an agent will randomly die at the end of a generation.
-        /// </summary>
-        double RandomDeathChance { get; }
-
-        /// <summary>
-        /// The total number of times, per interaction, that an agent will try to locate
-        /// an acceptable target.
-        /// </summary>
-        int MaximumAttemptsToFindSuitableTarget { get; }
-
-        #endregion
+        Configuration Configuration { get; }
 
     }
 }

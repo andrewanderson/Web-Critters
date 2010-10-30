@@ -93,14 +93,14 @@ namespace Cas.Core
         /// <summary>
         /// Populate the Resource Map with resource characters from 'a' to 'a'+numberOfResources.
         /// </summary>
-        public static void Initialize(int numberOfResources, int normalToWildcardRatio, bool allowWildcards)
+        public static void Initialize(Configuration config)
         {
-            NormalToWildcardRatio = normalToWildcardRatio;
-            GlobalAllowWildcard = allowWildcards;
+            NormalToWildcardRatio = config.ResourceSettings.NormalToWildcardRatio;
+            GlobalAllowWildcard = config.ResourceSettings.AllowWildcards;
 
             resourceList.Clear();
             resourceMap.Clear();
-            for (int i = 0; i < numberOfResources; i++)
+            for (int i = 0; i < config.ResourceSettings.Count; i++)
             {
                 char c = Convert.ToChar(Convert.ToInt32(FirstResourceCharacter) + i);
                 var r = new Resource(c);

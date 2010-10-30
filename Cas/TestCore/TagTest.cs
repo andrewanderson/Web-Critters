@@ -42,7 +42,12 @@ namespace TestCore
         [TestInitialize()]
         public void MyTestInitialize()
         {
-            Resource.Initialize(4, 1, true);
+            var config = new Configuration();
+            config.ResourceSettings.AllowWildcards = true;
+            config.ResourceSettings.Count = 4;
+            config.ResourceSettings.NormalToWildcardRatio = 1;
+
+            Resource.Initialize(config);
         }
         
         [TestMethod]

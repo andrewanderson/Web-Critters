@@ -16,7 +16,12 @@ namespace TestCore.Interactions
         [TestInitialize()]
         public void MyTestInitialize()
         {
-            Resource.Initialize(10, 1, true);
+            var config = new Configuration();
+            config.ResourceSettings.AllowWildcards = true;
+            config.ResourceSettings.Count = 10;
+            config.ResourceSettings.NormalToWildcardRatio = 1;
+
+            Resource.Initialize(config);
         }
 
         [TestMethod]
@@ -27,16 +32,19 @@ namespace TestCore.Interactions
             string offenseData = "abc";
             string defenseData = "dcb";
             string exchangeData = "cca";
+            string matingData = "dca";
 
             var actor = GridCell.New();
             actor.Offense = Tag.New(offenseData);
             actor.Defense = Tag.New(defenseData);
             actor.Exchange = Tag.New(exchangeData);
+            actor.Mating = Tag.New(matingData);
 
             var target = GridCell.New();
             target.Offense = Tag.New(offenseData);
             target.Defense = Tag.New(defenseData);
             target.Exchange = Tag.New(exchangeData);
+            target.Mating = Tag.New(matingData);
 
             var results = interaction.Interact(actor, target);
 
@@ -45,10 +53,12 @@ namespace TestCore.Interactions
             Assert.AreEqual(results[0].Offense.ToString(), offenseData);
             Assert.AreEqual(results[0].Defense.ToString(), defenseData);
             Assert.AreEqual(results[0].Exchange.ToString(), exchangeData);
+            Assert.AreEqual(results[0].Mating.ToString(), matingData);
 
             Assert.AreEqual(results[1].Offense.ToString(), offenseData);
             Assert.AreEqual(results[1].Defense.ToString(), defenseData);
             Assert.AreEqual(results[1].Exchange.ToString(), exchangeData);
+            Assert.AreEqual(results[1].Mating.ToString(), matingData);
         }
 
         [TestMethod]

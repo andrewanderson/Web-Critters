@@ -7,23 +7,17 @@ namespace Cas.Core
     /// </summary>
     public class Configuration
     {
-        public class Simulation
+        public readonly Environment EnvironmentSettings;
+        public readonly Agent AgentSettings;
+        public readonly Tag TagSettings;
+        public readonly Resource ResourceSettings;
+
+        public Configuration()
         {
-            private double interactionsPerGenerationFactor;
-            /// <summary>
-            /// The number of interactions that each agent in the simulation receives 
-            /// per generation.  If this number is fractional then some agents will
-            /// receive one extra action per generation.
-            /// </summary>
-            public double InteractionsPerGenerationFactor
-            {
-                get { return interactionsPerGenerationFactor; } 
-                set
-                {
-                    if (value <= 0) throw new ArgumentOutOfRangeException("value", "InteractionsPerGenerationFactor must be greater than zero");
-                    interactionsPerGenerationFactor = value;
-                }
-            }    
+            EnvironmentSettings = new Environment();
+            AgentSettings = new Agent();
+            TagSettings = new Tag();
+            ResourceSettings = new Resource();
         }
 
         public class Environment
@@ -85,6 +79,24 @@ namespace Cas.Core
                 maximumLocationCapacity = maximum;
             }
 
+            private int globalResourcePoolSize;
+            /// <summary>
+            /// The total number of distinct resources that are available for
+            /// the simulation.
+            /// </summary>
+            public int GlobalResourcePoolSize
+            {
+                get
+                {
+                    return globalResourcePoolSize;
+                }
+                set
+                {
+                    if (value <= 0) throw new ArgumentOutOfRangeException("value", "GlobalResourcePoolSize must be greater than zero");
+                    globalResourcePoolSize = value;
+                }
+            }
+
             private int minimumRenewableResourceNodes;
             /// <summary>
             /// The lower bounds on the number of renewable resource nodes that a location 
@@ -144,6 +156,22 @@ namespace Cas.Core
 
         public class Agent
         {
+            private double interactionsPerGeneration;
+            /// <summary>
+            /// The number of interactions that each agent in the simulation receives 
+            /// per generation.  If this number is fractional then some agents will
+            /// receive one extra action per generation.
+            /// </summary>
+            public double InteractionsPerGeneration
+            {
+                get { return interactionsPerGeneration; }
+                set
+                {
+                    if (value <= 0) throw new ArgumentOutOfRangeException("value", "InteractionsPerGeneration must be greater than zero");
+                    interactionsPerGeneration = value;
+                }
+            }  
+
             private double reproductionThreshold;
             /// <summary>
             /// The percentage of its resources that an agent must gather before being eligible
@@ -242,6 +270,20 @@ namespace Cas.Core
                 {
                     if (value <= 0) throw new ArgumentOutOfRangeException("value", "StartingTagComplexity must be greater than zero.");
                     startingTagComplexity = value;
+                }
+            }
+
+            private double mutationChance;
+            /// <summary>
+            /// The chance that mutation will take place at any given point within an agent during reproduction.
+            /// </summary>
+            public double MutationChance
+            {
+                get { return mutationChance; }
+                set
+                {
+                    if (value < 0 || value > 1) throw new ArgumentOutOfRangeException("value", "MutationChance must be between zero and one.");
+                    mutationChance = value;
                 }
             }
         }

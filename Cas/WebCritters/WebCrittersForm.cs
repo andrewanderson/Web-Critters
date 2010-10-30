@@ -47,39 +47,39 @@ namespace WebCritters
 
         private void CreateSimulationFromLoadControls()
         {
-            CasSimulation = new GridSimulation(
-                int.Parse(gridHeight.Text),
-                int.Parse(gridWidth.Text),
-                int.Parse(minResourceNodes.Text),
-                int.Parse(maxResourceNodes.Text),
-                int.Parse(minResourcesPerNode.Text),
-                int.Parse(maxResourcesPerNode.Text),
-                int.Parse(minResourceNodeSize.Text),
-                int.Parse(maxResourceNodeSize.Text),
-                int.Parse(startingComplexity.Text),
-                int.Parse(uniqueResourceCount.Text),
-                int.Parse(maximumUpkeep.Text),
-                int.Parse(upkeepPercent.Text) / 100.0,
-                double.Parse(interactionsPerGeneration.Text),
-                int.Parse(reproductionThresholdPercent.Text) / 100.0,
-                int.Parse(reproductionInheritancePercent.Text) / 100.0,
-                double.Parse(migrationBaseChance.Text) / 100.0,
-                double.Parse(maxMigrationBonus.Text) / 100.0,
-                double.Parse(randomDeathPercent.Text) / 100.0,
-                5, // TODO: Config max attepts to find prey in form
-                int.Parse(minimumCapacity.Text),
-                int.Parse(maximumCapacity.Text)
-                );
+            var config = new Configuration();
 
+            // Agent settings
+            config.AgentSettings.InteractionsPerGeneration = double.Parse(interactionsPerGeneration.Text);
+            config.AgentSettings.MaximumAttemptsToFindSuitableTarget = 5; // TODO: Config max attepts to find prey in form
+            config.AgentSettings.MaximumMigrationBonus = double.Parse(maxMigrationBonus.Text) / 100.0;
+            config.AgentSettings.MigrationBaseChance = double.Parse(migrationBaseChance.Text) / 100.0;
+            config.AgentSettings.MutationChance = double.Parse(mutationPercent.Text) / 100.0;
+            config.AgentSettings.RandomDeathChance = double.Parse(randomDeathPercent.Text) / 100.0;
+            config.AgentSettings.ReproductionInheritance = int.Parse(reproductionInheritancePercent.Text) / 100.0;
+            config.AgentSettings.ReproductionThreshold = int.Parse(reproductionThresholdPercent.Text) / 100.0;
+            config.AgentSettings.StartingTagComplexity = int.Parse(startingComplexity.Text);
+
+            // Environment settings
+            config.EnvironmentSettings.GlobalResourcePoolSize = int.Parse(uniqueResourceCount.Text);
+            config.EnvironmentSettings.SetLocationCapacity(int.Parse(minimumCapacity.Text), int.Parse(maximumCapacity.Text));
+            config.EnvironmentSettings.SetLocationResourceNodeRange(int.Parse(minResourceNodes.Text), int.Parse(maxResourceNodes.Text));
+            config.EnvironmentSettings.SetLocationResourcesPerNode(int.Parse(minResourcesPerNode.Text), int.Parse(maxResourcesPerNode.Text));
+            config.EnvironmentSettings.MaximumUpkeepCostPerLocation = int.Parse(maximumUpkeep.Text);
+            config.EnvironmentSettings.UpkeepChance = int.Parse(upkeepPercent.Text) / 100.0;
+
+            // Resource settings
+            config.ResourceSettings.AllowWildcards = allowWildcards.Checked;
+            config.ResourceSettings.Count = int.Parse(numberOfResources.Text);
+            config.ResourceSettings.NormalToWildcardRatio = int.Parse(normalToWildcardRatio.Text);
+
+            // Tag settings
+            config.TagSettings.MaxSize = int.Parse(maxComplexity.Text);
+
+            CasSimulation = new GridSimulation(int.Parse(gridHeight.Text), int.Parse(gridWidth.Text), config);
             CasSimulation.GenerationFinished += new EventHandler(CasSimulation_GenerationFinished);
             CasSimulation.LogHistory = this.trackAgentHistory.Checked;
-
-            CasSimulation.Initialize(
-                int.Parse(numberOfResources.Text), 
-                allowWildcards.Checked,
-                int.Parse(normalToWildcardRatio.Text), 
-                int.Parse(maxComplexity.Text),
-                double.Parse(mutationPercent.Text));
+            CasSimulation.Initialize();
 
             // TODO: Load up some default agents
             LoadStartingAgents(

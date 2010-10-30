@@ -42,10 +42,6 @@
             this.label54 = new System.Windows.Forms.Label();
             this.maximumCapacity = new System.Windows.Forms.TextBox();
             this.label55 = new System.Windows.Forms.Label();
-            this.minResourceNodeSize = new System.Windows.Forms.TextBox();
-            this.label51 = new System.Windows.Forms.Label();
-            this.maxResourceNodeSize = new System.Windows.Forms.TextBox();
-            this.label52 = new System.Windows.Forms.Label();
             this.allowWildcards = new System.Windows.Forms.CheckBox();
             this.label49 = new System.Windows.Forms.Label();
             this.mutationPercent = new System.Windows.Forms.TextBox();
@@ -123,6 +119,8 @@
             this.agentResourceList = new System.Windows.Forms.ListBox();
             this.label16 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.matingTag = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
             this.cellReservoir = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.exchangeTag = new System.Windows.Forms.Label();
@@ -160,8 +158,6 @@
             this.currentGeneration = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.matingTag = new System.Windows.Forms.Label();
-            this.label59 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -175,7 +171,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 248);
+            this.label1.Location = new System.Drawing.Point(9, 273);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 0;
@@ -183,7 +179,7 @@
             // 
             // gridHeight
             // 
-            this.gridHeight.Location = new System.Drawing.Point(139, 246);
+            this.gridHeight.Location = new System.Drawing.Point(139, 271);
             this.gridHeight.Name = "gridHeight";
             this.gridHeight.Size = new System.Drawing.Size(40, 20);
             this.gridHeight.TabIndex = 1;
@@ -194,7 +190,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(185, 248);
+            this.label2.Location = new System.Drawing.Point(185, 273);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(12, 13);
             this.label2.TabIndex = 2;
@@ -202,7 +198,7 @@
             // 
             // gridWidth
             // 
-            this.gridWidth.Location = new System.Drawing.Point(203, 246);
+            this.gridWidth.Location = new System.Drawing.Point(203, 271);
             this.gridWidth.Name = "gridWidth";
             this.gridWidth.Size = new System.Drawing.Size(36, 20);
             this.gridWidth.TabIndex = 3;
@@ -213,7 +209,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(179, 277);
+            this.label3.Location = new System.Drawing.Point(179, 302);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(10, 13);
             this.label3.TabIndex = 4;
@@ -221,7 +217,7 @@
             // 
             // maxStartingPopulation
             // 
-            this.maxStartingPopulation.Location = new System.Drawing.Point(195, 274);
+            this.maxStartingPopulation.Location = new System.Drawing.Point(195, 299);
             this.maxStartingPopulation.Name = "maxStartingPopulation";
             this.maxStartingPopulation.Size = new System.Drawing.Size(44, 20);
             this.maxStartingPopulation.TabIndex = 5;
@@ -231,7 +227,7 @@
             // 
             // minStartingPopulation
             // 
-            this.minStartingPopulation.Location = new System.Drawing.Point(139, 274);
+            this.minStartingPopulation.Location = new System.Drawing.Point(139, 299);
             this.minStartingPopulation.Name = "minStartingPopulation";
             this.minStartingPopulation.Size = new System.Drawing.Size(34, 20);
             this.minStartingPopulation.TabIndex = 7;
@@ -242,7 +238,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 276);
+            this.label4.Location = new System.Drawing.Point(9, 301);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 13);
             this.label4.TabIndex = 6;
@@ -261,10 +257,6 @@
             this.splitContainer.Panel1.Controls.Add(this.label54);
             this.splitContainer.Panel1.Controls.Add(this.maximumCapacity);
             this.splitContainer.Panel1.Controls.Add(this.label55);
-            this.splitContainer.Panel1.Controls.Add(this.minResourceNodeSize);
-            this.splitContainer.Panel1.Controls.Add(this.label51);
-            this.splitContainer.Panel1.Controls.Add(this.maxResourceNodeSize);
-            this.splitContainer.Panel1.Controls.Add(this.label52);
             this.splitContainer.Panel1.Controls.Add(this.allowWildcards);
             this.splitContainer.Panel1.Controls.Add(this.label49);
             this.splitContainer.Panel1.Controls.Add(this.mutationPercent);
@@ -409,44 +401,6 @@
             this.label55.TabIndex = 59;
             this.label55.Text = "-";
             // 
-            // minResourceNodeSize
-            // 
-            this.minResourceNodeSize.Location = new System.Drawing.Point(140, 351);
-            this.minResourceNodeSize.Name = "minResourceNodeSize";
-            this.minResourceNodeSize.Size = new System.Drawing.Size(34, 20);
-            this.minResourceNodeSize.TabIndex = 58;
-            this.minResourceNodeSize.Text = "6";
-            this.minResourceNodeSize.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
-            this.minResourceNodeSize.Validated += new System.EventHandler(this.control_Validated);
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(10, 353);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(90, 13);
-            this.label51.TabIndex = 57;
-            this.label51.Text = "Min-Max Defense";
-            // 
-            // maxResourceNodeSize
-            // 
-            this.maxResourceNodeSize.Location = new System.Drawing.Point(196, 351);
-            this.maxResourceNodeSize.Name = "maxResourceNodeSize";
-            this.maxResourceNodeSize.Size = new System.Drawing.Size(44, 20);
-            this.maxResourceNodeSize.TabIndex = 56;
-            this.maxResourceNodeSize.Text = "10";
-            this.maxResourceNodeSize.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
-            this.maxResourceNodeSize.Validated += new System.EventHandler(this.control_Validated);
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(180, 354);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(10, 13);
-            this.label52.TabIndex = 55;
-            this.label52.Text = "-";
-            // 
             // allowWildcards
             // 
             this.allowWildcards.AutoSize = true;
@@ -545,7 +499,7 @@
             // 
             // minResourcesPerNode
             // 
-            this.minResourcesPerNode.Location = new System.Drawing.Point(139, 326);
+            this.minResourcesPerNode.Location = new System.Drawing.Point(139, 351);
             this.minResourcesPerNode.Name = "minResourcesPerNode";
             this.minResourcesPerNode.Size = new System.Drawing.Size(34, 20);
             this.minResourcesPerNode.TabIndex = 44;
@@ -556,7 +510,7 @@
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(9, 328);
+            this.label42.Location = new System.Drawing.Point(9, 353);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(100, 13);
             this.label42.TabIndex = 43;
@@ -564,7 +518,7 @@
             // 
             // maxResourcesPerNode
             // 
-            this.maxResourcesPerNode.Location = new System.Drawing.Point(195, 326);
+            this.maxResourcesPerNode.Location = new System.Drawing.Point(195, 351);
             this.maxResourcesPerNode.Name = "maxResourcesPerNode";
             this.maxResourcesPerNode.Size = new System.Drawing.Size(44, 20);
             this.maxResourcesPerNode.TabIndex = 42;
@@ -575,7 +529,7 @@
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(179, 329);
+            this.label43.Location = new System.Drawing.Point(179, 354);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(10, 13);
             this.label43.TabIndex = 41;
@@ -583,7 +537,7 @@
             // 
             // minResourceNodes
             // 
-            this.minResourceNodes.Location = new System.Drawing.Point(139, 300);
+            this.minResourceNodes.Location = new System.Drawing.Point(139, 325);
             this.minResourceNodes.Name = "minResourceNodes";
             this.minResourceNodes.Size = new System.Drawing.Size(34, 20);
             this.minResourceNodes.TabIndex = 40;
@@ -594,7 +548,7 @@
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(9, 302);
+            this.label40.Location = new System.Drawing.Point(9, 327);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(130, 13);
             this.label40.TabIndex = 39;
@@ -602,7 +556,7 @@
             // 
             // maxResourceNodes
             // 
-            this.maxResourceNodes.Location = new System.Drawing.Point(195, 300);
+            this.maxResourceNodes.Location = new System.Drawing.Point(195, 325);
             this.maxResourceNodes.Name = "maxResourceNodes";
             this.maxResourceNodes.Size = new System.Drawing.Size(44, 20);
             this.maxResourceNodes.TabIndex = 38;
@@ -613,7 +567,7 @@
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(179, 303);
+            this.label41.Location = new System.Drawing.Point(179, 328);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(10, 13);
             this.label41.TabIndex = 37;
@@ -832,7 +786,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(9, 230);
+            this.label25.Location = new System.Drawing.Point(9, 255);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(113, 13);
             this.label25.TabIndex = 12;
@@ -1201,6 +1155,24 @@
             this.panel2.Size = new System.Drawing.Size(440, 101);
             this.panel2.TabIndex = 18;
             // 
+            // matingTag
+            // 
+            this.matingTag.AutoSize = true;
+            this.matingTag.Location = new System.Drawing.Point(310, 3);
+            this.matingTag.Name = "matingTag";
+            this.matingTag.Size = new System.Drawing.Size(10, 13);
+            this.matingTag.TabIndex = 11;
+            this.matingTag.Text = "-";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(233, 3);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(42, 13);
+            this.label59.TabIndex = 10;
+            this.label59.Text = "Mating:";
+            // 
             // cellReservoir
             // 
             this.cellReservoir.AutoSize = true;
@@ -1533,24 +1505,6 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // matingTag
-            // 
-            this.matingTag.AutoSize = true;
-            this.matingTag.Location = new System.Drawing.Point(310, 3);
-            this.matingTag.Name = "matingTag";
-            this.matingTag.Size = new System.Drawing.Size(10, 13);
-            this.matingTag.TabIndex = 11;
-            this.matingTag.Text = "-";
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(233, 3);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(42, 13);
-            this.label59.TabIndex = 10;
-            this.label59.Text = "Mating:";
-            // 
             // WebCrittersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1696,10 +1650,6 @@
         private System.Windows.Forms.ListBox agentResourceList;
         private System.Windows.Forms.CheckBox allowWildcards;
         private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.TextBox minResourceNodeSize;
-        private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.TextBox maxResourceNodeSize;
-        private System.Windows.Forms.Label label52;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.ListBox speciesList;
         private System.Windows.Forms.TextBox minimumCapacity;

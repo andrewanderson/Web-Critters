@@ -90,11 +90,9 @@ namespace Cas.Core
             MaxSize = DefaultMaxSize;
         }
 
-        public static void Initialize(int maxSize)
+        public static void Initialize(Configuration config)
         {
-            if (maxSize <= 0) throw new ArgumentOutOfRangeException("maxSize", "maxSize must be greater than zero.");
-
-            MaxSize = maxSize;
+            MaxSize = config.TagSettings.MaxSize;
         }
 
         /// <summary>

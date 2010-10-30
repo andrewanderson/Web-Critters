@@ -18,7 +18,12 @@ namespace TestCore
         [TestInitialize()]
         public void MyTestInitialize()
         {
-            Resource.Initialize(4, 1, true);
+            var config = new Configuration();
+            config.ResourceSettings.AllowWildcards = true;
+            config.ResourceSettings.Count = 4;
+            config.ResourceSettings.NormalToWildcardRatio = 1;
+
+            Resource.Initialize(config);
         }
         
         [TestMethod]
@@ -48,12 +53,14 @@ namespace TestCore
             actor.Offense = Tag.New("abcd");
             actor.Defense = Tag.New("abcd");
             actor.Exchange = Tag.New("abcd");
+            actor.Mating = Tag.New("abcd");
             actor.AddRandomResources(actor.Size * 2);
 
             var target = GridCell.New();
             target.Offense = Tag.New("abcd");
             target.Defense = Tag.New("abcd");
             target.Exchange = Tag.New("abcd");
+            target.Mating = Tag.New("abcd");
             target.AddRandomResources(target.Size * 2);
 
             // Reverse engineer the interaction percentage so that each child gets 2 resources

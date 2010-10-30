@@ -14,64 +14,26 @@ namespace Cas.TestImplementation
     {
         public int Length { get; private set; }
         public int Width { get; private set; }
-        private int MinResourceNodesPerLocation { get; set; }
-        private int MaxResourceNodesPerLocation { get; set; }
-        private int MinResourcesPerNodePerLocation { get; set; }
-        private int MaxResourcesPerNodePerLocation { get; set; }
-        private int MinResourceNodeDefense { get; set; }
-        private int MaxResourceNodeDefense { get; set; }
-        private int StartingTagComplexity { get; set; }
-        private int UniqueResourceCount { get; set; }
-
+ 
         private readonly IInteraction<IInteractable, IInteractable, int> attackInteraction;
         private readonly IInteraction<ICell, ICell, IList<ICell>> crossoverInteraction;
         private readonly IInteraction<ICell, ICell, IList<ICell>> multipointCrossoverInteraction;
         private readonly IInteraction<ICell, ICell, ICell> asexualReproductionInteraction;
 
-        public GridSimulation(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, 
-                              int minResourceNodeDefense, int maxResourceNodeDefense, int tagComplexity) 
-            : this(length, width, minResourceNodes, maxResourceNodes, minResourcesPerNode, maxResourcesPerNode, minResourceNodeDefense, maxResourceNodeDefense, tagComplexity, 
-                   100, 4, 0.25, 1.5, 1.75, 0.2, 0.005, 0.02, 0.005, 5, 10, 30) { }
-
-        public GridSimulation(int length, int width, int minResourceNodes, int maxResourceNodes, int minResourcesPerNode, int maxResourcesPerNode, 
-                              int minResourceNodeDefense, int maxResourceNodeDefense, int tagComplexity, int uniqueResourceCount, int maximumUpkeepCostPerLocation, 
-                              double upkeepChance, double interactionsPerGeneration, double reproductionThreshold, double reproductionInheritance,
-                              double migrationBaseChance, double maxMigrationBonus, double randomDeathChance, int maximumAttemptsToFindSuitableTarget,
-                              int minimumLocationResourceCapacity, int maximumLocationResourceCapacity)
-            : base(interactionsPerGeneration, maximumUpkeepCostPerLocation, upkeepChance, reproductionThreshold, reproductionInheritance,
-                   migrationBaseChance, maxMigrationBonus, randomDeathChance, maximumAttemptsToFindSuitableTarget, minimumLocationResourceCapacity, maximumLocationResourceCapacity)
+        public GridSimulation(int length, int width, Configuration config) : base(config)
         {
             Length = length;
             Width = width;
-            MinResourceNodesPerLocation = minResourceNodes;
-            MaxResourceNodesPerLocation = maxResourceNodes;
-            MinResourcesPerNodePerLocation = minResourcesPerNode;
-            MaxResourcesPerNodePerLocation = maxResourcesPerNode;
-            MinResourceNodeDefense = minResourceNodeDefense;
-            MaxResourceNodeDefense = maxResourceNodeDefense;
-            StartingTagComplexity = tagComplexity;
-            UniqueResourceCount = uniqueResourceCount;
 
             attackInteraction = new AttackInteraction(2, -2, 0, 1, 1.0, 1);
-            crossoverInteraction = new CrossoverInteraction(true, ReproductionInheritance);
-            multipointCrossoverInteraction = new MultipointCrossoverInteraction(true, ReproductionInheritance);
-            asexualReproductionInteraction = new AsexualInteraction(true, ReproductionInheritance);
+            crossoverInteraction = new CrossoverInteraction(true, config.AgentSettings.ReproductionInheritance);
+            multipointCrossoverInteraction = new MultipointCrossoverInteraction(true, config.AgentSettings.ReproductionInheritance);
+            asexualReproductionInteraction = new AsexualInteraction(true, config.AgentSettings.ReproductionInheritance);
         }
 
         protected override void InnerInitialize()
         {
-            environment = new GridEnvironment(
-                Length, 
-                Width, 
-                MinResourceNodesPerLocation, 
-                MaxResourceNodesPerLocation, 
-                MinResourcesPerNodePerLocation, 
-                MaxResourcesPerNodePerLocation,
-                MinResourceNodeDefense,
-                MaxResourceNodeDefense,
-                StartingTagComplexity,
-                UniqueResourceCount,
-                this);
+            environment = new GridEnvironment(Length, Width, this);
         }
 
         protected override void InnerReset()
