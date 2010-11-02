@@ -158,6 +158,8 @@
             this.currentGeneration = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.scavengeAttempts = new System.Windows.Forms.TextBox();
+            this.label51 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -253,6 +255,8 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer.Panel1.Controls.Add(this.scavengeAttempts);
+            this.splitContainer.Panel1.Controls.Add(this.label51);
             this.splitContainer.Panel1.Controls.Add(this.minimumCapacity);
             this.splitContainer.Panel1.Controls.Add(this.label54);
             this.splitContainer.Panel1.Controls.Add(this.maximumCapacity);
@@ -404,8 +408,6 @@
             // allowWildcards
             // 
             this.allowWildcards.AutoSize = true;
-            this.allowWildcards.Checked = true;
-            this.allowWildcards.CheckState = System.Windows.Forms.CheckState.Checked;
             this.allowWildcards.Location = new System.Drawing.Point(107, 157);
             this.allowWildcards.Name = "allowWildcards";
             this.allowWildcards.Size = new System.Drawing.Size(15, 14);
@@ -1505,6 +1507,25 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // scavengeAttempts
+            // 
+            this.scavengeAttempts.Location = new System.Drawing.Point(109, 226);
+            this.scavengeAttempts.Name = "scavengeAttempts";
+            this.scavengeAttempts.Size = new System.Drawing.Size(34, 20);
+            this.scavengeAttempts.TabIndex = 64;
+            this.scavengeAttempts.Text = "10";
+            this.scavengeAttempts.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.scavengeAttempts.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(9, 229);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(99, 13);
+            this.label51.TabIndex = 63;
+            this.label51.Text = "Scavenge attempts";
+            // 
             // WebCrittersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1662,6 +1683,8 @@
         private System.Windows.Forms.Label locationRenewableCount;
         private System.Windows.Forms.Label matingTag;
         private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.TextBox scavengeAttempts;
+        private System.Windows.Forms.Label label51;
     }
 }
 

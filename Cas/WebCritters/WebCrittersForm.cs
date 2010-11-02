@@ -51,7 +51,7 @@ namespace WebCritters
 
             // Agent settings
             config.AgentSettings.InteractionsPerGeneration = double.Parse(interactionsPerGeneration.Text);
-            config.AgentSettings.MaximumAttemptsToFindSuitableTarget = 5; // TODO: Config max attepts to find prey in form
+            config.AgentSettings.MaximumAttemptsToFindSuitableTarget = int.Parse(scavengeAttempts.Text);
             config.AgentSettings.MaximumMigrationBonus = double.Parse(maxMigrationBonus.Text) / 100.0;
             config.AgentSettings.MigrationBaseChance = double.Parse(migrationBaseChance.Text) / 100.0;
             config.AgentSettings.MutationChance = double.Parse(mutationPercent.Text) / 100.0;
