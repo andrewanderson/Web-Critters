@@ -70,13 +70,14 @@ namespace Cas.Core
         /// </summary>
         public void RefreshResourcePool()
         {
-            CurrentResources.AddRange(ResourceAllocation.Select(x => x.DeepCopy()).ToList());
-
-            // If there are excess resources, remove some at random.
-            while (CurrentResources.Count > ResourceCapacity)
+            // If there will be excess resources, remove some at random.
+            int resourcesToRemove = CurrentResources.Count + ResourceAllocation.Count - ResourceCapacity;
+            for (int i = 0; i < resourcesToRemove; i++)
             {
                 CurrentResources.RemoveRandom();
             }
+
+            CurrentResources.AddRange(ResourceAllocation.Select(x => x.DeepCopy()).ToList());
         }
 
         /// <summary>
