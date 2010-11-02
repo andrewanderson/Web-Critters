@@ -476,6 +476,8 @@ namespace Cas.Core
             if (actor == null) throw new ArgumentNullException("actor");
 
             IInteractable target = null;
+            IInteractable bestTarget = null;
+            int bestScore = -1;
             for (int i = 0; i < this.Configuration.AgentSettings.MaximumAttemptsToFindSuitableTarget; i++)
             {
                 target = SelectRandomTarget(allTargets, actor);
@@ -483,10 +485,41 @@ namespace Cas.Core
 
                 if (target is IAgent) (target as IAgent).SetInteractionContactPoint();
 
-                if (ShouldExchangeOccur(actor, target)) break;
+                int exchangeScore = CalculateConditionalExchangeMatch(actor.Exchange, target.Offense);
+
+                if (exchangeScore > bestScore)
+                {
+                    bestScore = exchangeScore;
+                    bestTarget = target;
+                }
+
+                // If we've already found a perfect match, stop looking.
+                if (bestScore == actor.Exchange.Data.Count) break;
             }
 
-            return target;
+            return bestTarget;
+        }
+
+        /// <summary>
+        /// Determines whether or not the exchange tag of one individual is well matched
+        /// to the offense tag of another individual.
+        /// 
+        /// The best possible match score is equal to the length of the exchange tag.
+        /// </summary>
+        protected static int CalculateConditionalExchangeMatch(Tag exchange, Tag offense)
+        {
+            if (exchange == null) throw new ArgumentNullException("exchange");
+            if (offense == null) throw new ArgumentNullException("offense");
+
+            int matchStrength = 0;
+            for (int i = 0; i < exchange.Data.Count; i++)
+            {
+                if (i >= offense.Data.Count) break;
+                if ((exchange.Data[i] == Resource.WildcardResource) || (exchange.Data[i] == offense.Data[i]))
+                    matchStrength++;
+            }
+
+            return matchStrength;
         }
 
         /// <summary>
@@ -515,48 +548,6 @@ namespace Cas.Core
             }
 
             return target;
-        }
-
-        /// <summary>
-        /// Test to see whether or not an exchange interaction should take place.
-        /// </summary>
-        /// <remarks>
-        /// See Holland pg. 111-113, 148 for details and explanations on this.
-        /// </remarks>
-        protected static bool ShouldExchangeOccur(IAgent actor, IInteractable target)
-        {
-            if (actor == null) throw new ArgumentNullException("actor");
-            if (target == null) throw new ArgumentNullException("target");
-
-            return CalculateConditionalExchangeMatch(actor.Exchange, target.Offense);
-
-            // NOTE:
-            // Holland suggests also checking if the target matches the actor, and 
-            // if not then giving it a chance to flee.  I have not included this since
-            // I believe that Holland's model has agents encountering each other and
-            // attacking simultaneously, not a one way attack like I currently have 
-            // implemented.
-        }
-
-        /// <summary>
-        /// Determine whether or not the exchange tag of one individual is well matched
-        /// to the offense tag of another individual.
-        /// 
-        /// If the exchange tag matches the start of the offense tag then it is considered a match.
-        /// </summary>
-        protected static bool CalculateConditionalExchangeMatch(Tag exchange, Tag offense)
-        {
-            if (exchange == null) throw new ArgumentNullException("exchange");
-            if (offense == null) throw new ArgumentNullException("offense");
-
-            for (int i = 0; i < exchange.Data.Count; i++)
-            {
-                if (i >= offense.Data.Count) return false;
-                if (exchange.Data[i] == Resource.WildcardResource) continue;
-                if (exchange.Data[i] != offense.Data[i]) return false;
-            }
-
-            return true;
         }
 
         #endregion
