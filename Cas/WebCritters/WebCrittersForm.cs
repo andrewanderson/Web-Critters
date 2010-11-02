@@ -243,7 +243,12 @@ namespace WebCritters
                 .ContinueWith(t =>
                                   {
                                       if (t.IsFaulted && t.Exception != null) DisplayException(t.Exception);
-                                      this.Invoke(new MethodInvoker(() => this.UpdateSimulationDetails(true)));
+                                      this.Invoke(new MethodInvoker(() =>
+                                                                        {
+                                                                            this.UpdateSimulationDetails(true);
+                                                                            this.runGenerations.Enabled = true;
+                                                                            this.stopButton.Enabled = false;
+                                                                        }));
                                   });
 
             this.stopButton.Enabled = true;
