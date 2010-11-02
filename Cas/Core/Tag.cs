@@ -114,7 +114,7 @@ namespace Cas.Core
             Tag newTag = new Tag();
             newTag.Data = new List<Resource>();
 
-            int length = minLength + RandomProvider.Next(maxLength - minLength) + 1;
+            int length = minLength + RandomProvider.Next(maxLength - minLength + 1);
             for (int i = 0; i < length; i++)
             {
                 newTag.Data.Add(Resource.Random(allowWildCard));
