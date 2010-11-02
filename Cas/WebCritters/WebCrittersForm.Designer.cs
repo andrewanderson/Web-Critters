@@ -38,6 +38,8 @@
             this.minStartingPopulation = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.scavengeAttempts = new System.Windows.Forms.TextBox();
+            this.label51 = new System.Windows.Forms.Label();
             this.minimumCapacity = new System.Windows.Forms.TextBox();
             this.label54 = new System.Windows.Forms.Label();
             this.maximumCapacity = new System.Windows.Forms.TextBox();
@@ -158,8 +160,6 @@
             this.currentGeneration = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.scavengeAttempts = new System.Windows.Forms.TextBox();
-            this.label51 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -367,6 +367,25 @@
             this.splitContainer.SplitterDistance = 250;
             this.splitContainer.TabIndex = 8;
             // 
+            // scavengeAttempts
+            // 
+            this.scavengeAttempts.Location = new System.Drawing.Point(109, 226);
+            this.scavengeAttempts.Name = "scavengeAttempts";
+            this.scavengeAttempts.Size = new System.Drawing.Size(34, 20);
+            this.scavengeAttempts.TabIndex = 64;
+            this.scavengeAttempts.Text = "10";
+            this.scavengeAttempts.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
+            this.scavengeAttempts.Validated += new System.EventHandler(this.control_Validated);
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(9, 229);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(99, 13);
+            this.label51.TabIndex = 63;
+            this.label51.Text = "Scavenge attempts";
+            // 
             // minimumCapacity
             // 
             this.minimumCapacity.Location = new System.Drawing.Point(140, 376);
@@ -505,7 +524,7 @@
             this.minResourcesPerNode.Name = "minResourcesPerNode";
             this.minResourcesPerNode.Size = new System.Drawing.Size(34, 20);
             this.minResourcesPerNode.TabIndex = 44;
-            this.minResourcesPerNode.Text = "15";
+            this.minResourcesPerNode.Text = "5";
             this.minResourcesPerNode.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
             this.minResourcesPerNode.Validated += new System.EventHandler(this.control_Validated);
             // 
@@ -1506,25 +1525,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // scavengeAttempts
-            // 
-            this.scavengeAttempts.Location = new System.Drawing.Point(109, 226);
-            this.scavengeAttempts.Name = "scavengeAttempts";
-            this.scavengeAttempts.Size = new System.Drawing.Size(34, 20);
-            this.scavengeAttempts.TabIndex = 64;
-            this.scavengeAttempts.Text = "10";
-            this.scavengeAttempts.Validating += new System.ComponentModel.CancelEventHandler(this.intTextBox_Validating);
-            this.scavengeAttempts.Validated += new System.EventHandler(this.control_Validated);
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(9, 229);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(99, 13);
-            this.label51.TabIndex = 63;
-            this.label51.Text = "Scavenge attempts";
             // 
             // WebCrittersForm
             // 

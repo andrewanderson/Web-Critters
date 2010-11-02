@@ -76,18 +76,16 @@ namespace Cas.TestImplementation
         {
             if (maximumTagSize <= 0) throw new ArgumentOutOfRangeException("maximumTagSize");
             if (minResources < 0) throw new ArgumentOutOfRangeException("minResources");
-            if (maxResources < minResources) throw new ArgumentOutOfRangeException("maxResources cannot be less than minResources");
+            if (maxResources < minResources) throw new ArgumentOutOfRangeException("maxResources", "maxResources cannot be less than minResources");
 
             var grn = new GridResourceNode();
             grn.Offense = Tag.New(maximumTagSize, false);
             grn.Defense = Tag.New(maximumTagSize, false);
             grn.Exchange = Tag.New(maximumTagSize, false);
 
-            int nodeSize = 0;
             int resourceRange = maxResources - minResources;
-            double maxSize = maximumTagSize * 3;
-            double sizeRange = maxSize - 3;
-            nodeSize = (int)(((double)(maxSize - grn.Size) / sizeRange) * resourceRange) + minResources;
+            double maxStrength = (maximumTagSize / 3.0) + maximumTagSize; // Offense tag counts for 1/3 strength
+            int nodeSize = (int)((double)(grn.Strength / maxStrength) * resourceRange) + minResources;
             
             var resources = new List<Resource>();
             for (int j = 0; j < nodeSize; j++)
@@ -101,17 +99,20 @@ namespace Cas.TestImplementation
             return grn;
         }
 
-        public int Size
+        /// <summary>
+        /// The effective size of the resource node, which only considers their Offense and Defence tags.
+        /// </summary>
+        public int Strength
         {
             get
             {
-                return this.Offense.Data.Count + this.Defense.Data.Count + this.Exchange.Data.Count;
+                return (int) (this.Offense.Data.Count/3.0) + this.Defense.Data.Count;
             }
         }
 
         public override string ToString()
         {
-            return string.Format("RN.{0}: {1} {2}, {3} resources", Math.Abs(this.Id), this.Offense, this.Defense, this.Reservoir.Count);
+            return string.Format("RN.{0}: o={1} d={2}, {3} resources", Math.Abs(this.Id), this.Offense, this.Defense, this.Reservoir.Count);
         }
 
         #region IResourceNode Members
