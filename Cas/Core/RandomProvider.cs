@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Cas.Core
 {
@@ -15,20 +12,30 @@ namespace Cas.Core
     public static class RandomProvider
     {
         private static readonly Random random = new Random();
+        private static readonly object syncLock = new object();
 
         public static int Next(int max)
         {
-            return random.Next(max);
+            lock (syncLock)
+            {
+                return random.Next(max);
+            }
         }
 
         public static int Next(int min, int max)
         {
-            return random.Next(min, max);
+            lock (syncLock)
+            {
+                return random.Next(min, max);
+            }
         }
 
         public static double NextDouble()
         {
-            return random.NextDouble();
+            lock (syncLock)
+            {
+                return random.NextDouble();
+            }
         }
 
     }

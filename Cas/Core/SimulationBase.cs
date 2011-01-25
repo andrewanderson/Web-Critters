@@ -19,6 +19,7 @@ namespace Cas.Core
         protected bool Initializing = false;
 
         protected IEnvironment environment;
+        private object pendingMigrationsSyncRoot = new object();
 
         #endregion
 
@@ -215,7 +216,7 @@ namespace Cas.Core
 
         #region RunGeneration
 
-        private List<KeyValuePair<IAgent, ILocation>> pendingMigrations;
+        private SynchronizedCollection<KeyValuePair<IAgent, ILocation>> pendingMigrations;
 
         /// <summary>
         /// Queue up an agent to move to a new location at the end of the current generation.
@@ -236,12 +237,16 @@ namespace Cas.Core
             CurrentGeneration++;
             OnGenerationStarted(CurrentGeneration);
 
-            pendingMigrations = new List<KeyValuePair<IAgent, ILocation>>();
+            pendingMigrations = new SynchronizedCollection<KeyValuePair<IAgent, ILocation>>(pendingMigrationsSyncRoot);
 
-            foreach (var location in this.Environment.Locations)
+            var generationTasks = new Task[Environment.Locations.Count];
+            for (int x = 0; x < this.Environment.Locations.Count; x++)
             {
-                ProcessLocation(location);
+                var location = Environment.Locations[x];
+                generationTasks[x] = Task.Factory.StartNew(() => ProcessLocation(location));
             }
+
+            Task.WaitAll(generationTasks);
 
             // Relocate the migrants and charge them upkeep at their new location
             foreach (var migration in pendingMigrations)

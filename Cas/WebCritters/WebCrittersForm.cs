@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -232,14 +233,14 @@ namespace WebCritters
             if (!(this.RunGenerationCTS == null || this.RunGenerationCTS.IsCancellationRequested)) this.RunGenerationCTS.Cancel();
             this.RunGenerationCTS = new CancellationTokenSource();
             var token = this.RunGenerationCTS.Token;
-            var task = Task.Factory.StartNew(() =>
-                                                 {
-                                                     for (int i = 0; i < generationCount; i++)
-                                                     {
-                                                         if (token.IsCancellationRequested) return;
-                                                         this.CasSimulation.RunGeneration();
-                                                     }
-                                                 })
+            Task.Factory.StartNew(() =>
+                                      {
+                                          for (int i = 0; i < generationCount; i++)
+                                          {
+                                              if (token.IsCancellationRequested) return;
+                                              this.CasSimulation.RunGeneration();
+                                          }
+                                      })
                 .ContinueWith(t =>
                                   {
                                       if (t.IsFaulted && t.Exception != null) DisplayException(t.Exception);
