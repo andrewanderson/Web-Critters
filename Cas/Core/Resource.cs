@@ -18,7 +18,9 @@ namespace Cas.Core
     {
         #region Instance Methods
 
-        public Resource(char value)
+        // Cannot construct a Resource.  Call the static Initialize and then
+        // use the Get method.
+        private Resource(char value)
         {
             this.Label = value;
         }

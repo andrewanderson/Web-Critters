@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,13 +79,14 @@ namespace Cas.Core
             get
             {
                 return this.SpeciesByKey
-                    .OrderBy(kvp => kvp.Value.Id)
-                    .Select(kvp => kvp.Value)
+                    .Cast<DictionaryEntry>()
+                    .OrderBy(de => (de.Value as ISpecies).Id)
+                    .Select(de => de.Value as ISpecies)
                     .ToList();
             }
         }
 
-        protected readonly Dictionary<string, ISpecies> SpeciesByKey = new Dictionary<string, ISpecies>();
+        protected readonly Hashtable SpeciesByKey = Hashtable.Synchronized(new Hashtable());
 
         /// <summary>
         /// Performs work required to add a new agent to the simulation.
@@ -102,7 +104,7 @@ namespace Cas.Core
 
             ISpecies species;
             string key = agent.UniqueKey;
-            if (!SpeciesByKey.TryGetValue(key, out species))
+            if (!SpeciesByKey.Contains(key))
             {
                 // Work out the ancestors
                 var parentSpeciesIds = new List<long>();
@@ -112,9 +114,11 @@ namespace Cas.Core
                 }
 
                 species = new Species(this, agent, parentSpeciesIds.ToArray());
+
                 SpeciesByKey.Add(key, species);
             }
 
+            species = (ISpecies)SpeciesByKey[key];
             species.Population++;
             agent.Species = species;
         }
@@ -239,13 +243,13 @@ namespace Cas.Core
 
             pendingMigrations = new SynchronizedCollection<KeyValuePair<IAgent, ILocation>>(pendingMigrationsSyncRoot);
 
+            // Parallelize the location processing
             var generationTasks = new Task[Environment.Locations.Count];
             for (int x = 0; x < this.Environment.Locations.Count; x++)
             {
                 var location = Environment.Locations[x];
                 generationTasks[x] = Task.Factory.StartNew(() => ProcessLocation(location));
             }
-
             Task.WaitAll(generationTasks);
 
             // Relocate the migrants and charge them upkeep at their new location
