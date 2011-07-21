@@ -87,6 +87,7 @@ namespace Cas.Core
         }
 
         protected readonly Hashtable SpeciesByKey = Hashtable.Synchronized(new Hashtable());
+        private readonly object SpeciesByKeyWriteLock = new object();
 
         /// <summary>
         /// Performs work required to add a new agent to the simulation.
@@ -106,16 +107,22 @@ namespace Cas.Core
             string key = agent.UniqueKey;
             if (!SpeciesByKey.Contains(key))
             {
-                // Work out the ancestors
-                var parentSpeciesIds = new List<long>();
-                if (birthEvent is BirthEvent)
+                lock (SpeciesByKeyWriteLock)
                 {
-                    parentSpeciesIds.AddRange((birthEvent as BirthEvent).Parents.Select(s => s.Id));
+                    if (!SpeciesByKey.Contains(key))
+                    {
+                        // Work out the ancestors
+                        var parentSpeciesIds = new List<long>();
+                        if (birthEvent is BirthEvent)
+                        {
+                            parentSpeciesIds.AddRange((birthEvent as BirthEvent).Parents.Select(s => s.Id));
+                        }
+
+                        species = new Species(this, agent, parentSpeciesIds.ToArray());
+
+                        SpeciesByKey.Add(key, species);
+                    }
                 }
-
-                species = new Species(this, agent, parentSpeciesIds.ToArray());
-
-                SpeciesByKey.Add(key, species);
             }
 
             species = (ISpecies)SpeciesByKey[key];
@@ -131,9 +138,12 @@ namespace Cas.Core
             if (agent == null) throw new ArgumentNullException("agent");
             if (agent.Species == null) throw new ArgumentException("Agent cannot have a null species.", "agent");
 
-            if (--agent.Species.Population <= 0)
+            lock (SpeciesByKeyWriteLock)
             {
-                this.SpeciesByKey.Remove(agent.UniqueKey);
+                if (--agent.Species.Population <= 0)
+                {
+                    this.SpeciesByKey.Remove(agent.UniqueKey);
+                }
             }
         }
 
