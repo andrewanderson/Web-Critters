@@ -88,6 +88,7 @@
     <Compile Include="Extensions\IListExtensions.cs" />
     <Compile Include="Fossil.cs" />
     <Compile Include="GenerationEventArgs.cs" />
+    <Compile Include="IdentityType.cs" />
     <Compile Include="Interactions\AsexualInteraction.cs" />
     <Compile Include="Interactions\AttackInteraction.cs" />
     <Compile Include="Interactions\ExchangeInteraction.cs" />
@@ -124,6 +125,7 @@
     </Compile>
     <Compile Include="Tag.cs" />
     <Compile Include="CellTagIndex.cs" />
+    <Compile Include="UniqueIdentifier.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Documentation\" />

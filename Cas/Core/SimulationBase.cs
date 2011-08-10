@@ -80,7 +80,7 @@ namespace Cas.Core
             {
                 return this.SpeciesByKey
                     .Cast<DictionaryEntry>()
-                    .OrderBy(de => (de.Value as ISpecies).Id)
+                    .OrderBy(de => (de.Value as ISpecies).FirstSeen)
                     .Select(de => de.Value as ISpecies)
                     .ToList();
             }
@@ -112,7 +112,7 @@ namespace Cas.Core
                     if (!SpeciesByKey.Contains(key))
                     {
                         // Work out the ancestors
-                        var parentSpeciesIds = new List<long>();
+                        var parentSpeciesIds = new List<UniqueIdentifier>();
                         if (birthEvent is BirthEvent)
                         {
                             parentSpeciesIds.AddRange((birthEvent as BirthEvent).Parents.Select(s => s.Id));
@@ -151,7 +151,7 @@ namespace Cas.Core
         /// Retrieves a species from the list of currently active species, or retrieves the 
         /// fossil record of the species.
         /// </summary>
-        public IIsUnique GetSpeciesOrFossil(long id)
+        public IIsUnique GetSpeciesOrFossil(UniqueIdentifier id)
         {
             // TODO: Try to get the fossil from any saved records
 

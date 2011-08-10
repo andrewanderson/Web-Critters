@@ -14,8 +14,6 @@ namespace Cas.TestImplementation
     /// </summary>
     public class GridResourceNode : IResourceNode
     {
-        private static long NextAvailableId = -1;
-
         /// <summary>
         /// The global resource node instance that spawned this node, if any.
         /// 
@@ -25,31 +23,32 @@ namespace Cas.TestImplementation
 
         internal List<Resource> Reservoir { get; private set; }
 
-        private GridResourceNode()
+        private GridResourceNode(Tag offense, Tag defense, Tag exchange)
         {
             RenewableResources = new List<Resource>();
             Reservoir = new List<Resource>();
 
-            Id = NextAvailableId--;
+            this.Offense = offense;
+            this.Defense = defense;
+            this.Exchange = exchange;
+
+            Id = new UniqueIdentifier(IdentityType.ResourceNode, new[] { this.Offense, this.Defense, this.Exchange });
             Source = null;
         }
 
-        private GridResourceNode(int maximumTagSize) : this()
-        {
-            Offense = Tag.New(maximumTagSize, false);
-            Defense = Tag.New(maximumTagSize, false);
-            Exchange = Tag.New(maximumTagSize, false);
-        }
+        private GridResourceNode(int maximumTagSize) : this(Tag.New(maximumTagSize, false), Tag.New(maximumTagSize, false), Tag.New(maximumTagSize, false))
+        {  }
 
         private GridResourceNode(IResourceNode node)
         {
             if (node == null) throw new ArgumentNullException("node");
 
-            this.Id = node.Id;
             this.Source = node;
             this.Offense = node.Offense;
             this.Defense = node.Defense;
             this.Exchange = node.Exchange;
+
+            Id = new UniqueIdentifier(IdentityType.ResourceNode, new[] { this.Offense, this.Defense, this.Exchange });
 
             this.RenewableResources = new List<Resource>();
             this.RenewableResources.AddRange(node.RenewableResources);
@@ -78,10 +77,7 @@ namespace Cas.TestImplementation
             if (minResources < 0) throw new ArgumentOutOfRangeException("minResources");
             if (maxResources < minResources) throw new ArgumentOutOfRangeException("maxResources", "maxResources cannot be less than minResources");
 
-            var grn = new GridResourceNode();
-            grn.Offense = Tag.New(maximumTagSize, false);
-            grn.Defense = Tag.New(maximumTagSize, false);
-            grn.Exchange = Tag.New(maximumTagSize, false);
+            var grn = new GridResourceNode(maximumTagSize);
 
             int resourceRange = maxResources - minResources;
             double maxStrength = (maximumTagSize / 3.0) + maximumTagSize; // Offense tag counts for 1/3 strength
@@ -112,7 +108,7 @@ namespace Cas.TestImplementation
 
         public override string ToString()
         {
-            return string.Format("RN.{0}: o={1} d={2}, {3} resources", Math.Abs(this.Id), this.Offense, this.Defense, this.Reservoir.Count);
+            return string.Format("{0}: {1} resources", this.Id, this.Reservoir.Count);
         }
 
         #region IResourceNode Members
@@ -140,7 +136,7 @@ namespace Cas.TestImplementation
 
         public string ToShortString()
         {
-            return string.Format("RN.{0}: {1} {2}", Math.Abs(this.Id), this.Offense, this.Defense);
+            return this.Id.ToString();
         }
 
         #endregion
@@ -197,7 +193,7 @@ namespace Cas.TestImplementation
         /// <summary>
         /// The unique identifier for this ResourceNode, which is always a negative number.
         /// </summary>
-        public long Id { get; private set; }
+        public UniqueIdentifier Id { get; private set; }
 
         #endregion
 

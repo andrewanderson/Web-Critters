@@ -32,7 +32,7 @@ namespace Cas.TestImplementation
         /// </summary>
         public List<ILocation> Locations { get; private set; }
 
-        public IResourceNode FindResourceNodeById(long id)
+        public IResourceNode FindResourceNodeById(UniqueIdentifier id)
         {
             return this.GlobalResources.Where(rn => rn.Id == id).FirstOrDefault();
         }   

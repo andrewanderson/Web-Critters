@@ -20,7 +20,7 @@ namespace Cas.Core.Interfaces
         IEnvironment Environment { get; }
 
         /// <summary>
-        /// A catalog of all unique species in the simulation.
+        /// A catalogue of all unique species in the simulation.
         /// </summary>
         List<ISpecies> Species { get; }
 
@@ -42,7 +42,7 @@ namespace Cas.Core.Interfaces
         /// Retrieves a species from the list of currently active species, or retrieves the 
         /// fossil record of the species.
         /// </summary>
-        IIsUnique GetSpeciesOrFossil(long id);
+        IIsUnique GetSpeciesOrFossil(UniqueIdentifier id);
 
         /// <summary>
         /// Attaches a history event to the specified agent

@@ -74,6 +74,7 @@
     <Compile Include="Interactions\SexualReproductionBaseTest.cs" />
     <Compile Include="SimulationBaseTest.cs" />
     <Compile Include="TagTest.cs" />
+    <Compile Include="UniqueIdentifierTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

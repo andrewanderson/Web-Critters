@@ -16,7 +16,7 @@ namespace Cas.Core.Interfaces
         /// <summary>
         /// Unique identifier for the object.
         /// </summary>
-        long Id { get; }
+        UniqueIdentifier Id { get; }
 
         /// <summary>
         /// A terse description of the object.

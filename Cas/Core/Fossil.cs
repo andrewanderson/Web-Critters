@@ -8,13 +8,13 @@ namespace Cas.Core
 {
     public class Fossil : IFossil
     {
-        public long Id { get; private set; }
+        public UniqueIdentifier Id { get; private set; }
 
-        public Fossil(long id)
+        public Fossil(UniqueIdentifier speciesId)
         {
-            if (id <= 0) throw new ArgumentOutOfRangeException("id", "id must be positive");
+            if (speciesId == null) throw new ArgumentNullException("speciesId");
 
-            this.Id = id;
+            this.Id = new UniqueIdentifier(IdentityType.Fossil, (Resource[])speciesId.Genome.Clone());
         }
 
         public string ToShortString()
@@ -24,7 +24,7 @@ namespace Cas.Core
 
         public override string ToString()
         {
-            return string.Format("F.{0}: extinct", this.Id);
+            return this.Id.ToString();
         }
     }
 }

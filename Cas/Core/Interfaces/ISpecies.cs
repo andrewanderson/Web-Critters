@@ -29,7 +29,7 @@ namespace Cas.Core.Interfaces
         /// will have one Id, and species that arose from SexualReproduction
         /// will have two Ids.
         /// </remarks>
-        List<long> DerivedFromSpeciesIds { get; }
+        List<UniqueIdentifier> DerivedFromSpeciesIds { get; }
 
         /// <summary>
         /// The number of resources consumed from ResourceNodes
@@ -44,7 +44,7 @@ namespace Cas.Core.Interfaces
         long ResourcesFromAgents { get; }
 
         /// <summary>
-        /// A classifcation of this species based of what it consumes.
+        /// A classification of this species based of what it consumes.
         /// </summary>
         DietType DietType { get; }
 
@@ -70,13 +70,13 @@ namespace Cas.Core.Interfaces
 
         /// <summary>
         /// The foods that this species has consumed across all time, ordered by number of
-        /// occurences.
+        /// occurrences.
         /// </summary>
         IEnumerable<IIsUnique> Prey { get; }
 
         /// <summary>
         /// The agents that this species has been predated by across all time, ordered by number of
-        /// occurences.
+        /// occurrences.
         /// </summary>
         IEnumerable<IIsUnique> Predators { get; }
     }

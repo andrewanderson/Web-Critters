@@ -143,6 +143,13 @@ namespace Cas.Core
             return new Tag(chars);
         }
 
+        public static Tag New(Resource[] resources)
+        {
+            if (resources == null) throw new ArgumentNullException("resources");
+
+            return new Tag(resources.Select(r => r.Label).ToArray());
+        }
+
         public static Tag New(Tag tag)
         {
             if (tag == null) throw new ArgumentNullException("tag");

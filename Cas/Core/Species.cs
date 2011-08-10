@@ -11,15 +11,13 @@ namespace Cas.Core
         /// <summary>
         /// Unique identifier for the species.
         /// </summary>
-        public long Id {
+        public UniqueIdentifier Id {
             get 
             {
                 return this.id;
             }
         }
-        private readonly long id;
-
-        private static long NextAvailableId = 1;
+        private readonly UniqueIdentifier id;
 
         /// <summary>
         /// An example of the agent that this species represents
@@ -53,14 +51,14 @@ namespace Cas.Core
         /// will have one Id, and species that arose from SexualReproduction
         /// will have two Ids.
         /// </remarks>
-        public List<long> DerivedFromSpeciesIds 
+        public List<UniqueIdentifier> DerivedFromSpeciesIds 
         {
             get
             {
                 return this.derivedFromSpeciesIds;
             }
         }
-        private readonly List<long> derivedFromSpeciesIds = new List<long>();
+        private readonly List<UniqueIdentifier> derivedFromSpeciesIds = new List<UniqueIdentifier>();
         
         /// <summary>
         /// The number of resources consumed from ResourceNodes
@@ -75,7 +73,7 @@ namespace Cas.Core
         public long ResourcesFromAgents { get; private set; }
 
         /// <summary>
-        /// A classifcation of this species based of what it consumes.
+        /// A classification of this species based of what it consumes.
         /// </summary>
         /// <remarks>
         ///  0-15%  meat = herbivore
@@ -106,23 +104,50 @@ namespace Cas.Core
 
         private readonly ISimulation Simulation;
 
-        protected readonly Dictionary<long, long> preyCounts = new Dictionary<long, long>();
-        protected readonly Dictionary<long, long> predatorCounts = new Dictionary<long, long>();
+        protected readonly Dictionary<UniqueIdentifier, long> preyCounts = new Dictionary<UniqueIdentifier, long>();
+        protected readonly Dictionary<UniqueIdentifier, long> predatorCounts = new Dictionary<UniqueIdentifier, long>();
 
-        public Species(ISimulation simulation, IAgent exemplar, params long[] derivedFromSpeciesIds)
+        public Species(ISimulation simulation, IAgent exemplar, params UniqueIdentifier[] derivedFromSpeciesIds)
         {
             if (simulation == null) throw new ArgumentNullException("simulation");
             if (exemplar == null) throw new ArgumentNullException("exemplar");
 
             this.Simulation = simulation;
             this.firstSeen = simulation.CurrentGeneration;
-            this.id = NextAvailableId++;
             this.ResourcesFromResourceNodes = 0;
             this.ResourcesFromAgents = 0;
             this.Population = 0;
 
+            this.id = CreateUniqueIdentifier(exemplar);
+
             this.derivedFromSpeciesIds.AddRange(derivedFromSpeciesIds);
             this.exemplar = exemplar.DeepCopy();
+        }
+
+        private static UniqueIdentifier CreateUniqueIdentifier(IAgent exemplar)
+        {
+            bool isFirst = true;
+
+            // Build a list of tags, with a null between each agent's tags.
+            var allTags = new List<Tag>();
+            foreach (var cell in exemplar.Cells)
+            {
+                if (isFirst)
+                {
+                    isFirst = false;
+                }
+                else
+                {
+                    allTags.Add(null);
+                }
+
+                for (int i = 0; i < cell.ActiveTagsInModel; i++)
+                {
+                    allTags.Add(cell.GetTagByIndex(i));
+                }
+            }
+
+            return new UniqueIdentifier(IdentityType.Species, allTags.ToArray());
         }
 
         /// <summary>
@@ -190,7 +215,7 @@ namespace Cas.Core
 
         /// <summary>
         /// The foods that this species has consumed across all time, ordered by number of
-        /// occurences.
+        /// occurrences.
         /// </summary>
         public IEnumerable<IIsUnique> Prey
         {
@@ -200,7 +225,7 @@ namespace Cas.Core
                     .OrderByDescending(kvp => kvp.Value)
                     .Select(kvp =>
                     {
-                        return (kvp.Key < 0) ? 
+                        return (kvp.Key.Type == IdentityType.ResourceNode) ? 
                             this.Simulation.Environment.FindResourceNodeById(kvp.Key)
                             : this.Simulation.GetSpeciesOrFossil(kvp.Key);
                     });
@@ -228,7 +253,7 @@ namespace Cas.Core
 
         public override string ToString()
         {
-            return string.Format("S.{0}: {1}", this.id, this.exemplar.ToShortString());
+            return this.Id.ToString();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Cas.Core
     {
         internal List<Resource> Reservoir { get; private set; }
 
-        public long Id { get; private set; }
+        public UniqueIdentifier Id { get; private set; }
 
         public Tag Offense { get; set; }
 
@@ -28,7 +28,7 @@ namespace Cas.Core
         {
             if (deceased == null) throw new ArgumentNullException("deceased");
 
-            this.Id = deceased.Species.Id;
+            this.Id = new UniqueIdentifier(IdentityType.Corpse, deceased.Species.Id.Genome);
             this.Offense = Tag.New(deceased.Offense);
             this.Defense = Tag.New(deceased.Defense);
             this.Exchange = Tag.New(deceased.Exchange);
@@ -91,12 +91,12 @@ namespace Cas.Core
 
         public string ToShortString()
         {
-            return string.Format("C.{0}: {1} {2}", this.Id, this.Offense, this.Defense);
+            return this.Id.ToString();
         }
 
         public override string ToString()
         {
-            return string.Format("C.{0}: {1} {2}, {3} resources", this.Id, this.Offense, this.Defense, this.Reservoir.Count);
+            return string.Format("{0}: {1} resources", this.Id, this.Reservoir.Count);
         }
 
         public IResourceNode DeepCopy()

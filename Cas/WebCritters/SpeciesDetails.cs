@@ -69,7 +69,7 @@ namespace WebCritters
             {
                 if (CurrentSpecies.DerivedFromSpeciesIds.Count > index)
                 {
-                    long parentSpeciesId = CurrentSpecies.DerivedFromSpeciesIds[index];
+                    var parentSpeciesId = CurrentSpecies.DerivedFromSpeciesIds[index];
                     var species = Simulation.GetSpeciesOrFossil(parentSpeciesId);
 
                     label.Text = species.ToString();

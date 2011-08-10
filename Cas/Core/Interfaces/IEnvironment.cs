@@ -30,6 +30,6 @@ namespace Cas.Core.Interfaces
         /// Retrieve a resource node fromt he environment using its 
         /// (negative) unique identifier as a look-up.
         /// </summary>
-        IResourceNode FindResourceNodeById(long id);
+        IResourceNode FindResourceNodeById(UniqueIdentifier id);
     }
 }
